@@ -1,0 +1,2641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Salah Tracker - My Islamic Journey">
+<title>Salah Tracker</title>
+
+<style>
+:root{
+  --navy:#27374D;
+  --slate:#526D82;
+  --blue-gray:#9DB2BF;
+  --mist:#DDE6ED;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:Georgia,"Times New Roman",serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--navy);
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--mist);
+  font-family:var(--sans);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(82,109,130,.30),transparent 38%),
+    radial-gradient(circle at 8% 55%,rgba(157,178,191,.10),transparent 28%),
+    radial-gradient(circle at 92% 78%,rgba(82,109,130,.16),transparent 30%),
+    var(--navy);
+}
+
+button,
+textarea{
+  font:inherit;
+}
+
+button{
+  color:inherit;
+}
+
+.sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.sky::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  opacity:.17;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 45%,
+      transparent 0 62px,
+      rgba(157,178,191,.10) 63px 64px,
+      transparent 65px 126px
+    ),
+    repeating-conic-gradient(
+      from 22.5deg at 50% 45%,
+      transparent 0 44deg,
+      rgba(157,178,191,.065) 45deg 46deg,
+      transparent 47deg 90deg
+    );
+  mask-image:radial-gradient(circle,black 0 40%,transparent 74%);
+  animation:patternDrift 32s linear infinite;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  opacity:.17;
+}
+
+.orb.one{
+  width:48vw;
+  height:48vw;
+  left:25%;
+  top:-14%;
+  background:var(--slate);
+  animation:drift 24s ease-in-out infinite;
+}
+
+.orb.two{
+  width:34vw;
+  height:34vw;
+  left:-12%;
+  top:42%;
+  background:var(--blue-gray);
+  animation:drift 30s ease-in-out infinite reverse;
+}
+
+.orb.three{
+  width:38vw;
+  height:38vw;
+  right:-13%;
+  bottom:-10%;
+  background:var(--slate);
+  animation:drift 27s ease-in-out infinite;
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+}
+
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:var(--mist);
+  box-shadow:0 0 5px rgba(221,230,237,.22);
+  animation:twinkle var(--dur) ease-in-out var(--delay) infinite;
+}
+
+.star.glow{
+  box-shadow:
+    0 0 10px rgba(221,230,237,.45),
+    0 0 22px rgba(157,178,191,.18);
+}
+
+.constellations{
+  position:absolute;
+  inset:0;
+  opacity:.16;
+}
+
+.constellations svg{
+  width:100%;
+  height:100%;
+}
+
+.constellations line{
+  stroke:var(--blue-gray);
+  stroke-width:.7;
+  stroke-dasharray:2 10;
+}
+
+.constellations circle{
+  fill:var(--mist);
+  opacity:.7;
+}
+
+
+/* APP */
+
+.app{
+  position:relative;
+  z-index:2;
+  width:min(1100px,100%);
+  margin:auto;
+  padding:25px clamp(18px,5vw,56px) 70px;
+}
+
+
+/* TOP NAV */
+
+.top-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:35px;
+}
+
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 15px;
+  border:1px solid rgba(157,178,191,.16);
+  border-radius:999px;
+  background:rgba(39,55,77,.45);
+  backdrop-filter:blur(15px);
+  color:var(--blue-gray);
+  font-size:11px;
+  letter-spacing:.08em;
+  transition:.45s ease;
+}
+
+.back-link:hover{
+  transform:translateX(-4px);
+  border-color:rgba(157,178,191,.35);
+  color:var(--mist);
+  background:rgba(82,109,130,.20);
+}
+
+.breadcrumb{
+  font-size:9px;
+  letter-spacing:.18em;
+  color:rgba(157,178,191,.58);
+  text-transform:uppercase;
+}
+
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  max-width:780px;
+  margin:0 auto 48px;
+}
+
+.arch-wrap{
+  position:relative;
+  width:min(430px,90vw);
+  margin:0 auto -5px;
+  height:105px;
+}
+
+.arch{
+  position:absolute;
+  inset:0 16% 0;
+  border:1px solid rgba(157,178,191,.24);
+  border-bottom:0;
+  border-radius:50% 50% 0 0/75% 75% 0 0;
+  box-shadow:inset 0 0 45px rgba(82,109,130,.08);
+  opacity:0;
+  animation:reveal .9s cubic-bezier(.2,.7,.2,1) .2s forwards;
+}
+
+.arch::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid rgba(157,178,191,.11);
+  border-bottom:0;
+  border-radius:50% 50% 0 0/75% 75% 0 0;
+}
+
+.moon{
+  position:absolute;
+  left:50%;
+  top:17px;
+  transform:translateX(-50%) scale(.8);
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:var(--mist);
+  box-shadow:0 0 22px rgba(221,230,237,.14);
+  opacity:0;
+  animation:
+    moonIn .9s cubic-bezier(.2,.7,.2,1) .45s forwards,
+    moonGlow 5s ease-in-out 1.4s infinite;
+}
+
+.moon::before{
+  content:"";
+  position:absolute;
+  inset:-14px;
+  border-radius:50%;
+  border:1px solid rgba(157,178,191,.10);
+  animation:ringPulse 4s ease-in-out infinite;
+}
+
+.moon::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:27%;
+  top:-11%;
+  border-radius:50%;
+  background:var(--navy);
+}
+
+.eyebrow{
+  font-size:10px;
+  letter-spacing:.34em;
+  font-weight:600;
+  color:var(--blue-gray);
+  margin-bottom:15px;
+  opacity:0;
+  animation:fadeUp .7s ease .75s forwards;
+}
+
+.eyebrow::before,
+.eyebrow::after{
+  content:"";
+  display:inline-block;
+  width:28px;
+  height:1px;
+  vertical-align:middle;
+  margin:0 10px;
+  background:rgba(157,178,191,.3);
+}
+
+h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(48px,7vw,78px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  margin:0;
+  color:var(--mist);
+  text-shadow:0 0 30px rgba(221,230,237,.06);
+  opacity:0;
+  animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) .9s forwards;
+}
+
+.subtitle{
+  max-width:480px;
+  margin:19px auto 0;
+  font-size:13px;
+  line-height:1.7;
+  color:var(--blue-gray);
+  letter-spacing:.02em;
+  opacity:0;
+  animation:fadeUp .7s ease 1.15s forwards;
+}
+
+.date-display{
+  margin-top:18px;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(157,178,191,.65);
+  opacity:0;
+  animation:fadeUp .7s ease 1.3s forwards;
+}
+
+
+/* DASHBOARD */
+
+.dashboard{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(157,178,191,.18);
+  border-radius:25px;
+  background:rgba(39,55,77,.58);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 20px 65px rgba(39,55,77,.25),
+    inset 0 1px 0 rgba(221,230,237,.055);
+  padding:27px;
+  margin-bottom:18px;
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 1.45s forwards;
+}
+
+.dashboard::before{
+  content:"";
+  position:absolute;
+  inset:-100% 35% 40% -60%;
+  background:linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(221,230,237,.075),
+    transparent 62%
+  );
+  transform:translateX(-35%) rotate(8deg);
+  animation:surfaceSweep 7s ease-in-out 3s infinite;
+}
+
+.dashboard-top{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.progress-copy{
+  flex:1;
+}
+
+.mini-label{
+  color:var(--blue-gray);
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.progress-title{
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:-.03em;
+}
+
+.progress-sub{
+  color:var(--blue-gray);
+  font-size:12px;
+  margin-top:7px;
+}
+
+.progress-ring{
+  width:112px;
+  height:112px;
+  border-radius:50%;
+  position:relative;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at center,var(--navy) 57%,transparent 58%),
+    conic-gradient(
+      var(--mist) var(--progress,0%),
+      rgba(157,178,191,.12) 0
+    );
+  box-shadow:
+    0 0 22px rgba(157,178,191,.07),
+    inset 0 0 20px rgba(82,109,130,.12);
+  transition:.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.progress-ring::before{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border:1px solid rgba(157,178,191,.12);
+  border-radius:50%;
+  animation:ringPulse 4s ease-in-out infinite;
+}
+
+.progress-number{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.progress-number strong{
+  display:block;
+  font-family:var(--display);
+  font-size:30px;
+  font-weight:400;
+}
+
+.progress-number span{
+  display:block;
+  color:var(--blue-gray);
+  font-size:8px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+
+/* PRAYERS */
+
+.prayers{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-top:23px;
+}
+
+.prayer{
+  position:relative;
+  min-height:165px;
+  padding:19px 12px;
+  border:1px solid rgba(157,178,191,.15);
+  border-radius:19px;
+  background:rgba(39,55,77,.42);
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    background .45s,
+    border-color .45s,
+    box-shadow .45s;
+  overflow:hidden;
+}
+
+.prayer::before{
+  content:"";
+  position:absolute;
+  inset:-80% 30% 30% -70%;
+  background:linear-gradient(
+    110deg,
+    transparent,
+    rgba(221,230,237,.10),
+    transparent
+  );
+  transform:rotate(10deg);
+  transition:transform .9s ease;
+}
+
+.prayer:hover{
+  transform:translateY(-5px);
+  background:rgba(82,109,130,.20);
+  border-color:rgba(157,178,191,.34);
+  box-shadow:
+    0 20px 45px rgba(39,55,77,.30),
+    0 0 20px rgba(157,178,191,.05);
+}
+
+.prayer:hover::before{
+  transform:translateX(120%) rotate(10deg);
+}
+
+.prayer-name{
+  position:relative;
+  z-index:2;
+  font-size:14px;
+  font-weight:500;
+  text-align:center;
+}
+
+.prayer-time{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  margin-top:5px;
+  font-size:9px;
+  color:var(--blue-gray);
+  letter-spacing:.08em;
+}
+
+.prayer-button{
+  position:relative;
+  z-index:2;
+  width:65px;
+  height:65px;
+  margin:18px auto 12px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(157,178,191,.24);
+  background:
+    radial-gradient(circle at center,rgba(221,230,237,.035),transparent 65%),
+    rgba(39,55,77,.4);
+  cursor:pointer;
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    border-color .4s,
+    box-shadow .4s,
+    background .4s;
+}
+
+.prayer-button svg{
+  width:27px;
+  height:27px;
+  fill:none;
+  stroke:var(--blue-gray);
+  stroke-width:1.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:.4s ease;
+}
+
+.prayer-button:hover{
+  transform:scale(1.08);
+  border-color:rgba(221,230,237,.42);
+  box-shadow:0 0 24px rgba(157,178,191,.10);
+}
+
+.prayer.completed .prayer-button{
+  background:
+    radial-gradient(circle,rgba(221,230,237,.13),transparent 67%),
+    rgba(82,109,130,.30);
+  border-color:rgba(221,230,237,.46);
+  box-shadow:
+    0 0 24px rgba(157,178,191,.14),
+    inset 0 0 18px rgba(221,230,237,.06);
+  animation:completedPulse 2.8s ease-in-out infinite;
+}
+
+.prayer.completed .prayer-button svg{
+  stroke:var(--mist);
+  filter:drop-shadow(0 0 7px rgba(221,230,237,.28));
+}
+
+.check{
+  display:none;
+}
+
+.prayer.completed .check{
+  display:block;
+}
+
+.prayer.completed .mosque-icon{
+  display:none;
+}
+
+.status{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  font-size:9px;
+  color:var(--blue-gray);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.prayer.completed .status{
+  color:var(--mist);
+}
+
+
+/* CELEBRATION */
+
+.celebration{
+  display:none;
+  margin-top:17px;
+  padding:21px;
+  border:1px solid rgba(221,230,237,.20);
+  border-radius:19px;
+  text-align:center;
+  background:rgba(82,109,130,.17);
+  box-shadow:
+    0 0 35px rgba(157,178,191,.07),
+    inset 0 1px 0 rgba(221,230,237,.07);
+  animation:fadeUp .7s ease forwards;
+}
+
+.celebration.show{
+  display:block;
+}
+
+.celebration-title{
+  font-family:var(--display);
+  font-size:26px;
+}
+
+.celebration-text{
+  margin-top:6px;
+  color:var(--blue-gray);
+  font-size:11px;
+  line-height:1.7;
+}
+
+
+/* STATS GRID */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.stat-card{
+  position:relative;
+  overflow:hidden;
+  padding:23px;
+  min-height:125px;
+  border:1px solid rgba(157,178,191,.15);
+  border-radius:21px;
+  background:rgba(39,55,77,.54);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 18px 50px rgba(39,55,77,.20),
+    inset 0 1px 0 rgba(221,230,237,.05);
+  opacity:0;
+  animation:rowIn .75s cubic-bezier(.2,.7,.2,1) var(--delay) forwards;
+}
+
+.stat-label{
+  font-size:9px;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:var(--blue-gray);
+}
+
+.stat-value{
+  margin-top:12px;
+  font-family:var(--display);
+  font-size:34px;
+  font-weight:400;
+}
+
+.stat-description{
+  color:var(--blue-gray);
+  font-size:10px;
+  margin-top:3px;
+}
+
+
+/* WEEK */
+
+.section-card{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:18px;
+  padding:26px;
+  border:1px solid rgba(157,178,191,.15);
+  border-radius:23px;
+  background:rgba(39,55,77,.54);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 18px 55px rgba(39,55,77,.21),
+    inset 0 1px 0 rgba(221,230,237,.05);
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 2.15s forwards;
+}
+
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.section-title{
+  font-size:19px;
+  font-weight:500;
+  letter-spacing:-.02em;
+}
+
+.section-subtitle{
+  margin-top:5px;
+  color:var(--blue-gray);
+  font-size:11px;
+}
+
+.week{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:9px;
+}
+
+.day{
+  text-align:center;
+  padding:13px 7px;
+  border:1px solid rgba(157,178,191,.12);
+  border-radius:15px;
+  background:rgba(39,55,77,.38);
+  transition:.4s ease;
+}
+
+.day:hover{
+  transform:translateY(-3px);
+  border-color:rgba(157,178,191,.28);
+}
+
+.day-name{
+  color:var(--blue-gray);
+  font-size:8px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.day-number{
+  margin:5px 0 10px;
+  font-family:var(--display);
+  font-size:20px;
+}
+
+.day-dots{
+  display:flex;
+  justify-content:center;
+  gap:4px;
+}
+
+.day-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:rgba(157,178,191,.17);
+}
+
+.day-dot.done{
+  background:var(--mist);
+  box-shadow:0 0 6px rgba(221,230,237,.22);
+}
+
+.day.today{
+  border-color:rgba(157,178,191,.35);
+  box-shadow:inset 0 0 20px rgba(82,109,130,.08);
+}
+
+
+/* ACHIEVEMENTS */
+
+.achievements{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.achievement{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-height:78px;
+  padding:15px;
+  border:1px solid rgba(157,178,191,.12);
+  border-radius:17px;
+  background:rgba(39,55,77,.35);
+  transition:.4s ease;
+}
+
+.achievement:hover{
+  transform:translateY(-3px);
+  border-color:rgba(157,178,191,.27);
+}
+
+.achievement-icon{
+  width:40px;
+  height:40px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(157,178,191,.17);
+  color:var(--blue-gray);
+}
+
+.achievement-icon svg{
+  width:19px;
+  height:19px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.achievement.unlocked{
+  border-color:rgba(221,230,237,.25);
+  background:rgba(82,109,130,.16);
+}
+
+.achievement.unlocked .achievement-icon{
+  color:var(--mist);
+  box-shadow:0 0 16px rgba(157,178,191,.09);
+}
+
+.achievement-name{
+  font-size:11px;
+  font-weight:500;
+}
+
+.achievement-description{
+  margin-top:4px;
+  color:var(--blue-gray);
+  font-size:9px;
+  line-height:1.4;
+}
+
+
+/* REFLECTION */
+
+.reflection{
+  margin-top:18px;
+}
+
+.reflection textarea{
+  width:100%;
+  min-height:115px;
+  resize:vertical;
+  padding:17px;
+  border:1px solid rgba(157,178,191,.14);
+  border-radius:17px;
+  outline:none;
+  color:var(--mist);
+  background:rgba(39,55,77,.35);
+  transition:.4s ease;
+}
+
+.reflection textarea::placeholder{
+  color:rgba(157,178,191,.48);
+}
+
+.reflection textarea:focus{
+  border-color:rgba(157,178,191,.34);
+  box-shadow:0 0 22px rgba(157,178,191,.06);
+}
+
+
+/* MOTIVATION */
+
+.motivation{
+  position:relative;
+  text-align:center;
+  padding:25px 20px;
+  margin-top:18px;
+  border-top:1px solid rgba(157,178,191,.10);
+  border-bottom:1px solid rgba(157,178,191,.10);
+}
+
+.motivation-label{
+  font-size:8px;
+  letter-spacing:.25em;
+  color:var(--blue-gray);
+  text-transform:uppercase;
+}
+
+.motivation-text{
+  margin-top:10px;
+  font-family:var(--display);
+  font-size:20px;
+  line-height:1.45;
+}
+
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  padding:28px 0 0;
+  color:rgba(157,178,191,.53);
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.signature{
+  margin-top:9px;
+  font-family:var(--display);
+  color:rgba(221,230,237,.68);
+  font-size:15px;
+  letter-spacing:.04em;
+  text-transform:none;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:var(--op);
+    transform:scale(1);
+  }
+  50%{
+    opacity:calc(var(--op) + .28);
+    transform:scale(1.25);
+  }
+}
+
+@keyframes drift{
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+  50%{
+    transform:translate3d(3vw,-2vw,0);
+  }
+}
+
+@keyframes patternDrift{
+  from{
+    transform:translate3d(0,0,0) scale(1.15);
+  }
+  to{
+    transform:translate3d(1.5%,1%,0) scale(1.15);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+    filter:blur(5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+@keyframes reveal{
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes moonIn{
+  to{
+    opacity:1;
+    transform:translateX(-50%) scale(1);
+  }
+}
+
+@keyframes moonGlow{
+  0%,100%{
+    filter:drop-shadow(0 0 8px rgba(221,230,237,.10));
+  }
+  50%{
+    filter:drop-shadow(0 0 22px rgba(221,230,237,.24));
+  }
+}
+
+@keyframes ringPulse{
+  0%,100%{
+    transform:scale(.92);
+    opacity:.25;
+  }
+  50%{
+    transform:scale(1.12);
+    opacity:.65;
+  }
+}
+
+@keyframes rowIn{
+  0%{
+    opacity:0;
+    transform:translateY(35px) scale(.965);
+    filter:blur(9px);
+  }
+  65%{
+    opacity:1;
+    filter:blur(1px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
+}
+
+@keyframes completedPulse{
+  0%,100%{
+    box-shadow:
+      0 0 20px rgba(157,178,191,.10),
+      inset 0 0 18px rgba(221,230,237,.05);
+  }
+  50%{
+    box-shadow:
+      0 0 31px rgba(157,178,191,.18),
+      inset 0 0 22px rgba(221,230,237,.08);
+  }
+}
+
+@keyframes surfaceSweep{
+  0%,35%{
+    transform:translateX(-35%) rotate(8deg);
+  }
+  70%,100%{
+    transform:translateX(125%) rotate(8deg);
+  }
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+  .prayers{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .achievements{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:650px){
+
+  .app{
+    padding:20px 15px 50px;
+  }
+
+  .top-nav{
+    margin-bottom:27px;
+  }
+
+  .breadcrumb{
+    display:none;
+  }
+
+  .hero{
+    margin-bottom:32px;
+  }
+
+  .arch-wrap{
+    height:90px;
+  }
+
+  .moon{
+    width:55px;
+    height:55px;
+    top:15px;
+  }
+
+  h1{
+    font-size:clamp(43px,14vw,65px);
+  }
+
+  .subtitle{
+    font-size:12px;
+    max-width:350px;
+  }
+
+  .dashboard{
+    padding:20px 15px;
+    border-radius:20px;
+  }
+
+  .dashboard-top{
+    align-items:flex-start;
+  }
+
+  .progress-ring{
+    width:88px;
+    height:88px;
+  }
+
+  .progress-number strong{
+    font-size:24px;
+  }
+
+  .progress-title{
+    font-size:21px;
+  }
+
+  .prayers{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .prayer{
+    min-height:153px;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stat-card{
+    min-height:105px;
+  }
+
+  .section-card{
+    padding:20px 15px;
+    border-radius:20px;
+  }
+
+  .week{
+    gap:5px;
+  }
+
+  .day{
+    padding:11px 3px;
+  }
+
+  .day-dots{
+    gap:2px;
+  }
+
+  .day-dot{
+    width:4px;
+    height:4px;
+  }
+
+  .achievements{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:430px){
+
+  .top-nav{
+    align-items:flex-start;
+  }
+
+  .back-link{
+    padding:8px 12px;
+    font-size:9px;
+  }
+
+  .eyebrow{
+    font-size:8px;
+    letter-spacing:.25em;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after{
+    width:18px;
+    margin:0 6px;
+  }
+
+  .dashboard-top{
+    gap:10px;
+  }
+
+  .progress-title{
+    font-size:18px;
+  }
+
+  .progress-sub{
+    font-size:10px;
+  }
+
+  .progress-ring{
+    width:78px;
+    height:78px;
+  }
+
+  .progress-number strong{
+    font-size:21px;
+  }
+
+  .progress-number span{
+    font-size:7px;
+  }
+
+  .prayer{
+    min-height:145px;
+  }
+
+  .prayer-button{
+    width:58px;
+    height:58px;
+  }
+
+  .prayer-name{
+    font-size:13px;
+  }
+
+  .section-heading{
+    display:block;
+  }
+
+  .day-name{
+    font-size:7px;
+  }
+
+  .day-number{
+    font-size:17px;
+  }
+
+  .motivation-text{
+    font-size:18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+
+  .star,
+  .orb{
+    animation:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- EXACT INDEX BACKGROUND -->
+
+<div class="sky" aria-hidden="true">
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="constellations">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+
+      <line x1="90" y1="130" x2="210" y2="185"/>
+      <line x1="210" y1="185" x2="270" y2="110"/>
+
+      <line x1="940" y1="125" x2="1035" y2="205"/>
+      <line x1="1035" y1="205" x2="1110" y2="145"/>
+
+      <line x1="120" y1="650" x2="205" y2="570"/>
+      <line x1="1025" y1="615" x2="1105" y2="680"/>
+
+      <circle cx="90" cy="130" r="2"/>
+      <circle cx="210" cy="185" r="2"/>
+      <circle cx="270" cy="110" r="2"/>
+
+      <circle cx="940" cy="125" r="2"/>
+      <circle cx="1035" cy="205" r="2"/>
+      <circle cx="1110" cy="145" r="2"/>
+
+      <circle cx="120" cy="650" r="2"/>
+      <circle cx="205" cy="570" r="2"/>
+      <circle cx="1025" cy="615" r="2"/>
+      <circle cx="1105" cy="680" r="2"/>
+
+    </svg>
+  </div>
+
+</div>
+
+
+<main class="app">
+
+  <!-- NAVIGATION -->
+
+  <nav class="top-nav">
+
+    <a href="index.html" class="back-link">
+      <span>←</span>
+      <span>My Islamic Journey</span>
+    </a>
+
+    <div class="breadcrumb">
+      MY ISLAMIC JOURNEY / SALAH TRACKER
+    </div>
+
+  </nav>
+
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <div class="arch-wrap" aria-hidden="true">
+      <div class="arch"></div>
+      <div class="moon"></div>
+    </div>
+
+    <div class="eyebrow">
+      SALAH TRACKER
+    </div>
+
+    <h1>
+      Stay Connected<br>
+      Through Prayer
+    </h1>
+
+    <p class="subtitle">
+      Five daily prayers. One beautiful connection with Allah.
+    </p>
+
+    <div class="date-display" id="dateDisplay"></div>
+
+  </header>
+
+
+  <!-- MAIN DASHBOARD -->
+
+  <section class="dashboard">
+
+    <div class="dashboard-top">
+
+      <div class="progress-copy">
+
+        <div class="mini-label">
+          TODAY'S JOURNEY
+        </div>
+
+        <div class="progress-title" id="progressTitle">
+          Begin with your first prayer
+        </div>
+
+        <div class="progress-sub" id="progressSub">
+          Every prayer is a step closer.
+        </div>
+
+      </div>
+
+      <div
+        class="progress-ring"
+        id="progressRing"
+        style="--progress:0%"
+        aria-label="Prayer completion progress"
+      >
+
+        <div class="progress-number">
+          <strong id="progressNumber">0/5</strong>
+          <span>Prayers</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="prayers">
+
+      <!-- FAJR -->
+
+      <article class="prayer" data-prayer="fajr">
+
+        <div class="prayer-name">Fajr</div>
+        <div class="prayer-time">DAWN</div>
+
+        <button
+          class="prayer-button"
+          type="button"
+          aria-label="Mark Fajr as completed"
+          aria-pressed="false"
+        >
+
+          <svg class="mosque-icon" viewBox="0 0 48 48">
+            <path d="M7 39h34"/>
+            <path d="M10 39V25l14-12 14 12v14"/>
+            <path d="M18 39V27h12v12"/>
+            <path d="M24 13V8"/>
+            <path d="M21 8h6"/>
+          </svg>
+
+          <svg class="check" viewBox="0 0 48 48">
+            <path d="M10 25l9 9 19-20"/>
+          </svg>
+
+        </button>
+
+        <div class="status">Not completed</div>
+
+      </article>
+
+
+      <!-- DHUHR -->
+
+      <article class="prayer" data-prayer="dhuhr">
+
+        <div class="prayer-name">Dhuhr</div>
+        <div class="prayer-time">NOON</div>
+
+        <button
+          class="prayer-button"
+          type="button"
+          aria-label="Mark Dhuhr as completed"
+          aria-pressed="false"
+        >
+
+          <svg class="mosque-icon" viewBox="0 0 48 48">
+            <path d="M7 39h34"/>
+            <path d="M10 39V25l14-12 14 12v14"/>
+            <path d="M18 39V27h12v12"/>
+            <path d="M24 13V8"/>
+            <path d="M21 8h6"/>
+          </svg>
+
+          <svg class="check" viewBox="0 0 48 48">
+            <path d="M10 25l9 9 19-20"/>
+          </svg>
+
+        </button>
+
+        <div class="status">Not completed</div>
+
+      </article>
+
+
+      <!-- ASR -->
+
+      <article class="prayer" data-prayer="asr">
+
+        <div class="prayer-name">Asr</div>
+        <div class="prayer-time">AFTERNOON</div>
+
+        <button
+          class="prayer-button"
+          type="button"
+          aria-label="Mark Asr as completed"
+          aria-pressed="false"
+        >
+
+          <svg class="mosque-icon" viewBox="0 0 48 48">
+            <path d="M7 39h34"/>
+            <path d="M10 39V25l14-12 14 12v14"/>
+            <path d="M18 39V27h12v12"/>
+            <path d="M24 13V8"/>
+            <path d="M21 8h6"/>
+          </svg>
+
+          <svg class="check" viewBox="0 0 48 48">
+            <path d="M10 25l9 9 19-20"/>
+          </svg>
+
+        </button>
+
+        <div class="status">Not completed</div>
+
+      </article>
+
+
+      <!-- MAGHRIB -->
+
+      <article class="prayer" data-prayer="maghrib">
+
+        <div class="prayer-name">Maghrib</div>
+        <div class="prayer-time">SUNSET</div>
+
+        <button
+          class="prayer-button"
+          type="button"
+          aria-label="Mark Maghrib as completed"
+          aria-pressed="false"
+        >
+
+          <svg class="mosque-icon" viewBox="0 0 48 48">
+            <path d="M7 39h34"/>
+            <path d="M10 39V25l14-12 14 12v14"/>
+            <path d="M18 39V27h12v12"/>
+            <path d="M24 13V8"/>
+            <path d="M21 8h6"/>
+          </svg>
+
+          <svg class="check" viewBox="0 0 48 48">
+            <path d="M10 25l9 9 19-20"/>
+          </svg>
+
+        </button>
+
+        <div class="status">Not completed</div>
+
+      </article>
+
+
+      <!-- ISHA -->
+
+      <article class="prayer" data-prayer="isha">
+
+        <div class="prayer-name">Isha</div>
+        <div class="prayer-time">NIGHT</div>
+
+        <button
+          class="prayer-button"
+          type="button"
+          aria-label="Mark Isha as completed"
+          aria-pressed="false"
+        >
+
+          <svg class="mosque-icon" viewBox="0 0 48 48">
+            <path d="M7 39h34"/>
+            <path d="M10 39V25l14-12 14 12v14"/>
+            <path d="M18 39V27h12v12"/>
+            <path d="M24 13V8"/>
+            <path d="M21 8h6"/>
+          </svg>
+
+          <svg class="check" viewBox="0 0 48 48">
+            <path d="M10 25l9 9 19-20"/>
+          </svg>
+
+        </button>
+
+        <div class="status">Not completed</div>
+
+      </article>
+
+    </div>
+
+
+    <!-- COMPLETION -->
+
+    <div class="celebration" id="celebration">
+
+      <div class="celebration-title">
+        Alhamdulillah…
+      </div>
+
+      <div class="celebration-text">
+        Today's prayers are complete.<br>
+        May Allah accept your عبادات and keep your heart connected.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATISTICS -->
+
+  <section class="stats-grid">
+
+    <article class="stat-card" style="--delay:1.7s">
+
+      <div class="stat-label">Current Streak</div>
+
+      <div class="stat-value" id="streakValue">
+        0
+      </div>
+
+      <div class="stat-description">
+        consecutive complete days
+      </div>
+
+    </article>
+
+
+    <article class="stat-card" style="--delay:1.85s">
+
+      <div class="stat-label">Total Prayers</div>
+
+      <div class="stat-value" id="totalValue">
+        0
+      </div>
+
+      <div class="stat-description">
+        prayers completed
+      </div>
+
+    </article>
+
+
+    <article class="stat-card" style="--delay:2s">
+
+      <div class="stat-label">Monthly Progress</div>
+
+      <div class="stat-value" id="monthValue">
+        0%
+      </div>
+
+      <div class="stat-description">
+        prayers this month
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- WEEKLY OVERVIEW -->
+
+  <section class="section-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <div class="section-title">
+          Weekly Overview
+        </div>
+
+        <div class="section-subtitle">
+          Your seven-day connection with Salah
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="week" id="week"></div>
+
+  </section>
+
+
+  <!-- ACHIEVEMENTS -->
+
+  <section class="section-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <div class="section-title">
+          Achievements
+        </div>
+
+        <div class="section-subtitle">
+          Small milestones worth remembering
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="achievements">
+
+      <article class="achievement" data-achievement="first">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M24 6v30"/>
+            <path d="M15 13h18"/>
+            <path d="M15 13l-7 15h14l-7-15Z"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">First Prayer</div>
+          <div class="achievement-description">
+            Complete your first Salah
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="achievement" data-achievement="complete">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M9 25l9 9 21-21"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">Complete Day</div>
+          <div class="achievement-description">
+            Complete all five prayers
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="achievement" data-achievement="three">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M24 5l4.2 9.8L39 17l-8.3 7.2L33 35l-9-5.5-9 5.5 2.3-10.8L9 17l10.8-2.2L24 5Z"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">3 Day Connection</div>
+          <div class="achievement-description">
+            Three complete days
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="achievement" data-achievement="seven">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="17"/>
+            <path d="M24 14v11l7 5"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">7 Day Connection</div>
+          <div class="achievement-description">
+            One full week completed
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="achievement" data-achievement="thirty">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M8 20h32"/>
+            <path d="M12 8v8M36 8v8"/>
+            <rect x="8" y="11" width="32" height="29" rx="4"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">30 Day Connection</div>
+          <div class="achievement-description">
+            Thirty complete days
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="achievement" data-achievement="hundred">
+
+        <div class="achievement-icon">
+          <svg viewBox="0 0 48 48">
+            <path d="M24 6l4.8 10.3L40 18l-8 7.8L34 37l-10-5.5L14 37l2-11.2L8 18l11.2-1.7L24 6Z"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="achievement-name">Consistent Heart</div>
+          <div class="achievement-description">
+            Complete 100 total prayers
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- REFLECTION -->
+
+  <section class="section-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <div class="section-title">
+          Today's Reflection
+        </div>
+
+        <div class="section-subtitle">
+          A quiet moment to reflect on your Salah
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="reflection">
+
+      <textarea
+        id="reflection"
+        placeholder="How did today's prayers make you feel?"
+        aria-label="Today's reflection"
+      ></textarea>
+
+    </div>
+
+  </section>
+
+
+  <!-- MOTIVATION -->
+
+  <section class="motivation">
+
+    <div class="motivation-label">
+      A Thought For Today
+    </div>
+
+    <div class="motivation-text" id="motivation">
+      “Indeed, prayer prohibits immorality and wrongdoing.”
+    </div>
+
+  </section>
+
+
+  <footer class="footer">
+
+    Your journey continues, one prayer at a time.
+
+    <div class="signature">
+      Isba Eman
+    </div>
+
+  </footer>
+
+</main>
+
+
+<script>
+
+/* =========================
+   STORAGE
+========================= */
+
+const STORAGE_KEY = "myIslamicJourneySalahTrackerV1";
+
+const prayerNames = [
+  "fajr",
+  "dhuhr",
+  "asr",
+  "maghrib",
+  "isha"
+];
+
+const motivations = [
+  "“Indeed, prayer prohibits immorality and wrongdoing.”",
+  "“Establish prayer for My remembrance.”",
+  "“And seek help through patience and prayer.”",
+  "“Prayer is the believer's ascension.”",
+  "“Keep your heart connected to Allah.”",
+  "“Every sujood brings you closer.”",
+  "“A peaceful heart begins with prayer.”"
+];
+
+
+function todayKey(){
+
+  const d = new Date();
+
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+}
+
+
+function loadData(){
+
+  try{
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if(raw){
+
+      const parsed = JSON.parse(raw);
+
+      if(parsed && typeof parsed === "object"){
+        return parsed;
+      }
+
+    }
+
+  }catch(error){
+
+    console.warn("Could not read Salah Tracker data.",error);
+
+  }
+
+  return {
+    days:{},
+    reflections:{}
+  };
+}
+
+
+let data = loadData();
+
+
+function saveData(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+  }catch(error){
+
+    console.warn("Could not save Salah Tracker data.",error);
+
+  }
+
+}
+
+
+/* =========================
+   TODAY
+========================= */
+
+const today = todayKey();
+
+if(!data.days[today]){
+
+  data.days[today] = {
+    fajr:false,
+    dhuhr:false,
+    asr:false,
+    maghrib:false,
+    isha:false
+  };
+
+}
+
+if(!data.reflections){
+  data.reflections = {};
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+const dateDisplay = document.getElementById("dateDisplay");
+
+dateDisplay.textContent =
+  new Intl.DateTimeFormat(
+    "en-US",
+    {
+      weekday:"long",
+      month:"long",
+      day:"numeric",
+      year:"numeric"
+    }
+  ).format(new Date());
+
+
+/* =========================
+   MOTIVATION
+========================= */
+
+const motivation =
+  document.getElementById("motivation");
+
+const motivationIndex =
+  new Date().getDate() % motivations.length;
+
+motivation.textContent =
+  motivations[motivationIndex];
+
+
+/* =========================
+   PRAYER HELPERS
+========================= */
+
+function getTodayPrayers(){
+
+  return prayerNames.map(
+    prayer => Boolean(data.days[today][prayer])
+  );
+
+}
+
+
+function completedToday(){
+
+  return getTodayPrayers()
+    .filter(Boolean)
+    .length;
+
+}
+
+
+/* =========================
+   UPDATE PRAYERS
+========================= */
+
+function updatePrayerUI(){
+
+  const completed = completedToday();
+
+  document
+    .querySelectorAll(".prayer")
+    .forEach(card => {
+
+      const prayer = card.dataset.prayer;
+
+      const button =
+        card.querySelector(".prayer-button");
+
+      const status =
+        card.querySelector(".status");
+
+      const done =
+        Boolean(data.days[today][prayer]);
+
+      card.classList.toggle(
+        "completed",
+        done
+      );
+
+      button.setAttribute(
+        "aria-pressed",
+        String(done)
+      );
+
+      button.setAttribute(
+        "aria-label",
+        done
+          ? `Mark ${prayer} as incomplete`
+          : `Mark ${prayer} as completed`
+      );
+
+      status.textContent =
+        done
+          ? "Completed"
+          : "Not completed";
+
+    });
+
+
+  /* PROGRESS */
+
+  const percentage =
+    Math.round((completed / 5) * 100);
+
+  const ring =
+    document.getElementById("progressRing");
+
+  ring.style.setProperty(
+    "--progress",
+    percentage + "%"
+  );
+
+  document.getElementById(
+    "progressNumber"
+  ).textContent = `${completed}/5`;
+
+
+  const title =
+    document.getElementById("progressTitle");
+
+  const sub =
+    document.getElementById("progressSub");
+
+  if(completed === 0){
+
+    title.textContent =
+      "Begin with your first prayer";
+
+    sub.textContent =
+      "Every prayer is a step closer.";
+
+  }else if(completed < 5){
+
+    title.textContent =
+      `${completed} prayer${completed === 1 ? "" : "s"} completed`;
+
+    sub.textContent =
+      `${5-completed} more to complete today's journey.`;
+
+  }else{
+
+    title.textContent =
+      "Today's journey is complete";
+
+    sub.textContent =
+      "Alhamdulillah. May Allah accept your prayers.";
+
+  }
+
+
+  const celebration =
+    document.getElementById("celebration");
+
+  celebration.classList.toggle(
+    "show",
+    completed === 5
+  );
+
+
+  saveData();
+
+  updateStatistics();
+  updateAchievements();
+  renderWeek();
+
+}
+
+
+/* =========================
+   PRAYER CLICK
+========================= */
+
+document
+  .querySelectorAll(".prayer-button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const card =
+          button.closest(".prayer");
+
+        const prayer =
+          card.dataset.prayer;
+
+        data.days[today][prayer] =
+          !data.days[today][prayer];
+
+        updatePrayerUI();
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   TOTAL PRAYERS
+========================= */
+
+function totalPrayers(){
+
+  let total = 0;
+
+  Object.values(data.days)
+    .forEach(day => {
+
+      prayerNames.forEach(prayer => {
+
+        if(day[prayer]){
+          total++;
+        }
+
+      });
+
+    });
+
+  return total;
+
+}
+
+
+/* =========================
+   COMPLETE DAY
+========================= */
+
+function isCompleteDay(key){
+
+  const day = data.days[key];
+
+  if(!day){
+    return false;
+  }
+
+  return prayerNames.every(
+    prayer => day[prayer] === true
+  );
+
+}
+
+
+/* =========================
+   STREAK
+========================= */
+
+function getStreak(){
+
+  let streak = 0;
+
+  const cursor = new Date();
+
+  while(true){
+
+    const key =
+      cursor.getFullYear() +
+      "-" +
+      String(cursor.getMonth()+1).padStart(2,"0") +
+      "-" +
+      String(cursor.getDate()).padStart(2,"0");
+
+    if(isCompleteDay(key)){
+
+      streak++;
+
+      cursor.setDate(
+        cursor.getDate() - 1
+      );
+
+    }else{
+
+      break;
+
+    }
+
+  }
+
+  return streak;
+
+}
+
+
+/* =========================
+   MONTHLY
+========================= */
+
+function monthlyPercentage(){
+
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const daysInMonth =
+    new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+  const possible =
+    daysInMonth * 5;
+
+  let completed = 0;
+
+  Object.entries(data.days)
+    .forEach(([key,day]) => {
+
+      const parts = key.split("-");
+
+      const y = Number(parts[0]);
+      const m = Number(parts[1]) - 1;
+
+      if(y === year && m === month){
+
+        prayerNames.forEach(
+          prayer => {
+
+            if(day[prayer]){
+              completed++;
+            }
+
+          }
+        );
+
+      }
+
+    });
+
+  return Math.round(
+    (completed / possible) * 100
+  );
+
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+function updateStatistics(){
+
+  document.getElementById(
+    "streakValue"
+  ).textContent = getStreak();
+
+  document.getElementById(
+    "totalValue"
+  ).textContent = totalPrayers();
+
+  document.getElementById(
+    "monthValue"
+  ).textContent =
+    monthlyPercentage() + "%";
+
+}
+
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+function completeDayCount(){
+
+  return Object.keys(data.days)
+    .filter(isCompleteDay)
+    .length;
+
+}
+
+
+function updateAchievements(){
+
+  const total =
+    totalPrayers();
+
+  const streak =
+    getStreak();
+
+  const completeDays =
+    completeDayCount();
+
+  const unlocked = {
+
+    first: total >= 1,
+
+    complete:
+      isCompleteDay(today),
+
+    three:
+      streak >= 3,
+
+    seven:
+      streak >= 7,
+
+    thirty:
+      streak >= 30,
+
+    hundred:
+      total >= 100
+
+  };
+
+
+  Object.entries(unlocked)
+    .forEach(([key,value]) => {
+
+      const element =
+        document.querySelector(
+          `[data-achievement="${key}"]`
+        );
+
+      if(element){
+
+        element.classList.toggle(
+          "unlocked",
+          value
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =========================
+   WEEK
+========================= */
+
+function formatKey(date){
+
+  return date.getFullYear() +
+    "-" +
+    String(date.getMonth()+1).padStart(2,"0") +
+    "-" +
+    String(date.getDate()).padStart(2,"0");
+
+}
+
+
+function renderWeek(){
+
+  const container =
+    document.getElementById("week");
+
+  container.innerHTML = "";
+
+  const current =
+    new Date();
+
+  const dayOfWeek =
+    current.getDay();
+
+  const mondayOffset =
+    dayOfWeek === 0
+      ? -6
+      : 1 - dayOfWeek;
+
+  const monday =
+    new Date(current);
+
+  monday.setDate(
+    current.getDate() + mondayOffset
+  );
+
+
+  for(let i=0;i<7;i++){
+
+    const date =
+      new Date(monday);
+
+    date.setDate(
+      monday.getDate() + i
+    );
+
+    const key =
+      formatKey(date);
+
+    const record =
+      data.days[key] || {};
+
+    const day =
+      document.createElement("div");
+
+    day.className = "day";
+
+    if(key === today){
+      day.classList.add("today");
+    }
+
+
+    const names =
+      ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+    const dots =
+      prayerNames
+        .map(prayer => {
+
+          return `
+            <span
+              class="day-dot ${record[prayer] ? "done" : ""}"
+              title="${prayer}"
+            ></span>
+          `;
+
+        })
+        .join("");
+
+
+    day.innerHTML = `
+
+      <div class="day-name">
+        ${names[i]}
+      </div>
+
+      <div class="day-number">
+        ${date.getDate()}
+      </div>
+
+      <div class="day-dots">
+        ${dots}
+      </div>
+
+    `;
+
+
+    container.appendChild(day);
+
+  }
+
+}
+
+
+/* =========================
+   REFLECTION
+========================= */
+
+const reflection =
+  document.getElementById("reflection");
+
+reflection.value =
+  data.reflections[today] || "";
+
+
+let reflectionTimer;
+
+reflection.addEventListener(
+  "input",
+  () => {
+
+    clearTimeout(
+      reflectionTimer
+    );
+
+    reflectionTimer =
+      setTimeout(() => {
+
+        data.reflections[today] =
+          reflection.value;
+
+        saveData();
+
+      },300);
+
+  }
+);
+
+
+/* =========================
+   STARS
+========================= */
+
+const stars =
+  document.getElementById("stars");
+
+const count =
+  Math.min(
+    160,
+    Math.max(
+      100,
+      Math.round(
+        innerWidth *
+        innerHeight /
+        7000
+      )
+    )
+  );
+
+const frag =
+  document.createDocumentFragment();
+
+for(let i=0;i<count;i++){
+
+  const s =
+    document.createElement("i");
+
+  s.className =
+    "star" +
+    (
+      Math.random() < .08
+        ? " glow"
+        : ""
+    );
+
+  const size =
+    (
+      Math.random()*1.7+.55
+    ).toFixed(2);
+
+  s.style.left =
+    (
+      Math.random()*100
+    ).toFixed(2) + "%";
+
+  s.style.top =
+    (
+      Math.random()*100
+    ).toFixed(2) + "%";
+
+  s.style.width =
+    size + "px";
+
+  s.style.height =
+    size + "px";
+
+  s.style.setProperty(
+    "--op",
+    (
+      Math.random()*.34+.12
+    ).toFixed(2)
+  );
+
+  s.style.setProperty(
+    "--dur",
+    (
+      Math.random()*4+3.5
+    ).toFixed(2) + "s"
+  );
+
+  s.style.setProperty(
+    "--delay",
+    (
+      Math.random()*5
+    ).toFixed(2) + "s"
+  );
+
+  frag.appendChild(s);
+
+}
+
+stars.appendChild(frag);
+
+
+/* =========================
+   INITIAL RENDER
+========================= */
+
+updatePrayerUI();
+
+renderWeek();
+
+updateStatistics();
+
+updateAchievements();
+
+
+/* =========================
+   MIDNIGHT REFRESH
+========================= */
+
+setInterval(() => {
+
+  if(todayKey() !== today){
+
+    location.reload();
+
+  }
+
+},60000);
+
+</script>
+
+</body>
+</html>
