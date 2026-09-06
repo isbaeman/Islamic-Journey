@@ -1,0 +1,2695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Deeds Counter — My Islamic Journey</title>
+
+<style>
+:root{
+  --navy:#27374D;
+  --slate:#526D82;
+  --blue-gray:#9DB2BF;
+  --mist:#DDE6ED;
+
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:Georgia,"Times New Roman",serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--navy);
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--mist);
+  font-family:var(--sans);
+
+  background:
+    radial-gradient(circle at 50% 0%,rgba(82,109,130,.30),transparent 38%),
+    radial-gradient(circle at 8% 55%,rgba(157,178,191,.10),transparent 28%),
+    radial-gradient(circle at 92% 78%,rgba(82,109,130,.16),transparent 30%),
+    var(--navy);
+}
+
+
+/* =========================================================
+   CINEMATIC BACKGROUND
+========================================================= */
+
+.sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.sky::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  opacity:.17;
+
+  background:
+    repeating-radial-gradient(
+      circle at 50% 45%,
+      transparent 0 62px,
+      rgba(157,178,191,.10) 63px 64px,
+      transparent 65px 126px
+    ),
+
+    repeating-conic-gradient(
+      from 22.5deg at 50% 45%,
+      transparent 0 44deg,
+      rgba(157,178,191,.065) 45deg 46deg,
+      transparent 47deg 90deg
+    );
+
+  mask-image:
+    radial-gradient(
+      circle,
+      black 0 40%,
+      transparent 74%
+    );
+
+  animation:
+    patternDrift 32s linear infinite;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  opacity:.17;
+}
+
+.orb.one{
+  width:48vw;
+  height:48vw;
+  left:25%;
+  top:-14%;
+  background:var(--slate);
+  animation:drift 24s ease-in-out infinite;
+}
+
+.orb.two{
+  width:34vw;
+  height:34vw;
+  left:-12%;
+  top:42%;
+  background:var(--blue-gray);
+  animation:drift 30s ease-in-out infinite reverse;
+}
+
+.orb.three{
+  width:38vw;
+  height:38vw;
+  right:-13%;
+  bottom:-10%;
+  background:var(--slate);
+  animation:drift 27s ease-in-out infinite;
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+}
+
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:var(--mist);
+
+  box-shadow:
+    0 0 5px rgba(221,230,237,.22);
+
+  animation:
+    twinkle var(--dur)
+    ease-in-out
+    var(--delay)
+    infinite;
+}
+
+.star.glow{
+  box-shadow:
+    0 0 10px rgba(221,230,237,.45),
+    0 0 22px rgba(157,178,191,.18);
+}
+
+.constellations{
+  position:absolute;
+  inset:0;
+  opacity:.16;
+}
+
+.constellations svg{
+  width:100%;
+  height:100%;
+}
+
+.constellations line{
+  stroke:var(--blue-gray);
+  stroke-width:.7;
+  stroke-dasharray:2 10;
+}
+
+.constellations circle{
+  fill:var(--mist);
+  opacity:.7;
+}
+
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:var(--op);
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:calc(var(--op) + .28);
+    transform:scale(1.25);
+  }
+}
+
+@keyframes drift{
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+
+  50%{
+    transform:translate3d(3vw,-2vw,0);
+  }
+}
+
+@keyframes patternDrift{
+  from{
+    transform:translate3d(0,0,0) scale(1.15);
+  }
+
+  to{
+    transform:translate3d(1.5%,1%,0) scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+  position:relative;
+  z-index:2;
+
+  width:min(
+    1120px,
+    calc(100% - 36px)
+  );
+
+  margin:auto;
+
+  padding:
+    28px
+    0
+    70px;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  margin-bottom:65px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+
+  border:
+    1px solid
+    rgba(221,230,237,.28);
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  background:
+    rgba(221,230,237,.05);
+
+  box-shadow:
+    0 0 25px
+    rgba(157,178,191,.08);
+}
+
+.brand-mark::before{
+  content:"✦";
+
+  font-size:15px;
+
+  color:
+    var(--mist);
+}
+
+.brand-text{
+  font-family:var(--display);
+  font-size:18px;
+  letter-spacing:.02em;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+
+  padding:
+    11px
+    17px;
+
+  border:
+    1px solid
+    rgba(157,178,191,.20);
+
+  border-radius:999px;
+
+  color:var(--mist);
+
+  text-decoration:none;
+
+  background:
+    rgba(39,55,77,.40);
+
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+
+  font-size:13px;
+
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+
+  border-color:
+    rgba(221,230,237,.38);
+
+  background:
+    rgba(82,109,130,.28);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.16);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  max-width:800px;
+
+  margin:
+    0 auto
+    55px;
+
+  text-align:center;
+
+  animation:
+    heroIn 1s ease both;
+}
+
+.eyebrow{
+  color:var(--blue-gray);
+
+  text-transform:uppercase;
+
+  letter-spacing:.24em;
+
+  font-size:11px;
+
+  margin-bottom:17px;
+}
+
+.hero h1{
+  margin:0;
+
+  font-family:var(--display);
+
+  font-weight:400;
+
+  font-size:
+    clamp(
+      42px,
+      7vw,
+      78px
+    );
+
+  line-height:.95;
+
+  letter-spacing:-.04em;
+}
+
+.hero p{
+  max-width:570px;
+
+  margin:
+    23px auto 0;
+
+  color:var(--blue-gray);
+
+  line-height:1.8;
+
+  font-size:14px;
+}
+
+@keyframes heroIn{
+
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass{
+  border:
+    1px solid
+    rgba(157,178,191,.20);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(82,109,130,.18),
+      rgba(39,55,77,.48)
+    );
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  box-shadow:
+    0 25px 80px
+    rgba(0,0,0,.18),
+
+    inset 0 1px 0
+    rgba(221,230,237,.06);
+}
+
+
+/* =========================================================
+   TODAY TOTAL
+========================================================= */
+
+.today-card{
+
+  border-radius:28px;
+
+  padding:32px;
+
+  margin-bottom:20px;
+
+  animation:
+    cardIn .8s .12s ease both;
+}
+
+.today-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    210px
+    1fr;
+
+  gap:35px;
+
+  align-items:center;
+}
+
+.total-circle{
+
+  width:190px;
+  height:190px;
+
+  border-radius:50%;
+
+  display:grid;
+
+  place-items:center;
+
+  position:relative;
+
+  background:
+    conic-gradient(
+      var(--blue-gray)
+      var(--progress,0%),
+      rgba(157,178,191,.08)
+      var(--progress,0%)
+    );
+
+  box-shadow:
+    0 0 60px
+    rgba(157,178,191,.08);
+}
+
+.total-circle::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  border-radius:50%;
+
+  background:var(--navy);
+
+  border:
+    1px solid
+    rgba(157,178,191,.10);
+}
+
+.total-content{
+
+  position:relative;
+
+  text-align:center;
+}
+
+.total-number{
+
+  font-family:var(--display);
+
+  font-size:48px;
+
+  line-height:1;
+}
+
+.total-label{
+
+  margin-top:7px;
+
+  color:var(--blue-gray);
+
+  font-size:10px;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+}
+
+.today-text h2{
+
+  margin:0 0 9px;
+
+  font-family:var(--display);
+
+  font-size:30px;
+
+  font-weight:400;
+}
+
+.today-text p{
+
+  margin:0;
+
+  color:var(--blue-gray);
+
+  font-size:13px;
+
+  line-height:1.8;
+}
+
+.today-message{
+
+  margin-top:20px;
+
+  padding:
+    13px
+    15px;
+
+  border-radius:13px;
+
+  border:
+    1px solid
+    rgba(157,178,191,.12);
+
+  background:
+    rgba(221,230,237,.035);
+
+  color:var(--blue-gray);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   DEEDS
+========================================================= */
+
+.deeds-card{
+
+  border-radius:28px;
+
+  padding:30px;
+
+  margin-bottom:20px;
+
+  animation:
+    cardIn .8s .2s ease both;
+}
+
+.section-heading{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  margin-bottom:24px;
+}
+
+.section-title{
+
+  margin:0;
+
+  font-family:var(--display);
+
+  font-size:29px;
+
+  font-weight:400;
+}
+
+.section-subtitle{
+
+  margin-top:7px;
+
+  color:var(--blue-gray);
+
+  font-size:12px;
+}
+
+.deeds-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:13px;
+}
+
+.deed{
+
+  position:relative;
+
+  padding:19px;
+
+  border:
+    1px solid
+    rgba(157,178,191,.12);
+
+  border-radius:18px;
+
+  background:
+    rgba(39,55,77,.30);
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease;
+}
+
+.deed:hover{
+
+  transform:translateY(-4px);
+
+  background:
+    rgba(82,109,130,.17);
+
+  border-color:
+    rgba(157,178,191,.25);
+}
+
+.deed-name{
+
+  font-family:var(--display);
+
+  font-size:19px;
+
+  margin-bottom:4px;
+}
+
+.deed-desc{
+
+  color:var(--blue-gray);
+
+  font-size:10px;
+
+  line-height:1.5;
+
+  min-height:30px;
+}
+
+.deed-bottom{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-top:17px;
+}
+
+.deed-count{
+
+  font-family:var(--display);
+
+  font-size:25px;
+}
+
+.deed-btn{
+
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(221,230,237,.18);
+
+  background:
+    rgba(82,109,130,.30);
+
+  color:var(--mist);
+
+  font-size:20px;
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.deed-btn:hover{
+
+  transform:
+    scale(1.08);
+
+  background:
+    rgba(82,109,130,.52);
+}
+
+.deed-btn:active{
+
+  transform:
+    scale(.92);
+}
+
+
+/* =========================================================
+   CUSTOM DEED
+========================================================= */
+
+.custom-row{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    150px;
+
+  gap:12px;
+
+  margin-top:18px;
+}
+
+input{
+
+  width:100%;
+
+  padding:
+    13px
+    14px;
+
+  border:
+    1px solid
+    rgba(157,178,191,.17);
+
+  border-radius:13px;
+
+  outline:none;
+
+  background:
+    rgba(39,55,77,.58);
+
+  color:var(--mist);
+
+  font-family:var(--sans);
+
+  font-size:13px;
+
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+input:focus{
+
+  border-color:
+    rgba(221,230,237,.38);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(157,178,191,.06);
+}
+
+.add-btn{
+
+  border:
+    1px solid
+    rgba(221,230,237,.20);
+
+  border-radius:13px;
+
+  background:
+    rgba(82,109,130,.35);
+
+  color:var(--mist);
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  transition:
+    transform .25s ease,
+    background .25s ease;
+}
+
+.add-btn:hover{
+
+  transform:translateY(-2px);
+
+  background:
+    rgba(82,109,130,.52);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:20px;
+
+  margin-bottom:20px;
+}
+
+.stat-card{
+
+  border-radius:22px;
+
+  padding:24px;
+
+  animation:
+    cardIn .8s .3s ease both;
+
+  transition:
+    transform .3s ease,
+    border-color .3s ease;
+}
+
+.stat-card:hover{
+
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(157,178,191,.30);
+}
+
+.stat-icon{
+
+  font-size:18px;
+
+  color:var(--blue-gray);
+
+  margin-bottom:16px;
+}
+
+.stat-value{
+
+  font-family:var(--display);
+
+  font-size:31px;
+}
+
+.stat-label{
+
+  margin-top:5px;
+
+  color:var(--blue-gray);
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   WEEKLY
+========================================================= */
+
+.week-card{
+
+  border-radius:28px;
+
+  padding:30px;
+
+  margin-bottom:20px;
+
+  animation:
+    cardIn .8s .38s ease both;
+}
+
+.week-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(7,1fr);
+
+  gap:12px;
+
+  margin-top:25px;
+}
+
+.day{
+
+  text-align:center;
+}
+
+.day-name{
+
+  color:var(--blue-gray);
+
+  font-size:10px;
+
+  margin-bottom:9px;
+
+  text-transform:uppercase;
+}
+
+.day-bar{
+
+  height:105px;
+
+  border-radius:12px;
+
+  background:
+    rgba(221,230,237,.055);
+
+  border:
+    1px solid
+    rgba(157,178,191,.10);
+
+  display:flex;
+
+  align-items:flex-end;
+
+  overflow:hidden;
+}
+
+.day-fill{
+
+  width:100%;
+
+  height:0%;
+
+  background:
+    rgba(157,178,191,.48);
+
+  transition:
+    height .6s ease;
+}
+
+.day.today .day-bar{
+
+  border-color:
+    rgba(221,230,237,.28);
+}
+
+.day.today .day-name{
+
+  color:var(--mist);
+}
+
+.day-total{
+
+  color:var(--blue-gray);
+
+  font-size:10px;
+
+  margin-top:7px;
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.history-card{
+
+  border-radius:28px;
+
+  padding:30px;
+
+  animation:
+    cardIn .8s .45s ease both;
+}
+
+.history-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+  margin-top:22px;
+}
+
+.history-item{
+
+  display:grid;
+
+  grid-template-columns:
+    105px
+    1fr
+    auto;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding:
+    15px
+    17px;
+
+  border:
+    1px solid
+    rgba(157,178,191,.10);
+
+  border-radius:15px;
+
+  background:
+    rgba(39,55,77,.28);
+
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+.history-item:hover{
+
+  background:
+    rgba(82,109,130,.16);
+
+  transform:
+    translateX(3px);
+}
+
+.history-date{
+
+  color:var(--blue-gray);
+
+  font-size:11px;
+}
+
+.history-deeds{
+
+  font-family:var(--display);
+
+  font-size:17px;
+}
+
+.history-detail{
+
+  color:var(--blue-gray);
+
+  font-size:10px;
+
+  margin-top:4px;
+}
+
+.history-total{
+
+  font-family:var(--display);
+
+  font-size:19px;
+}
+
+.empty-history{
+
+  color:var(--blue-gray);
+
+  text-align:center;
+
+  padding:30px 10px;
+
+  font-size:13px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+  text-align:center;
+
+  padding:
+    50px
+    0
+    10px;
+
+  color:
+    rgba(157,178,191,.60);
+
+  font-size:11px;
+}
+
+footer span{
+
+  color:var(--mist);
+
+  font-family:var(--display);
+
+  font-size:14px;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes cardIn{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:800px){
+
+  .today-layout{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+
+  .today-text{
+    width:100%;
+  }
+
+  .deeds-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  .page{
+
+    width:
+      min(
+        100% - 24px,
+        620px
+      );
+
+    padding-top:18px;
+  }
+
+  .topbar{
+    margin-bottom:48px;
+  }
+
+  .brand-text{
+    font-size:16px;
+  }
+
+  .back-btn{
+    padding:
+      9px
+      12px;
+
+    font-size:11px;
+  }
+
+  .hero{
+    margin-bottom:38px;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .today-card,
+  .deeds-card,
+  .week-card,
+  .history-card{
+
+    padding:22px;
+
+    border-radius:22px;
+  }
+
+  .stats{
+
+    grid-template-columns:
+      1fr
+      1fr;
+  }
+
+  .stat-card:last-child{
+    grid-column:
+      1 / -1;
+  }
+
+  .week-grid{
+    gap:6px;
+  }
+
+  .day-bar{
+    height:80px;
+  }
+
+  .history-item{
+
+    grid-template-columns:
+      75px
+      1fr
+      auto;
+
+    gap:10px;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .deeds-grid{
+    grid-template-columns:1fr;
+  }
+
+  .custom-row{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .topbar{
+    align-items:flex-start;
+  }
+
+  .brand-mark{
+    width:34px;
+    height:34px;
+  }
+
+  .brand-text{
+    font-size:14px;
+  }
+
+  .back-btn{
+    font-size:10px;
+    padding:
+      8px
+      10px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .total-circle{
+
+    width:160px;
+    height:160px;
+  }
+
+  .total-circle::before{
+
+    width:126px;
+    height:126px;
+  }
+
+  .total-number{
+    font-size:40px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .stat-card:last-child{
+    grid-column:auto;
+  }
+
+  .section-heading{
+    display:block;
+  }
+
+  .week-card{
+    overflow:hidden;
+  }
+
+  .week-grid{
+    gap:4px;
+  }
+
+  .day-name{
+    font-size:8px;
+  }
+
+  .history-item{
+    grid-template-columns:
+      1fr
+      auto;
+  }
+
+  .history-date{
+    grid-column:
+      1 / -1;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div class="sky" aria-hidden="true">
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="constellations">
+
+    <svg
+      viewBox="0 0 1200 800"
+      preserveAspectRatio="none"
+    >
+
+      <line x1="90" y1="130" x2="210" y2="185"/>
+      <line x1="210" y1="185" x2="270" y2="110"/>
+
+      <line x1="940" y1="125" x2="1035" y2="205"/>
+      <line x1="1035" y1="205" x2="1110" y2="145"/>
+
+      <line x1="120" y1="650" x2="205" y2="570"/>
+      <line x1="1025" y1="615" x2="1105" y2="680"/>
+
+      <circle cx="90" cy="130" r="2"/>
+      <circle cx="210" cy="185" r="2"/>
+      <circle cx="270" cy="110" r="2"/>
+
+      <circle cx="940" cy="125" r="2"/>
+      <circle cx="1035" cy="205" r="2"/>
+      <circle cx="1110" cy="145" r="2"/>
+
+      <circle cx="120" cy="650" r="2"/>
+      <circle cx="205" cy="570" r="2"/>
+
+      <circle cx="1025" cy="615" r="2"/>
+      <circle cx="1105" cy="680" r="2"/>
+
+    </svg>
+
+  </div>
+
+</div>
+
+
+<main class="page">
+
+
+  <!-- =====================================================
+       TOP BAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <div class="brand-mark"></div>
+
+      <div class="brand-text">
+        My Islamic Journey
+      </div>
+
+    </div>
+
+
+    <a
+      href="index.html"
+      class="back-btn"
+    >
+      ← Back to Journey
+    </a>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      Good Deeds Counter
+    </div>
+
+    <h1>
+      Turn Intentions<br>
+      Into Actions
+    </h1>
+
+    <p>
+      Small acts done consistently can become
+      a beautiful part of your journey.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       TODAY TOTAL
+  ====================================================== -->
+
+  <section class="glass today-card">
+
+    <div class="today-layout">
+
+      <div
+        class="total-circle"
+        id="totalCircle"
+        style="--progress:0%"
+      >
+
+        <div class="total-content">
+
+          <div
+            class="total-number"
+            id="todayTotal"
+          >
+            0
+          </div>
+
+          <div class="total-label">
+            Today's Deeds
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="today-text">
+
+        <h2 id="todayHeading">
+          Make today meaningful.
+        </h2>
+
+        <p>
+          Keep track of the little acts of goodness
+          you complete throughout your day.
+        </p>
+
+        <div
+          class="today-message"
+          id="todayMessage"
+        >
+          Every good action counts.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       DEEDS
+  ====================================================== -->
+
+  <section class="glass deeds-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2 class="section-title">
+          Today's Good Deeds
+        </h2>
+
+        <div class="section-subtitle">
+          Tap + whenever you complete an act of goodness.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="deeds-grid"
+      id="deedsGrid"
+    ></div>
+
+
+    <div class="custom-row">
+
+      <input
+        id="customDeed"
+        type="text"
+        maxlength="40"
+        placeholder="Add your own good deed..."
+      >
+
+      <button
+        class="add-btn"
+        id="addDeedBtn"
+      >
+        + Add Deed
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STATS
+  ====================================================== -->
+
+  <section class="stats">
+
+
+    <div class="glass stat-card">
+
+      <div class="stat-icon">
+        ✦
+      </div>
+
+      <div
+        class="stat-value"
+        id="streakValue"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Day Streak
+      </div>
+
+    </div>
+
+
+    <div class="glass stat-card">
+
+      <div class="stat-icon">
+        + 
+      </div>
+
+      <div
+        class="stat-value"
+        id="allTimeValue"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Total Deeds
+      </div>
+
+    </div>
+
+
+    <div class="glass stat-card">
+
+      <div class="stat-icon">
+        ◷
+      </div>
+
+      <div
+        class="stat-value"
+        id="activeDaysValue"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Active Days
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =====================================================
+       WEEKLY OVERVIEW
+  ====================================================== -->
+
+  <section class="glass week-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2 class="section-title">
+          Weekly Overview
+        </h2>
+
+        <div class="section-subtitle">
+          Your acts of goodness over the last seven days.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="week-grid"
+      id="weekGrid"
+    ></div>
+
+  </section>
+
+
+  <!-- =====================================================
+       HISTORY
+  ====================================================== -->
+
+  <section class="glass history-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <h2 class="section-title">
+          Completed History
+        </h2>
+
+        <div class="section-subtitle">
+          A quiet record of the good you have done.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="history-list"
+      id="historyList"
+    ></div>
+
+  </section>
+
+
+  <footer>
+
+    A journey worth taking ·
+
+    <span>
+      My Islamic Journey
+    </span>
+
+  </footer>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   STAR FIELD
+========================================================= */
+
+const stars =
+  document.getElementById("stars");
+
+const count =
+  Math.min(
+    160,
+    Math.max(
+      100,
+      Math.round(
+        innerWidth *
+        innerHeight /
+        7000
+      )
+    )
+  );
+
+const frag =
+  document.createDocumentFragment();
+
+for(let i=0;i<count;i++){
+
+  const s =
+    document.createElement("i");
+
+  s.className =
+    "star" +
+    (
+      Math.random() < .08
+      ? " glow"
+      : ""
+    );
+
+  const size =
+    (
+      Math.random() * 1.7 +
+      .55
+    ).toFixed(2);
+
+  s.style.left =
+    (
+      Math.random() * 100
+    ).toFixed(2) + "%";
+
+  s.style.top =
+    (
+      Math.random() * 100
+    ).toFixed(2) + "%";
+
+  s.style.width =
+    size + "px";
+
+  s.style.height =
+    size + "px";
+
+  s.style.setProperty(
+    "--op",
+    (
+      Math.random() * .34 +
+      .12
+    ).toFixed(2)
+  );
+
+  s.style.setProperty(
+    "--dur",
+    (
+      Math.random() * 4 +
+      3.5
+    ).toFixed(2) + "s"
+  );
+
+  s.style.setProperty(
+    "--delay",
+    (
+      Math.random() * 5
+    ).toFixed(2) + "s"
+  );
+
+  frag.appendChild(s);
+
+}
+
+stars.appendChild(frag);
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const STORAGE_KEY =
+  "myIslamicJourneyGoodDeedsV1";
+
+
+const defaultDeeds = [
+
+  {
+    id:"quran",
+    name:"Quran Reading",
+    desc:"Read or study the Quran"
+  },
+
+  {
+    id:"salah",
+    name:"Extra Salah",
+    desc:"Pray an additional prayer"
+  },
+
+  {
+    id:"dhikr",
+    name:"Dhikr",
+    desc:"Remember Allah"
+  },
+
+  {
+    id:"dua",
+    name:"Make Dua",
+    desc:"Make a sincere dua"
+  },
+
+  {
+    id:"charity",
+    name:"Charity",
+    desc:"Give something for Allah"
+  },
+
+  {
+    id:"kindness",
+    name:"Kindness",
+    desc:"Do something kind"
+  },
+
+  {
+    id:"parents",
+    name:"Help Parents",
+    desc:"Help or serve your parents"
+  },
+
+  {
+    id:"forgive",
+    name:"Forgive Someone",
+    desc:"Let go of resentment"
+  },
+
+  {
+    id:"salawat",
+    name:"Send Salawat",
+    desc:"Send blessings upon the Prophet ﷺ"
+  }
+
+];
+
+
+function loadData(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE_KEY
+        )
+      );
+
+    if(saved){
+
+      return saved;
+
+    }
+
+  }catch(error){}
+
+  return {
+
+    days:{},
+
+    customDeeds:[]
+
+  };
+
+}
+
+
+let data =
+  loadData();
+
+
+if(!data.days){
+  data.days = {};
+}
+
+if(!data.customDeeds){
+  data.customDeeds = [];
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function dateKey(
+  date = new Date()
+){
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
+  const d =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+const todayKey =
+  dateKey();
+
+
+function displayDate(key){
+
+  const d =
+    new Date(
+      key + "T00:00:00"
+    );
+
+  return d.toLocaleDateString(
+    undefined,
+    {
+      weekday:"short",
+      day:"numeric",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =========================================================
+   GET ALL DEEDS
+========================================================= */
+
+function getAllDeeds(){
+
+  return [
+    ...defaultDeeds,
+
+    ...data.customDeeds
+  ];
+
+}
+
+
+/* =========================================================
+   TODAY RECORD
+========================================================= */
+
+function getTodayRecord(){
+
+  if(!data.days[todayKey]){
+
+    data.days[todayKey] = {};
+
+  }
+
+  return data.days[todayKey];
+
+}
+
+
+/* =========================================================
+   RENDER DEEDS
+========================================================= */
+
+function renderDeeds(){
+
+  const grid =
+    document.getElementById(
+      "deedsGrid"
+    );
+
+  grid.innerHTML = "";
+
+  const record =
+    getTodayRecord();
+
+  getAllDeeds()
+    .forEach(deed => {
+
+      const count =
+        Number(
+          record[deed.id]
+        ) || 0;
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "deed";
+
+      card.innerHTML = `
+
+        <div class="deed-name">
+          ${escapeHTML(deed.name)}
+        </div>
+
+        <div class="deed-desc">
+          ${escapeHTML(deed.desc || "")}
+        </div>
+
+        <div class="deed-bottom">
+
+          <div class="deed-count">
+            ${count}
+          </div>
+
+          <button
+            class="deed-btn"
+            data-id="${escapeHTML(deed.id)}"
+            aria-label="Add ${escapeHTML(deed.name)}"
+          >
+            +
+          </button>
+
+        </div>
+
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+
+  document
+    .querySelectorAll(".deed-btn")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            button.dataset.id;
+
+          const current =
+            Number(
+              getTodayRecord()[id]
+            ) || 0;
+
+          getTodayRecord()[id] =
+            current + 1;
+
+          saveData();
+
+          renderAll();
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   TODAY TOTAL
+========================================================= */
+
+function calculateTodayTotal(){
+
+  const record =
+    getTodayRecord();
+
+  return Object
+    .values(record)
+    .reduce(
+      (sum,value) =>
+        sum + (Number(value) || 0),
+      0
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE TODAY
+========================================================= */
+
+function renderToday(){
+
+  const total =
+    calculateTodayTotal();
+
+  const circle =
+    document.getElementById(
+      "totalCircle"
+    );
+
+  const maxVisual =
+    20;
+
+  const percent =
+    Math.min(
+      100,
+      Math.round(
+        (total / maxVisual) * 100
+      )
+    );
+
+  circle.style.setProperty(
+    "--progress",
+    percent + "%"
+  );
+
+  document.getElementById(
+    "todayTotal"
+  ).textContent =
+    total;
+
+
+  const heading =
+    document.getElementById(
+      "todayHeading"
+    );
+
+  const message =
+    document.getElementById(
+      "todayMessage"
+    );
+
+
+  if(total === 0){
+
+    heading.textContent =
+      "Make today meaningful.";
+
+    message.textContent =
+      "Every good action counts.";
+
+  }
+
+  else if(total < 5){
+
+    heading.textContent =
+      "A beautiful beginning.";
+
+    message.textContent =
+      "Keep going. Small actions matter.";
+
+  }
+
+  else if(total < 10){
+
+    heading.textContent =
+      "You're building a habit.";
+
+    message.textContent =
+      "Your consistency is becoming something beautiful.";
+
+  }
+
+  else{
+
+    heading.textContent =
+      "Keep your heart moving.";
+
+    message.textContent =
+      "Beautiful effort. Continue doing good.";
+
+  }
+
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+function calculateStreak(){
+
+  let streak = 0;
+
+  const current =
+    new Date();
+
+  while(true){
+
+    const key =
+      dateKey(current);
+
+    const record =
+      data.days[key];
+
+    if(!record){
+
+      break;
+
+    }
+
+    const total =
+      Object
+        .values(record)
+        .reduce(
+          (sum,value) =>
+            sum + (Number(value) || 0),
+          0
+        );
+
+    if(total <= 0){
+
+      break;
+
+    }
+
+    streak++;
+
+    current.setDate(
+      current.getDate() - 1
+    );
+
+  }
+
+  return streak;
+
+}
+
+
+/* =========================================================
+   ALL TIME STATS
+========================================================= */
+
+function renderStats(){
+
+  let allTime = 0;
+
+  let activeDays = 0;
+
+
+  Object
+    .values(data.days)
+    .forEach(record => {
+
+      const total =
+        Object
+          .values(record)
+          .reduce(
+            (sum,value) =>
+              sum + (Number(value) || 0),
+            0
+          );
+
+      if(total > 0){
+
+        allTime += total;
+
+        activeDays++;
+
+      }
+
+    });
+
+
+  document.getElementById(
+    "streakValue"
+  ).textContent =
+    calculateStreak();
+
+
+  document.getElementById(
+    "allTimeValue"
+  ).textContent =
+    allTime;
+
+
+  document.getElementById(
+    "activeDaysValue"
+  ).textContent =
+    activeDays;
+
+}
+
+
+/* =========================================================
+   WEEK
+========================================================= */
+
+function renderWeek(){
+
+  const grid =
+    document.getElementById(
+      "weekGrid"
+    );
+
+  grid.innerHTML = "";
+
+  const today =
+    new Date();
+
+  const names =
+    [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ];
+
+
+  for(let i=6;i>=0;i--){
+
+    const date =
+      new Date(today);
+
+    date.setDate(
+      today.getDate() - i
+    );
+
+    const key =
+      dateKey(date);
+
+    const record =
+      data.days[key] || {};
+
+
+    const total =
+      Object
+        .values(record)
+        .reduce(
+          (sum,value) =>
+            sum + (Number(value) || 0),
+          0
+        );
+
+
+    const visual =
+      Math.min(
+        100,
+        total * 10
+      );
+
+
+    const day =
+      document.createElement(
+        "div"
+      );
+
+    day.className =
+      "day" +
+      (
+        i === 0
+        ? " today"
+        : ""
+      );
+
+
+    day.innerHTML = `
+
+      <div class="day-name">
+        ${names[date.getDay()]}
+      </div>
+
+      <div class="day-bar">
+
+        <div
+          class="day-fill"
+          style="height:${visual}%"
+        ></div>
+
+      </div>
+
+      <div class="day-total">
+        ${total}
+      </div>
+
+    `;
+
+
+    grid.appendChild(day);
+
+  }
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+  const list =
+    document.getElementById(
+      "historyList"
+    );
+
+  list.innerHTML = "";
+
+
+  const entries =
+    Object
+      .entries(data.days)
+      .map(
+        ([date,record]) => {
+
+          const total =
+            Object
+              .values(record)
+              .reduce(
+                (sum,value) =>
+                  sum +
+                  (Number(value) || 0),
+                0
+              );
+
+          return {
+            date,
+            record,
+            total
+          };
+
+        }
+      )
+      .filter(
+        item =>
+          item.total > 0
+      )
+      .sort(
+        (a,b) =>
+          b.date.localeCompare(
+            a.date
+          )
+      );
+
+
+  if(entries.length === 0){
+
+    list.innerHTML = `
+
+      <div class="empty-history">
+
+        Your good deeds history will
+        appear here after you begin.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  entries
+    .slice(0,20)
+    .forEach(item => {
+
+      const names = [];
+
+      getAllDeeds()
+        .forEach(deed => {
+
+          const count =
+            Number(
+              item.record[
+                deed.id
+              ]
+            ) || 0;
+
+          if(count > 0){
+
+            names.push(
+              `${deed.name} ×${count}`
+            );
+
+          }
+
+        });
+
+
+      const history =
+        document.createElement(
+          "div"
+        );
+
+      history.className =
+        "history-item";
+
+
+      history.innerHTML = `
+
+        <div class="history-date">
+          ${displayDate(item.date)}
+        </div>
+
+        <div>
+
+          <div class="history-deeds">
+            Good deeds
+          </div>
+
+          <div class="history-detail">
+            ${escapeHTML(
+              names.join(" · ")
+            )}
+          </div>
+
+        </div>
+
+        <div class="history-total">
+          ${item.total}
+        </div>
+
+      `;
+
+
+      list.appendChild(history);
+
+    });
+
+}
+
+
+/* =========================================================
+   ADD CUSTOM DEED
+========================================================= */
+
+document
+  .getElementById("addDeedBtn")
+  .addEventListener(
+    "click",
+    addCustomDeed
+  );
+
+
+document
+  .getElementById("customDeed")
+  .addEventListener(
+    "keydown",
+    event => {
+
+      if(event.key === "Enter"){
+
+        addCustomDeed();
+
+      }
+
+    }
+  );
+
+
+function addCustomDeed(){
+
+  const input =
+    document.getElementById(
+      "customDeed"
+    );
+
+  const name =
+    input.value.trim();
+
+  if(!name){
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  const id =
+    "custom_" +
+    Date.now();
+
+
+  data.customDeeds.push({
+
+    id,
+
+    name,
+
+    desc:"Personal good deed"
+
+  });
+
+
+  saveData();
+
+  input.value = "";
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  renderDeeds();
+
+  renderToday();
+
+  renderStats();
+
+  renderWeek();
+
+  renderHistory();
+
+}
+
+
+renderAll();
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+if(
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+){
+
+  document
+    .querySelectorAll("*")
+    .forEach(el => {
+
+      el.style.animationDuration =
+        "0.01ms";
+
+      el.style.transitionDuration =
+        "0.01ms";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
