@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dua — My Islamic Journey</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --navy:#27374D;
+  --slate:#526D82;
+  --blue-gray:#9DB2BF;
+  --mist:#DDE6ED;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:Georgia,"Times New Roman",serif;
+}
+
+html{
+  background:var(--navy);
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--mist);
+  font-family:var(--sans);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(82,109,130,.30),transparent 38%),
+    radial-gradient(circle at 8% 55%,rgba(157,178,191,.10),transparent 28%),
+    radial-gradient(circle at 92% 78%,rgba(82,109,130,.16),transparent 30%),
+    var(--navy);
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.sky::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  opacity:.17;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 45%,
+      transparent 0 62px,
+      rgba(157,178,191,.10) 63px 64px,
+      transparent 65px 126px
+    ),
+    repeating-conic-gradient(
+      from 22.5deg at 50% 45%,
+      transparent 0 44deg,
+      rgba(157,178,191,.065) 45deg 46deg,
+      transparent 47deg 90deg
+    );
+  mask-image:radial-gradient(circle,black 0 40%,transparent 74%);
+  animation:patternDrift 32s linear infinite;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  opacity:.17;
+}
+
+.orb.one{
+  width:48vw;
+  height:48vw;
+  left:25%;
+  top:-14%;
+  background:var(--slate);
+  animation:drift 24s ease-in-out infinite;
+}
+
+.orb.two{
+  width:34vw;
+  height:34vw;
+  left:-12%;
+  top:42%;
+  background:var(--blue-gray);
+  animation:drift 30s ease-in-out infinite reverse;
+}
+
+.orb.three{
+  width:38vw;
+  height:38vw;
+  right:-13%;
+  bottom:-10%;
+  background:var(--slate);
+  animation:drift 27s ease-in-out infinite;
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+}
+
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:var(--mist);
+  box-shadow:0 0 5px rgba(221,230,237,.22);
+  animation:twinkle var(--dur) ease-in-out var(--delay) infinite;
+}
+
+.star.glow{
+  box-shadow:
+    0 0 10px rgba(221,230,237,.45),
+    0 0 22px rgba(157,178,191,.18);
+}
+
+.constellations{
+  position:absolute;
+  inset:0;
+  opacity:.16;
+}
+
+.constellations svg{
+  width:100%;
+  height:100%;
+}
+
+.constellations line{
+  stroke:var(--blue-gray);
+  stroke-width:.7;
+  stroke-dasharray:2 10;
+}
+
+.constellations circle{
+  fill:var(--mist);
+  opacity:.7;
+}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:var(--op);
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:calc(var(--op) + .28);
+    transform:scale(1.25);
+  }
+}
+
+@keyframes drift{
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+
+  50%{
+    transform:translate3d(3vw,-2vw,0);
+  }
+}
+
+@keyframes patternDrift{
+  from{
+    transform:translate3d(0,0,0) scale(1.15);
+  }
+
+  to{
+    transform:translate3d(1.5%,1%,0) scale(1.15);
+  }
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+  position:relative;
+  z-index:2;
+  width:min(1180px,92%);
+  margin:auto;
+  padding:28px 0 80px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:70px;
+}
+
+.brand{
+  color:var(--mist);
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.back{
+  color:var(--blue-gray);
+  text-decoration:none;
+  border:1px solid rgba(221,230,237,.12);
+  background:rgba(221,230,237,.045);
+  backdrop-filter:blur(14px);
+  padding:11px 17px;
+  border-radius:999px;
+  font-size:13px;
+  transition:.3s ease;
+}
+
+.back:hover{
+  color:var(--mist);
+  background:rgba(221,230,237,.09);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 65px;
+  animation:heroIn 1s ease both;
+}
+
+.hero-label{
+  color:var(--blue-gray);
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(50px,8vw,88px);
+  font-weight:400;
+  line-height:.95;
+  letter-spacing:-.045em;
+  margin-bottom:24px;
+}
+
+.hero h1 span{
+  font-style:italic;
+}
+
+.hero p{
+  color:var(--blue-gray);
+  font-size:16px;
+  line-height:1.8;
+  max-width:620px;
+  margin:auto;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-wrap{
+  max-width:650px;
+  margin:0 auto 50px;
+  position:relative;
+}
+
+.search{
+  width:100%;
+  height:58px;
+  border-radius:18px;
+  border:1px solid rgba(221,230,237,.12);
+  background:rgba(221,230,237,.055);
+  backdrop-filter:blur(18px);
+  color:var(--mist);
+  outline:none;
+  padding:0 22px;
+  font-size:15px;
+  transition:.3s ease;
+}
+
+.search::placeholder{
+  color:rgba(157,178,191,.65);
+}
+
+.search:focus{
+  border-color:rgba(157,178,191,.35);
+  background:rgba(221,230,237,.075);
+  box-shadow:0 0 35px rgba(157,178,191,.06);
+}
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:9px;
+  margin-bottom:42px;
+}
+
+.filter{
+  border:1px solid rgba(221,230,237,.11);
+  background:rgba(221,230,237,.035);
+  color:var(--blue-gray);
+  padding:9px 15px;
+  border-radius:999px;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:12px;
+  transition:.3s ease;
+}
+
+.filter:hover,
+.filter.active{
+  color:var(--mist);
+  background:rgba(221,230,237,.09);
+  border-color:rgba(157,178,191,.3);
+}
+
+/* =========================
+   DUA GRID
+========================= */
+
+.dua-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.dua-card{
+  position:relative;
+  border:1px solid rgba(221,230,237,.10);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(221,230,237,.075),
+      rgba(221,230,237,.025)
+    );
+  backdrop-filter:blur(18px);
+  border-radius:25px;
+  padding:28px;
+  overflow:hidden;
+  transition:
+    transform .4s ease,
+    border-color .4s ease,
+    background .4s ease,
+    box-shadow .4s ease;
+  animation:cardIn .7s ease both;
+}
+
+.dua-card::before{
+  content:"";
+  position:absolute;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  top:-90px;
+  right:-80px;
+  background:var(--blue-gray);
+  opacity:.055;
+  filter:blur(20px);
+}
+
+.dua-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(157,178,191,.24);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(221,230,237,.095),
+      rgba(221,230,237,.035)
+    );
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.12),
+    0 0 30px rgba(157,178,191,.04);
+}
+
+.dua-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:22px;
+}
+
+.dua-category{
+  color:var(--blue-gray);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:9px;
+  margin-bottom:8px;
+}
+
+.dua-title{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:400;
+}
+
+.favorite{
+  border:0;
+  background:transparent;
+  color:rgba(157,178,191,.55);
+  font-size:22px;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.favorite:hover{
+  transform:scale(1.15);
+}
+
+.favorite.saved{
+  color:var(--mist);
+}
+
+.arabic{
+  direction:rtl;
+  text-align:right;
+  font-family:"Times New Roman",serif;
+  font-size:25px;
+  line-height:2;
+  color:var(--mist);
+  margin-bottom:19px;
+}
+
+.transliteration{
+  color:var(--blue-gray);
+  font-family:var(--display);
+  font-style:italic;
+  font-size:15px;
+  line-height:1.75;
+  margin-bottom:14px;
+}
+
+.meaning{
+  color:rgba(221,230,237,.78);
+  font-size:13px;
+  line-height:1.8;
+  padding-top:17px;
+  border-top:1px solid rgba(221,230,237,.08);
+}
+
+.reference{
+  margin-top:18px;
+  font-size:10px;
+  color:rgba(157,178,191,.58);
+  letter-spacing:.08em;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  display:none;
+  text-align:center;
+  color:var(--blue-gray);
+  padding:60px 20px;
+  grid-column:1/-1;
+}
+
+/* =========================
+   NOTE SECTION
+========================= */
+
+.note-section{
+  margin:90px auto 0;
+  max-width:720px;
+  text-align:center;
+}
+
+.note-line{
+  width:70px;
+  height:1px;
+  background:rgba(157,178,191,.3);
+  margin:0 auto 28px;
+}
+
+.note-section h2{
+  font-family:var(--display);
+  font-size:36px;
+  font-weight:400;
+  margin-bottom:14px;
+}
+
+.note-section p{
+  color:var(--blue-gray);
+  line-height:1.8;
+  font-size:14px;
+}
+
+/* =========================
+   SIGNATURE
+========================= */
+
+.signature{
+  text-align:center;
+  margin-top:80px;
+  padding-top:35px;
+  border-top:1px solid rgba(221,230,237,.08);
+}
+
+.signature-small{
+  color:rgba(157,178,191,.58);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.signature-name{
+  font-family:"Brush Script MT","Segoe Script",cursive;
+  font-size:48px;
+  color:var(--mist);
+  font-style:italic;
+  transform:rotate(-3deg);
+  display:inline-block;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(8,15,24,.72);
+  backdrop-filter:blur(10px);
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s ease;
+}
+
+.overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.popup{
+  width:min(520px,100%);
+  position:relative;
+  padding:42px;
+  border-radius:28px;
+  border:1px solid rgba(221,230,237,.14);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(82,109,130,.35),
+      rgba(39,55,77,.92)
+    );
+  box-shadow:0 30px 100px rgba(0,0,0,.35);
+  transform:translateY(20px) scale(.97);
+  transition:.45s ease;
+  text-align:center;
+}
+
+.overlay.show .popup{
+  transform:translateY(0) scale(1);
+}
+
+.close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid rgba(221,230,237,.1);
+  background:rgba(221,230,237,.05);
+  color:var(--mist);
+  cursor:pointer;
+  font-size:16px;
+}
+
+.popup-symbol{
+  font-size:28px;
+  margin-bottom:18px;
+}
+
+.popup h2{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:34px;
+  margin-bottom:18px;
+}
+
+.popup p{
+  color:var(--blue-gray);
+  line-height:1.9;
+  font-size:14px;
+}
+
+.popup-sign{
+  font-family:"Brush Script MT","Segoe Script",cursive;
+  font-size:32px;
+  margin-top:25px;
+  font-style:italic;
+}
+
+.open-note{
+  margin-top:28px;
+  border:1px solid rgba(221,230,237,.13);
+  background:rgba(221,230,237,.055);
+  color:var(--mist);
+  padding:12px 20px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:.3s ease;
+  font-family:inherit;
+}
+
+.open-note:hover{
+  background:rgba(221,230,237,.1);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+  .page{
+    width:90%;
+    padding-top:22px;
+  }
+
+  header{
+    margin-bottom:55px;
+  }
+
+  .dua-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    margin-bottom:50px;
+  }
+
+  .hero h1{
+    font-size:58px;
+  }
+
+  .arabic{
+    font-size:22px;
+  }
+
+  .dua-card{
+    padding:23px;
+  }
+}
+
+@media(max-width:430px){
+
+  header{
+    align-items:flex-start;
+  }
+
+  .brand{
+    font-size:11px;
+  }
+
+  .back{
+    padding:9px 12px;
+    font-size:11px;
+  }
+
+  .hero h1{
+    font-size:49px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .filters{
+    justify-content:flex-start;
+  }
+
+  .filter{
+    font-size:11px;
+    padding:8px 12px;
+  }
+
+  .dua-title{
+    font-size:23px;
+  }
+
+  .arabic{
+    font-size:20px;
+  }
+
+  .popup{
+    padding:35px 24px;
+  }
+
+  .signature-name{
+    font-size:42px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="sky" aria-hidden="true">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="constellations">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+
+      <line x1="90" y1="130" x2="210" y2="185"/>
+      <line x1="210" y1="185" x2="270" y2="110"/>
+
+      <line x1="940" y1="125" x2="1035" y2="205"/>
+      <line x1="1035" y1="205" x2="1110" y2="145"/>
+
+      <line x1="120" y1="650" x2="205" y2="570"/>
+      <line x1="1025" y1="615" x2="1105" y2="680"/>
+
+      <circle cx="90" cy="130" r="2"/>
+      <circle cx="210" cy="185" r="2"/>
+      <circle cx="270" cy="110" r="2"/>
+
+      <circle cx="940" cy="125" r="2"/>
+      <circle cx="1035" cy="205" r="2"/>
+      <circle cx="1110" cy="145" r="2"/>
+
+      <circle cx="120" cy="650" r="2"/>
+      <circle cx="205" cy="570" r="2"/>
+
+      <circle cx="1025" cy="615" r="2"/>
+      <circle cx="1105" cy="680" r="2"/>
+
+    </svg>
+  </div>
+</div>
+
+
+<div class="page">
+
+<header>
+
+  <a href="index.html" class="brand">
+    My Islamic Journey
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Journey
+  </a>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-label">
+    A collection for the heart
+  </div>
+
+  <h1>
+    Daily <span>Duas</span>
+  </h1>
+
+  <p>
+    Small moments become meaningful when the heart remembers Allah.
+    Keep these beautiful duas close throughout your day.
+  </p>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search-wrap">
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="Search a dua... sleeping, eating, travel, forgiveness..."
+  >
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+  <button class="filter active" data-category="all">
+    All
+  </button>
+
+  <button class="filter" data-category="food">
+    Food & Drink
+  </button>
+
+  <button class="filter" data-category="sleep">
+    Sleep
+  </button>
+
+  <button class="filter" data-category="home">
+    Home
+  </button>
+
+  <button class="filter" data-category="mosque">
+    Mosque
+  </button>
+
+  <button class="filter" data-category="travel">
+    Travel
+  </button>
+
+  <button class="filter" data-category="heart">
+    Heart
+  </button>
+
+  <button class="filter" data-category="daily">
+    Daily
+  </button>
+
+</div>
+
+
+<!-- DUA GRID -->
+
+<div class="dua-grid" id="duaGrid"></div>
+
+<div class="empty" id="empty">
+  No dua found.
+</div>
+
+
+<!-- PERSONAL NOTE -->
+
+<section class="note-section">
+
+  <div class="note-line"></div>
+
+  <h2>A little reminder</h2>
+
+  <p>
+    You don't need a perfect moment to make dua.
+    Speak to Allah in the quiet moments, in happiness,
+    in difficulty, and whenever your heart remembers Him.
+  </p>
+
+  <button class="open-note" id="openNote">
+    A Note From Me
+  </button>
+
+</section>
+
+
+<!-- SIGNATURE -->
+
+<footer class="signature">
+
+  <div class="signature-small">
+    With a prayer in my heart
+  </div>
+
+  <div class="signature-name">
+    Isba Eman
+  </div>
+
+</footer>
+
+</div>
+
+
+<!-- POPUP -->
+
+<div class="overlay" id="overlay">
+
+  <div class="popup">
+
+    <button class="close" id="closeNote">
+      ×
+    </button>
+
+    <div class="popup-symbol">
+      ✦
+    </div>
+
+    <h2>A Note From Me</h2>
+
+    <p>
+      I hope these duas become more than words on a screen.
+      I hope they become little moments between you and Allah —
+      before you sleep, when you eat, when you leave home,
+      when you feel lost, and when your heart simply wants to say
+      thank You.
+    </p>
+
+    <div class="popup-sign">
+      Isba Eman
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   STARS
+========================= */
+
+const stars = document.getElementById("stars");
+
+const count = Math.min(
+  160,
+  Math.max(
+    100,
+    Math.round(innerWidth * innerHeight / 7000)
+  )
+);
+
+const frag = document.createDocumentFragment();
+
+for(let i=0;i<count;i++){
+
+  const s=document.createElement("i");
+
+  s.className =
+    "star" +
+    (Math.random()<0.08 ? " glow" : "");
+
+  const size =
+    (Math.random()*1.7+.55).toFixed(2);
+
+  s.style.left =
+    (Math.random()*100).toFixed(2)+"%";
+
+  s.style.top =
+    (Math.random()*100).toFixed(2)+"%";
+
+  s.style.width=size+"px";
+  s.style.height=size+"px";
+
+  s.style.setProperty(
+    "--op",
+    (Math.random()*.34+.12).toFixed(2)
+  );
+
+  s.style.setProperty(
+    "--dur",
+    (Math.random()*4+3.5).toFixed(2)+"s"
+  );
+
+  s.style.setProperty(
+    "--delay",
+    (Math.random()*5).toFixed(2)+"s"
+  );
+
+  frag.appendChild(s);
+}
+
+stars.appendChild(frag);
+
+
+/* =========================
+   DUA DATA
+========================= */
+
+const duas = [
+
+{
+title:"Before Eating",
+category:"food",
+arabic:"بِسْمِ اللَّهِ",
+trans:"Bismillah",
+meaning:"In the name of Allah.",
+reference:"Sunnah"
+},
+
+{
+title:"After Eating",
+category:"food",
+arabic:"الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
+trans:"Alhamdu lillahil-ladhi at'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah.",
+meaning:"All praise is for Allah who fed me this and provided it for me without any power or strength from me.",
+reference:"Abu Dawud, Tirmidhi"
+},
+
+{
+title:"Before Drinking",
+category:"food",
+arabic:"بِسْمِ اللَّهِ",
+trans:"Bismillah",
+meaning:"In the name of Allah.",
+reference:"Sunnah"
+},
+
+{
+title:"After Drinking",
+category:"food",
+arabic:"الْحَمْدُ لِلَّهِ",
+trans:"Alhamdulillah",
+meaning:"All praise belongs to Allah.",
+reference:"Sunnah"
+},
+
+{
+title:"Before Sleeping",
+category:"sleep",
+arabic:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+trans:"Bismika Allahumma amutu wa ahya.",
+meaning:"In Your name, O Allah, I die and I live.",
+reference:"Sahih al-Bukhari"
+},
+
+{
+title:"Upon Waking",
+category:"sleep",
+arabic:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+trans:"Alhamdu lillahil-ladhi ahyana ba'da ma amatana wa ilayhin-nushur.",
+meaning:"All praise is for Allah who gave us life after causing us to die, and to Him is the resurrection.",
+reference:"Sahih al-Bukhari"
+},
+
+{
+title:"Entering the Home",
+category:"home",
+arabic:"بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
+trans:"Bismillahi walajna, wa bismillahi kharajna, wa 'alallahi rabbina tawakkalna.",
+meaning:"In the name of Allah we enter, in the name of Allah we leave, and upon our Lord Allah we rely.",
+reference:"Abu Dawud"
+},
+
+{
+title:"Leaving the Home",
+category:"home",
+arabic:"بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+trans:"Bismillah, tawakkaltu 'alallah, la hawla wa la quwwata illa billah.",
+meaning:"In the name of Allah. I place my trust in Allah. There is no power and no strength except through Allah.",
+reference:"Abu Dawud, Tirmidhi"
+},
+
+{
+title:"Entering the Mosque",
+category:"mosque",
+arabic:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+trans:"Allahumma iftah li abwaba rahmatik.",
+meaning:"O Allah, open for me the gates of Your mercy.",
+reference:"Sahih Muslim"
+},
+
+{
+title:"Leaving the Mosque",
+category:"mosque",
+arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+trans:"Allahumma inni as'aluka min fadlik.",
+meaning:"O Allah, I ask You from Your bounty.",
+reference:"Sahih Muslim"
+},
+
+{
+title:"For Knowledge",
+category:"daily",
+arabic:"رَبِّ زِدْنِي عِلْمًا",
+trans:"Rabbi zidni ilma.",
+meaning:"My Lord, increase me in knowledge.",
+reference:"Quran 20:114"
+},
+
+{
+title:"For Forgiveness",
+category:"heart",
+arabic:"رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
+trans:"Rabbighfir li wa tub 'alayya innaka antat-Tawwabur-Rahim.",
+meaning:"My Lord, forgive me and accept my repentance. Indeed, You are the One who accepts repentance, the Most Merciful.",
+reference:"Abu Dawud, Tirmidhi"
+},
+
+{
+title:"When Feeling Distressed",
+category:"heart",
+arabic:"لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ",
+trans:"La ilaha illallahu al-'Azimul-Halim, la ilaha illallahu Rabbul-'Arshil-'Azim.",
+meaning:"There is no god but Allah, the Magnificent, the Forbearing. There is no god but Allah, Lord of the Mighty Throne.",
+reference:"Sahih al-Bukhari, Sahih Muslim"
+},
+
+{
+title:"For Ease",
+category:"heart",
+arabic:"اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا",
+trans:"Allahumma la sahla illa ma ja'altahu sahla.",
+meaning:"O Allah, there is no ease except what You make easy.",
+reference:"Ibn Hibban"
+},
+
+{
+title:"For Good in This Life",
+category:"daily",
+arabic:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+trans:"Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar.",
+meaning:"Our Lord, give us good in this world and good in the Hereafter and protect us from the punishment of the Fire.",
+reference:"Quran 2:201"
+},
+
+{
+title:"For Parents",
+category:"heart",
+arabic:"رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+trans:"Rabbir hamhuma kama rabbayani saghira.",
+meaning:"My Lord, have mercy upon them as they raised me when I was small.",
+reference:"Quran 17:24"
+},
+
+{
+title:"When Entering the Restroom",
+category:"daily",
+arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+trans:"Allahumma inni a'udhu bika minal-khubthi wal-khaba'ith.",
+meaning:"O Allah, I seek refuge in You from the male and female devils.",
+reference:"Sahih al-Bukhari, Sahih Muslim"
+},
+
+{
+title:"After Leaving the Restroom",
+category:"daily",
+arabic:"غُفْرَانَكَ",
+trans:"Ghufranak.",
+meaning:"I seek Your forgiveness.",
+reference:"Abu Dawud, Tirmidhi"
+},
+
+{
+title:"When Traveling",
+category:"travel",
+arabic:"سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ",
+trans:"Subhanalladhi sakhkhara lana hadha wa ma kunna lahu muqrinin.",
+meaning:"Glory is to Him who has subjected this to us, and we could not have controlled it ourselves.",
+reference:"Quran 43:13"
+},
+
+{
+title:"For Protection",
+category:"daily",
+arabic:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ",
+trans:"Qul huwa Allahu ahad. Allahus-Samad.",
+meaning:"Say: He is Allah, One. Allah, the Eternal Refuge.",
+reference:"Quran 112:1–2"
+},
+
+{
+title:"For Mercy",
+category:"heart",
+arabic:"رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+trans:"Rabbana zalamna anfusana wa illam taghfir lana wa tarhamna lanakunanna minal-khasirin.",
+meaning:"Our Lord, we have wronged ourselves. If You do not forgive us and have mercy upon us, we will surely be among the losers.",
+reference:"Quran 7:23"
+},
+
+{
+title:"For Guidance",
+category:"daily",
+arabic:"اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+trans:"Ihdinas-siratal-mustaqim.",
+meaning:"Guide us to the straight path.",
+reference:"Quran 1:6"
+},
+
+{
+title:"For Peace of Heart",
+category:"heart",
+arabic:"حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ",
+trans:"Hasbiyallahu la ilaha illa Huwa, 'alayhi tawakkaltu.",
+meaning:"Allah is sufficient for me. There is no deity except Him. Upon Him I rely.",
+reference:"Quran 9:129"
+},
+
+{
+title:"For Beneficial Knowledge",
+category:"daily",
+arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا",
+trans:"Allahumma inni as'aluka ilman nafi'an.",
+meaning:"O Allah, I ask You for beneficial knowledge.",
+reference:"Ibn Majah"
+},
+
+{
+title:"For a Good Day",
+category:"daily",
+arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ",
+trans:"Allahumma inni as'aluka khayra hadhal-yawm.",
+meaning:"O Allah, I ask You for the good of this day.",
+reference:"General supplication"
+}
+
+];
+
+
+/* =========================
+   FAVORITES
+========================= */
+
+let favorites =
+  JSON.parse(
+    localStorage.getItem("myIslamicJourneyDuaFavorites") || "[]"
+  );
+
+
+/* =========================
+   RENDER
+========================= */
+
+const grid =
+  document.getElementById("duaGrid");
+
+const empty =
+  document.getElementById("empty");
+
+let currentCategory="all";
+
+
+function render(){
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+  grid.innerHTML="";
+
+  let found=0;
+
+  duas.forEach((dua,index)=>{
+
+    const searchable = (
+      dua.title+" "+
+      dua.category+" "+
+      dua.trans+" "+
+      dua.meaning
+    ).toLowerCase();
+
+    const categoryMatch =
+      currentCategory==="all" ||
+      dua.category===currentCategory;
+
+    const searchMatch =
+      !search ||
+      searchable.includes(search);
+
+    if(!categoryMatch || !searchMatch){
+      return;
+    }
+
+    found++;
+
+    const card =
+      document.createElement("article");
+
+    card.className="dua-card";
+
+    card.style.animationDelay =
+      Math.min(index*0.035,.45)+"s";
+
+    const isSaved =
+      favorites.includes(index);
+
+    card.innerHTML=`
+
+      <div class="dua-top">
+
+        <div>
+          <div class="dua-category">
+            ${dua.category}
+          </div>
+
+          <h2 class="dua-title">
+            ${dua.title}
+          </h2>
+        </div>
+
+        <button
+          class="favorite ${isSaved ? "saved" : ""}"
+          data-index="${index}"
+          aria-label="Favorite dua"
+        >
+          ${isSaved ? "★" : "☆"}
+        </button>
+
+      </div>
+
+      <div class="arabic">
+        ${dua.arabic}
+      </div>
+
+      <div class="transliteration">
+        ${dua.trans}
+      </div>
+
+      <div class="meaning">
+        ${dua.meaning}
+      </div>
+
+      <div class="reference">
+        ${dua.reference}
+      </div>
+
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+  empty.style.display =
+    found ? "none" : "block";
+
+
+  document
+    .querySelectorAll(".favorite")
+    .forEach(button=>{
+
+      button.addEventListener("click",()=>{
+
+        const index =
+          Number(button.dataset.index);
+
+        if(favorites.includes(index)){
+
+          favorites =
+            favorites.filter(
+              item=>item!==index
+            );
+
+        }else{
+
+          favorites.push(index);
+
+        }
+
+        localStorage.setItem(
+          "myIslamicJourneyDuaFavorites",
+          JSON.stringify(favorites)
+        );
+
+        render();
+
+      });
+
+    });
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document
+  .getElementById("search")
+  .addEventListener(
+    "input",
+    render
+  );
+
+
+/* =========================
+   FILTERS
+========================= */
+
+document
+  .querySelectorAll(".filter")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      document
+        .querySelectorAll(".filter")
+        .forEach(item=>
+          item.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+      currentCategory =
+        button.dataset.category;
+
+      render();
+
+    });
+
+  });
+
+
+/* =========================
+   NOTE POPUP
+========================= */
+
+const overlay =
+  document.getElementById("overlay");
+
+const openNote =
+  document.getElementById("openNote");
+
+const closeNote =
+  document.getElementById("closeNote");
+
+
+openNote.addEventListener(
+  "click",
+  ()=>{
+    overlay.classList.add("show");
+  }
+);
+
+
+closeNote.addEventListener(
+  "click",
+  ()=>{
+    overlay.classList.remove("show");
+  }
+);
+
+
+overlay.addEventListener(
+  "click",
+  e=>{
+    if(e.target===overlay){
+      overlay.classList.remove("show");
+    }
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  e=>{
+    if(e.key==="Escape"){
+      overlay.classList.remove("show");
+    }
+  }
+);
+
+
+/* =========================
+   INITIAL RENDER
+========================= */
+
+render();
+
+</script>
+
+</body>
+</html>
