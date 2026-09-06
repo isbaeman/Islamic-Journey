@@ -12,16 +12,11 @@
   --slate:#526D82;
   --blue-gray:#9DB2BF;
   --mist:#DDE6ED;
-
-  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
-  "Segoe UI",sans-serif;
-
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --display:Georgia,"Times New Roman",serif;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   background:var(--navy);
@@ -34,34 +29,15 @@ body{
   overflow-x:hidden;
   color:var(--mist);
   font-family:var(--sans);
-
   background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(82,109,130,.30),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 8% 55%,
-      rgba(157,178,191,.10),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 92% 78%,
-      rgba(82,109,130,.16),
-      transparent 30%
-    ),
+    radial-gradient(circle at 50% 0%,rgba(82,109,130,.30),transparent 38%),
+    radial-gradient(circle at 8% 55%,rgba(157,178,191,.10),transparent 28%),
+    radial-gradient(circle at 92% 78%,rgba(82,109,130,.16),transparent 30%),
     var(--navy);
 }
 
-button,
-textarea{
-  font:inherit;
-}
-
-button{
-  color:inherit;
-}
+button,textarea,input{font:inherit}
+button{color:inherit}
 
 /* =========================
    ATMOSPHERE
@@ -80,7 +56,6 @@ button{
   position:absolute;
   inset:-20%;
   opacity:.17;
-
   background:
     repeating-radial-gradient(
       circle at 50% 45%,
@@ -94,14 +69,7 @@ button{
       rgba(157,178,191,.065) 45deg 46deg,
       transparent 47px 90deg
     );
-
-  mask-image:
-    radial-gradient(
-      circle,
-      black 0 40%,
-      transparent 74%
-    );
-
+  mask-image:radial-gradient(circle,black 0 40%,transparent 74%);
   animation:patternDrift 32s linear infinite;
 }
 
@@ -149,13 +117,7 @@ button{
   border-radius:50%;
   background:var(--mist);
   box-shadow:0 0 5px rgba(221,230,237,.22);
-
-  animation:
-    twinkle
-    var(--dur)
-    ease-in-out
-    var(--delay)
-    infinite;
+  animation:twinkle var(--dur) ease-in-out var(--delay) infinite;
 }
 
 .star.glow{
@@ -187,20 +149,15 @@ button{
 }
 
 /* =========================
-   MAIN APP
+   APP
 ========================= */
 
 .app{
   position:relative;
   z-index:2;
-
   width:min(1060px,100%);
   margin:auto;
-
-  padding:
-    28px
-    clamp(18px,5vw,56px)
-    76px;
+  padding:28px clamp(18px,5vw,56px) 76px;
 }
 
 /* =========================
@@ -212,21 +169,12 @@ button{
   justify-content:space-between;
   align-items:center;
   gap:18px;
-
   margin-bottom:30px;
-
   opacity:0;
-
-  animation:
-    fadeUp
-    .7s
-    ease
-    .1s
-    forwards;
+  animation:fadeUp .7s ease .1s forwards;
 }
 
-.back,
-.crumb{
+.back,.crumb{
   color:var(--blue-gray);
   font-size:10px;
   letter-spacing:.18em;
@@ -237,24 +185,13 @@ button{
   border:0;
   background:none;
   padding:10px 0;
-
   cursor:pointer;
-
-  transition:
-    color .35s,
-    transform .35s;
+  transition:color .35s,transform .35s;
 }
 
 .back:hover{
   color:var(--mist);
   transform:translateX(-4px);
-}
-
-.back:focus-visible,
-.goal-button:focus-visible,
-textarea:focus-visible{
-  outline:1px solid var(--mist);
-  outline-offset:4px;
 }
 
 /* =========================
@@ -264,12 +201,11 @@ textarea:focus-visible{
 .hero{
   text-align:center;
   max-width:760px;
-  margin:0 auto 48px;
+  margin:0 auto 42px;
 }
 
 .arch-wrap{
   position:relative;
-
   width:min(430px,90vw);
   margin:0 auto -12px;
   height:120px;
@@ -278,116 +214,56 @@ textarea:focus-visible{
 .arch{
   position:absolute;
   inset:0 16% 0;
-
-  border:
-    1px solid
-    rgba(157,178,191,.24);
-
+  border:1px solid rgba(157,178,191,.24);
   border-bottom:0;
-
-  border-radius:
-    50% 50% 0 0/
-    75% 75% 0 0;
-
-  box-shadow:
-    inset 0 0 45px
-    rgba(82,109,130,.08);
-
+  border-radius:50% 50% 0 0/75% 75% 0 0;
+  box-shadow:inset 0 0 45px rgba(82,109,130,.08);
   opacity:0;
-
-  animation:
-    reveal
-    .9s
-    cubic-bezier(.2,.7,.2,1)
-    .2s
-    forwards;
+  animation:reveal .9s cubic-bezier(.2,.7,.2,1) .2s forwards;
 }
 
 .arch::before{
   content:"";
-
   position:absolute;
   inset:12px;
-
-  border:
-    1px solid
-    rgba(157,178,191,.11);
-
+  border:1px solid rgba(157,178,191,.11);
   border-bottom:0;
-
-  border-radius:
-    50% 50% 0 0/
-    75% 75% 0 0;
+  border-radius:50% 50% 0 0/75% 75% 0 0;
 }
 
 .moon{
   position:absolute;
-
   left:50%;
   top:21px;
-
-  transform:
-    translateX(-50%)
-    scale(.8);
-
+  transform:translateX(-50%) scale(.8);
   width:68px;
   height:68px;
-
   border-radius:50%;
-
   background:var(--mist);
-
-  box-shadow:
-    0 0 22px
-    rgba(221,230,237,.14);
-
+  box-shadow:0 0 22px rgba(221,230,237,.14);
   opacity:0;
-
   animation:
-    moonIn
-    .9s
-    cubic-bezier(.2,.7,.2,1)
-    .45s
-    forwards,
-    moonGlow
-    5s
-    ease-in-out
-    1.4s
-    infinite;
+    moonIn .9s cubic-bezier(.2,.7,.2,1) .45s forwards,
+    moonGlow 5s ease-in-out 1.4s infinite;
 }
 
 .moon::before{
   content:"";
-
   position:absolute;
   inset:-14px;
-
   border-radius:50%;
-
-  border:
-    1px solid
-    rgba(157,178,191,.10);
-
-  animation:
-    ringPulse
-    4s
-    ease-in-out
-    infinite;
+  border:1px solid rgba(157,178,191,.10);
+  animation:ringPulse 4s ease-in-out infinite;
 }
 
 .moon::after{
   content:"";
-
   position:absolute;
-
   width:100%;
   height:100%;
-
   left:27%;
   top:-11%;
-
   border-radius:50%;
-
   background:var(--navy);
 }
 
@@ -395,147 +271,84 @@ textarea:focus-visible{
   font-size:10px;
   letter-spacing:.34em;
   font-weight:600;
-
   color:var(--blue-gray);
-
   margin-bottom:16px;
-
   opacity:0;
-
-  animation:
-    fadeUp
-    .7s
-    ease
-    .75s
-    forwards;
+  animation:fadeUp .7s ease .75s forwards;
 }
 
 .eyebrow::before,
 .eyebrow::after{
   content:"";
   display:inline-block;
-
   width:28px;
   height:1px;
-
   vertical-align:middle;
-
   margin:0 10px;
-
-  background:
-    rgba(157,178,191,.3);
+  background:rgba(157,178,191,.3);
 }
 
 h1{
   font-family:var(--display);
   font-weight:400;
-
-  font-size:
-    clamp(54px,8vw,86px);
-
+  font-size:clamp(54px,8vw,86px);
   line-height:.95;
-
   letter-spacing:-.045em;
-
   margin:0;
-
   color:var(--mist);
-
-  text-shadow:
-    0 0 30px
-    rgba(221,230,237,.06);
-
+  text-shadow:0 0 30px rgba(221,230,237,.06);
   opacity:0;
-
-  animation:
-    fadeUp
-    .9s
-    cubic-bezier(.2,.7,.2,1)
-    .9s
-    forwards;
+  animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) .9s forwards;
 }
 
 .subtitle{
   max-width:430px;
-
   margin:22px auto 0;
-
   font-size:13px;
   line-height:1.7;
-
   color:var(--blue-gray);
-
-  letter-spacing:.02em;
-
   opacity:0;
-
-  animation:
-    fadeUp
-    .7s
-    ease
-    1.15s
-    forwards;
+  animation:fadeUp .7s ease 1.15s forwards;
 }
 
 /* =========================
-   META
+   GLASS
 ========================= */
 
-.meta-grid{
+.glass{
+  border:1px solid rgba(157,178,191,.17);
+  border-radius:22px;
+  background:rgba(39,55,77,.58);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 18px 55px rgba(39,55,77,.22),
+    inset 0 1px 0 rgba(221,230,237,.055);
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard{
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1.45fr
-    1fr;
-
+  grid-template-columns:1fr 1.5fr 1fr;
   gap:14px;
-
   margin-bottom:22px;
 }
 
-.glass{
-  border:
-    1px solid
-    rgba(157,178,191,.17);
-
-  border-radius:22px;
-
-  background:
-    rgba(39,55,77,.58);
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  box-shadow:
-    0 18px 55px
-    rgba(39,55,77,.22),
-
-    inset 0 1px 0
-    rgba(221,230,237,.055);
-}
-
-.meta-card{
+.dash-card{
   padding:20px 22px;
-  min-height:92px;
-
+  min-height:112px;
   opacity:0;
-
-  animation:
-    rowIn
-    .8s
-    cubic-bezier(.2,.7,.2,1)
-    var(--delay)
-    forwards;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) var(--delay) forwards;
 }
 
 .meta-label{
   font-size:9px;
   letter-spacing:.22em;
   text-transform:uppercase;
-
   color:var(--blue-gray);
-
   margin-bottom:9px;
 }
 
@@ -546,51 +359,78 @@ h1{
 .progress-count{
   font-size:12px;
   color:var(--blue-gray);
-
   margin-bottom:11px;
 }
 
 .bar{
   height:5px;
-
   border-radius:99px;
-
-  background:
-    rgba(221,230,237,.09);
-
+  background:rgba(221,230,237,.09);
   overflow:hidden;
 }
 
 .bar-fill{
   height:100%;
   width:0;
-
   border-radius:inherit;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--slate),
-      var(--blue-gray)
-    );
-
-  box-shadow:
-    0 0 14px
-    rgba(157,178,191,.18);
-
-  transition:
-    width
-    .7s
-    cubic-bezier(.2,.8,.2,1);
+  background:linear-gradient(90deg,var(--slate),var(--blue-gray));
+  box-shadow:0 0 14px rgba(157,178,191,.18);
+  transition:width .7s cubic-bezier(.2,.8,.2,1);
 }
 
 .message{
   font-size:10px;
   letter-spacing:.08em;
-
   color:var(--blue-gray);
-
   margin-top:10px;
+}
+
+.streak-display{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.fire{
+  font-size:24px;
+  animation:glow 3s ease-in-out infinite;
+}
+
+.streak-number{
+  font-family:var(--display);
+  font-size:38px;
+}
+
+.small-stat{
+  margin-top:6px;
+  color:var(--blue-gray);
+  font-size:10px;
+}
+
+/* =========================
+   MOTIVATION
+========================= */
+
+.motivation{
+  padding:19px 22px;
+  margin-bottom:14px;
+  text-align:center;
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 1.78s forwards;
+}
+
+.motivation-text{
+  font-family:var(--display);
+  font-size:20px;
+  color:var(--mist);
+}
+
+.motivation-source{
+  margin-top:7px;
+  color:var(--blue-gray);
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
 
 /* =========================
@@ -604,277 +444,159 @@ h1{
 
 .goal{
   position:relative;
-
   display:grid;
-
-  grid-template-columns:
-    54px
-    62px
-    minmax(0,1fr)
-    auto;
-
+  grid-template-columns:54px 62px minmax(0,1fr) auto;
   align-items:center;
-
   gap:20px;
-
   padding:22px 24px;
-
   min-height:118px;
-
   overflow:hidden;
   isolation:isolate;
-
   opacity:0;
-
-  transform:
-    translateY(24px);
-
-  animation:
-    rowIn
-    .8s
-    cubic-bezier(.2,.7,.2,1)
-    var(--delay)
-    forwards;
-
-  transition:
-    transform .5s,
-    border-color .5s,
-    background .5s,
-    box-shadow .5s;
+  transform:translateY(24px);
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) var(--delay) forwards;
+  transition:transform .5s,border-color .5s,background .5s,box-shadow .5s;
 }
 
 .goal::before{
   content:"";
-
   position:absolute;
-
-  inset:
-    -100%
-    35%
-    40%
-    -60%;
-
-  background:
-    linear-gradient(
-      115deg,
-      transparent 35%,
-      rgba(221,230,237,.075),
-      transparent 62%
-    );
-
-  transform:
-    translateX(-35%)
-    rotate(8deg);
-
+  inset:-100% 35% 40% -60%;
+  background:linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(221,230,237,.075),
+    transparent 62%
+  );
+  transform:translateX(-35%) rotate(8deg);
   z-index:-1;
 }
 
 .goal:hover::before{
-  animation:
-    glassSweep
-    1.1s
-    ease
-    forwards;
+  animation:glassSweep 1.1s ease forwards;
 }
 
 .goal::after{
   content:"";
-
   position:absolute;
-
   right:-70px;
   top:-70px;
-
   width:170px;
   height:170px;
-
   border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(157,178,191,.09),
-      transparent 68%
-    );
-
+  background:radial-gradient(circle,rgba(157,178,191,.09),transparent 68%);
   z-index:-1;
 }
 
 .goal:hover{
-  transform:
-    translateY(-5px);
-
-  background:
-    rgba(82,109,130,.25);
-
-  border-color:
-    rgba(157,178,191,.36);
-
+  transform:translateY(-5px);
+  background:rgba(82,109,130,.25);
+  border-color:rgba(157,178,191,.36);
   box-shadow:
-    0 28px 70px
-    rgba(39,55,77,.34),
-
-    0 0 28px
-    rgba(157,178,191,.065),
-
-    inset 0 1px 0
-    rgba(221,230,237,.1);
+    0 28px 70px rgba(39,55,77,.34),
+    0 0 28px rgba(157,178,191,.065),
+    inset 0 1px 0 rgba(221,230,237,.1);
 }
 
 .goal.completed{
-  border-color:
-    rgba(157,178,191,.38);
+  border-color:rgba(157,178,191,.38);
+  background:rgba(82,109,130,.21);
+}
 
-  background:
-    rgba(82,109,130,.21);
+.goal.completed .goal-title{
+  text-decoration:line-through;
+  text-decoration-color:rgba(221,230,237,.35);
 }
 
 .goal-num{
   font-size:10px;
-
   letter-spacing:.17em;
-
   color:var(--blue-gray);
 }
 
 .icon{
   width:50px;
   height:50px;
-
   color:var(--mist);
-
   opacity:.86;
-
-  transition:
-    transform .55s,
-    filter .55s;
+  transition:transform .55s,filter .55s;
 }
 
 .icon svg{
   width:100%;
   height:100%;
-
   fill:none;
-
   stroke:currentColor;
-
   stroke-width:1.2;
-
   stroke-linecap:round;
   stroke-linejoin:round;
 }
 
 .goal:hover .icon{
   transform:scale(1.08);
-
-  filter:
-    drop-shadow(
-      0 0 10px
-      rgba(221,230,237,.16)
-    );
+  filter:drop-shadow(0 0 10px rgba(221,230,237,.16));
 }
 
 .goal-title{
   font-size:19px;
-
   font-weight:500;
-
   letter-spacing:-.02em;
+  transition:.3s;
 }
 
 .goal-desc{
   margin-top:7px;
-
   color:var(--blue-gray);
-
   font-size:12px;
-
   line-height:1.55;
 }
 
 .goal-button{
   position:relative;
-
   width:43px;
   height:43px;
-
-  border:
-    1px solid
-    rgba(157,178,191,.28);
-
+  border:1px solid rgba(157,178,191,.28);
   border-radius:50%;
-
-  background:
-    rgba(39,55,77,.28);
-
+  background:rgba(39,55,77,.28);
   cursor:pointer;
-
   display:grid;
   place-items:center;
-
   transition:.4s;
 }
 
 .goal-button::before{
   content:"";
-
   width:13px;
   height:7px;
-
-  border-left:
-    1.5px solid
-    transparent;
-
-  border-bottom:
-    1.5px solid
-    transparent;
-
-  transform:
-    rotate(-45deg)
-    scale(.4);
-
+  border-left:1.5px solid transparent;
+  border-bottom:1.5px solid transparent;
+  transform:rotate(-45deg) scale(.4);
   transition:.35s;
 }
 
 .goal-button:hover{
   border-color:var(--blue-gray);
-
   transform:scale(1.06);
 }
 
 .goal.completed .goal-button{
-  background:
-    rgba(157,178,191,.16);
-
-  border-color:
-    var(--blue-gray);
-
-  box-shadow:
-    0 0 18px
-    rgba(157,178,191,.14);
+  background:rgba(157,178,191,.16);
+  border-color:var(--blue-gray);
+  box-shadow:0 0 18px rgba(157,178,191,.14);
 }
 
 .goal.completed .goal-button::before{
   border-color:var(--mist);
-
-  transform:
-    rotate(-45deg)
-    scale(1);
+  transform:rotate(-45deg) scale(1);
 }
 
 .completed-tag{
   font-size:8px;
-
   letter-spacing:.18em;
-
   text-transform:uppercase;
-
   color:var(--blue-gray);
-
   opacity:0;
-
   transform:translateY(4px);
-
   transition:.35s;
 }
 
@@ -885,114 +607,224 @@ h1{
 
 .action{
   display:flex;
-
   align-items:center;
-
   gap:14px;
 }
 
 /* =========================
-   LOWER SECTIONS
+   CUSTOM GOALS
 ========================= */
 
-.lower{
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    1.35fr;
-
-  gap:14px;
-
+.custom-area{
   margin-top:14px;
-}
-
-.streak,
-.reflection{
-  padding:24px;
-
+  padding:22px;
   opacity:0;
-
-  animation:
-    rowIn
-    .8s
-    cubic-bezier(.2,.7,.2,1)
-    2.25s
-    forwards;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 3.05s forwards;
 }
 
-.streak-top{
+.custom-form{
   display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
+  gap:10px;
 }
 
-.streak-number{
-  font-family:var(--display);
-  font-size:45px;
+.custom-form input{
+  flex:1;
+  min-width:0;
+  border:0;
+  border-bottom:1px solid rgba(157,178,191,.2);
+  outline:none;
+  background:transparent;
+  color:var(--mist);
+  padding:11px 2px;
 }
 
-.streak-unit{
-  font-size:10px;
+.custom-form input::placeholder{
+  color:rgba(157,178,191,.55);
+}
 
-  letter-spacing:.18em;
-
+.add-btn{
+  border:1px solid rgba(157,178,191,.25);
+  background:rgba(82,109,130,.16);
+  border-radius:99px;
+  padding:10px 17px;
   color:var(--blue-gray);
-
+  cursor:pointer;
+  transition:.35s;
+  font-size:10px;
+  letter-spacing:.12em;
   text-transform:uppercase;
 }
 
-.streak-copy{
-  margin-top:8px;
+.add-btn:hover{
+  color:var(--mist);
+  border-color:var(--blue-gray);
+  transform:translateY(-2px);
+}
 
+.custom-list{
+  display:grid;
+  gap:8px;
+  margin-top:14px;
+}
+
+.custom-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:10px 0;
+  border-top:1px solid rgba(157,178,191,.1);
   color:var(--blue-gray);
-
   font-size:12px;
 }
 
-.streak-icon{
-  font-size:27px;
+.delete-custom{
+  border:0;
+  background:none;
+  color:var(--blue-gray);
+  cursor:pointer;
+  opacity:.6;
+}
 
-  animation:
-    glow
-    4s
-    ease-in-out
-    infinite;
+/* =========================
+   HISTORY
+========================= */
+
+.history{
+  display:grid;
+  grid-template-columns:1fr 1.35fr;
+  gap:14px;
+  margin-top:14px;
+}
+
+.history-card{
+  padding:24px;
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 3.2s forwards;
+}
+
+.week{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+  margin-top:17px;
+}
+
+.day{
+  text-align:center;
+  color:var(--blue-gray);
+  font-size:8px;
+  letter-spacing:.05em;
+}
+
+.day-circle{
+  width:31px;
+  height:31px;
+  margin:7px auto 0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(157,178,191,.16);
+  font-size:9px;
+}
+
+.day.complete .day-circle{
+  background:rgba(157,178,191,.18);
+  border-color:var(--blue-gray);
+  color:var(--mist);
+}
+
+.month-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  margin-top:15px;
+}
+
+.month-cell{
+  aspect-ratio:1;
+  border-radius:5px;
+  background:rgba(221,230,237,.045);
+  border:1px solid rgba(157,178,191,.06);
+}
+
+.month-cell.complete{
+  background:rgba(157,178,191,.28);
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badges{
+  margin-top:14px;
+  padding:24px;
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 3.35s forwards;
+}
+
+.badge-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.badge{
+  padding:15px 8px;
+  text-align:center;
+  border:1px solid rgba(157,178,191,.11);
+  border-radius:15px;
+  opacity:.38;
+  transition:.4s;
+}
+
+.badge.unlocked{
+  opacity:1;
+  background:rgba(82,109,130,.17);
+  border-color:rgba(157,178,191,.32);
+  box-shadow:0 0 22px rgba(157,178,191,.07);
+}
+
+.badge-icon{
+  font-size:22px;
+  margin-bottom:7px;
+}
+
+.badge-name{
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+/* =========================
+   REFLECTION
+========================= */
+
+.reflection{
+  margin-top:14px;
+  padding:24px;
+  opacity:0;
+  animation:rowIn .8s cubic-bezier(.2,.7,.2,1) 3.45s forwards;
 }
 
 .reflection textarea{
   width:100%;
-
   min-height:115px;
-
   resize:vertical;
-
   margin-top:15px;
-
   padding:15px 0;
-
   border:0;
-
-  border-top:
-    1px solid
-    rgba(157,178,191,.15);
-
+  border-top:1px solid rgba(157,178,191,.15);
   outline:none;
-
   background:transparent;
-
   color:var(--mist);
-
   line-height:1.7;
-
   font-size:13px;
 }
 
 .reflection textarea::placeholder{
-  color:
-    rgba(157,178,191,.62);
+  color:rgba(157,178,191,.62);
 }
 
 /* =========================
@@ -1001,89 +833,126 @@ h1{
 
 .bottom{
   text-align:center;
-
   margin-top:45px;
-
   opacity:0;
-
-  animation:
-    fadeUp
-    .7s
-    ease
-    2.55s
-    forwards;
+  animation:fadeUp .7s ease 3.6s forwards;
 }
 
 .motto{
   font-family:var(--display);
-
-  font-size:
-    clamp(25px,4vw,38px);
-
+  font-size:clamp(25px,4vw,38px);
   line-height:1.15;
-
   color:var(--mist);
 }
 
 .divider{
   width:80px;
   height:1px;
-
-  background:
-    rgba(157,178,191,.3);
-
+  background:rgba(157,178,191,.3);
   margin:20px auto;
 }
 
 .return{
   display:inline-flex;
-
-  border:
-    1px solid
-    rgba(157,178,191,.2);
-
+  border:1px solid rgba(157,178,191,.2);
   padding:12px 17px;
-
   border-radius:99px;
-
   color:var(--blue-gray);
-
   font-size:10px;
-
   letter-spacing:.16em;
-
   text-transform:uppercase;
-
   text-decoration:none;
-
   transition:.35s;
-
-  background:
-    rgba(39,55,77,.22);
+  background:rgba(39,55,77,.22);
 }
 
 .return:hover{
   color:var(--mist);
-
-  border-color:
-    rgba(157,178,191,.42);
-
+  border-color:rgba(157,178,191,.42);
   transform:translateY(-3px);
 }
 
+/* =========================
+   CELEBRATION
+========================= */
+
+.celebration{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:rgba(20,30,43,.82);
+  backdrop-filter:blur(15px);
+  opacity:0;
+  visibility:hidden;
+  transition:.45s;
+}
+
+.celebration.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.celebration-box{
+  width:min(500px,100%);
+  padding:45px 30px;
+  text-align:center;
+  border:1px solid rgba(157,178,191,.3);
+  border-radius:30px;
+  background:rgba(39,55,77,.88);
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.35),
+    0 0 50px rgba(157,178,191,.08);
+  transform:scale(.88) translateY(20px);
+  transition:.5s cubic-bezier(.2,.8,.2,1);
+}
+
+.celebration.show .celebration-box{
+  transform:none;
+}
+
+.celebration-moon{
+  font-size:45px;
+  margin-bottom:12px;
+  animation:glow 2s ease-in-out infinite;
+}
+
+.celebration h2{
+  font-family:var(--display);
+  font-size:42px;
+  font-weight:400;
+  margin:0 0 12px;
+}
+
+.celebration p{
+  color:var(--blue-gray);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.close-celebration{
+  margin-top:22px;
+  border:1px solid rgba(157,178,191,.25);
+  background:transparent;
+  border-radius:99px;
+  padding:12px 22px;
+  color:var(--blue-gray);
+  cursor:pointer;
+}
+
+/* =========================
+   TRANSITION
+========================= */
+
 .transition{
   position:fixed;
-
   inset:0;
-
-  z-index:20;
-
+  z-index:60;
   background:var(--navy);
-
   opacity:0;
-
   pointer-events:none;
-
   transition:opacity .33s;
 }
 
@@ -1096,188 +965,93 @@ h1{
 ========================= */
 
 @keyframes rowIn{
-
   0%{
     opacity:0;
-    transform:
-      translateY(30px)
-      scale(.975);
-
+    transform:translateY(30px) scale(.975);
     filter:blur(7px);
   }
-
   70%{
     opacity:1;
     filter:blur(1px);
   }
-
   100%{
     opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
-
+    transform:translateY(0) scale(1);
     filter:blur(0);
   }
 }
 
 @keyframes fadeUp{
-
   from{
     opacity:0;
-
-    transform:
-      translateY(18px);
-
+    transform:translateY(18px);
     filter:blur(5px);
   }
-
   to{
     opacity:1;
-
-    transform:
-      translateY(0);
-
+    transform:translateY(0);
     filter:blur(0);
   }
 }
 
-@keyframes fade{
-  to{
-    opacity:1;
-  }
-}
-
-@keyframes reveal{
-  to{
-    opacity:1;
-  }
-}
+@keyframes reveal{to{opacity:1}}
 
 @keyframes moonIn{
-
   to{
     opacity:1;
-
-    transform:
-      translateX(-50%)
-      scale(1);
+    transform:translateX(-50%) scale(1);
   }
 }
 
 @keyframes ringPulse{
-
-  0%,
-  100%{
-    transform:scale(.92);
-    opacity:.25;
-  }
-
-  50%{
-    transform:scale(1.12);
-    opacity:.65;
-  }
+  0%,100%{transform:scale(.92);opacity:.25}
+  50%{transform:scale(1.12);opacity:.65}
 }
 
 @keyframes moonGlow{
-
-  0%,
-  100%{
-    filter:
-      drop-shadow(
-        0 0 8px
-        rgba(221,230,237,.1)
-      );
-  }
-
-  50%{
-    filter:
-      drop-shadow(
-        0 0 22px
-        rgba(221,230,237,.24)
-      );
-  }
+  0%,100%{filter:drop-shadow(0 0 8px rgba(221,230,237,.1))}
+  50%{filter:drop-shadow(0 0 22px rgba(221,230,237,.24))}
 }
 
 @keyframes twinkle{
-
-  0%,
-  100%{
+  0%,100%{
     opacity:var(--op);
     transform:scale(1);
   }
-
   50%{
-    opacity:
-      calc(var(--op) + .28);
-
+    opacity:calc(var(--op) + .28);
     transform:scale(1.25);
   }
 }
 
 @keyframes drift{
-
-  0%,
-  100%{
-    transform:
-      translate3d(0,0,0);
-  }
-
-  50%{
-    transform:
-      translate3d(3vw,-2vw,0);
-  }
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(3vw,-2vw,0)}
 }
 
 @keyframes patternDrift{
-
-  from{
-    transform:
-      translate3d(0,0,0)
-      scale(1.15);
-  }
-
-  to{
-    transform:
-      translate3d(1.5%,1%,0)
-      scale(1.15);
-  }
+  from{transform:translate3d(0,0,0) scale(1.15)}
+  to{transform:translate3d(1.5%,1%,0) scale(1.15)}
 }
 
 @keyframes glassSweep{
-
-  0%{
-    transform:
-      skewX(-18deg)
-      translateX(-230%);
-  }
-
-  100%{
-    transform:
-      skewX(-18deg)
-      translateX(850%);
-  }
+  0%{transform:skewX(-18deg) translateX(-230%)}
+  100%{transform:skewX(-18deg) translateX(850%)}
 }
 
 @keyframes glow{
-
-  0%,
-  100%{
-    filter:
-      drop-shadow(
-        0 0 2px
-        rgba(221,230,237,.05)
-      );
+  0%,100%{
+    filter:drop-shadow(0 0 2px rgba(221,230,237,.05))
   }
-
   50%{
-    filter:
-      drop-shadow(
-        0 0 11px
-        rgba(221,230,237,.16)
-      );
+    filter:drop-shadow(0 0 11px rgba(221,230,237,.16))
   }
+}
+
+@keyframes pop{
+  0%{transform:scale(.7);opacity:0}
+  70%{transform:scale(1.15)}
+  100%{transform:scale(1);opacity:1}
 }
 
 /* =========================
@@ -1286,20 +1060,14 @@ h1{
 
 @media(max-width:760px){
 
-  .meta-grid,
-  .lower{
+  .dashboard,
+  .history{
     grid-template-columns:1fr;
   }
 
   .goal{
-    grid-template-columns:
-      42px
-      50px
-      minmax(0,1fr)
-      auto;
-
+    grid-template-columns:42px 50px minmax(0,1fr) auto;
     gap:13px;
-
     padding:19px 17px;
   }
 
@@ -1308,13 +1076,8 @@ h1{
     height:43px;
   }
 
-  .goal-title{
-    font-size:16px;
-  }
-
-  .goal-desc{
-    font-size:11px;
-  }
+  .goal-title{font-size:16px}
+  .goal-desc{font-size:11px}
 
   .topbar{
     align-items:flex-start;
@@ -1323,18 +1086,21 @@ h1{
   }
 
   .app{
-    padding:
-      23px
-      16px
-      55px;
+    padding:23px 16px 55px;
+  }
+
+  .custom-form{
+    flex-direction:column;
+  }
+
+  .badge-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 @media(max-width:430px){
 
-  .arch-wrap{
-    height:100px;
-  }
+  .arch-wrap{height:100px}
 
   .moon{
     width:58px;
@@ -1343,55 +1109,44 @@ h1{
   }
 
   h1{
-    font-size:
-      clamp(48px,14vw,68px);
+    font-size:clamp(48px,14vw,68px);
   }
 
   .goal{
-    grid-template-columns:
-      32px
-      42px
-      minmax(0,1fr)
-      42px;
-
+    grid-template-columns:32px 42px minmax(0,1fr) 42px;
     gap:9px;
-
     padding:16px 12px;
-
     border-radius:18px;
   }
 
-  .goal-num{
-    font-size:8px;
-  }
+  .goal-num{font-size:8px}
 
   .icon{
     width:38px;
     height:38px;
   }
 
-  .goal-title{
-    font-size:14px;
-  }
+  .goal-title{font-size:14px}
+  .goal-desc{font-size:10px}
 
-  .goal-desc{
-    font-size:10px;
-  }
-
-  .completed-tag{
-    display:none;
-  }
+  .completed-tag{display:none}
 
   .goal-button{
     width:39px;
     height:39px;
   }
 
-  .meta-card,
-  .streak,
-  .reflection{
+  .dash-card,
+  .history-card,
+  .badges,
+  .reflection,
+  .custom-area{
     padding:19px;
     border-radius:18px;
+  }
+
+  .celebration h2{
+    font-size:34px;
   }
 }
 
@@ -1405,8 +1160,7 @@ h1{
     transition-duration:.001ms!important;
   }
 
-  .star,
-  .orb{
+  .star,.orb{
     animation:none!important;
   }
 }
@@ -1415,908 +1169,610 @@ h1{
 
 <body>
 
-<!-- =========================
-     BACKGROUND
-========================= -->
-
+<!-- BACKGROUND -->
 <div class="sky" aria-hidden="true">
-
   <div class="orb one"></div>
   <div class="orb two"></div>
   <div class="orb three"></div>
-
   <div class="stars" id="stars"></div>
 
   <div class="constellations">
-
-    <svg
-      viewBox="0 0 1200 800"
-      preserveAspectRatio="none"
-    >
-
-      <line
-        x1="90"
-        y1="130"
-        x2="210"
-        y2="185"
-      />
-
-      <line
-        x1="210"
-        y1="185"
-        x2="270"
-        y2="110"
-      />
-
-      <line
-        x1="940"
-        y1="125"
-        x2="1035"
-        y2="205"
-      />
-
-      <line
-        x1="1035"
-        y1="205"
-        x2="1110"
-        y2="145"
-      />
-
-      <line
-        x1="120"
-        y1="650"
-        x2="205"
-        y2="570"
-      />
-
-      <line
-        x1="1025"
-        y1="615"
-        x2="1105"
-        y2="680"
-      />
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+      <line x1="90" y1="130" x2="210" y2="185"/>
+      <line x1="210" y1="185" x2="270" y2="110"/>
+      <line x1="940" y1="125" x2="1035" y2="205"/>
+      <line x1="1035" y1="205" x2="1110" y2="145"/>
+      <line x1="120" y1="650" x2="205" y2="570"/>
+      <line x1="1025" y1="615" x2="1105" y2="680"/>
 
       <circle cx="90" cy="130" r="2"/>
       <circle cx="210" cy="185" r="2"/>
       <circle cx="270" cy="110" r="2"/>
-
       <circle cx="940" cy="125" r="2"/>
       <circle cx="1035" cy="205" r="2"/>
       <circle cx="1110" cy="145" r="2"/>
-
       <circle cx="120" cy="650" r="2"/>
       <circle cx="205" cy="570" r="2"/>
-
       <circle cx="1025" cy="615" r="2"/>
       <circle cx="1105" cy="680" r="2"/>
-
     </svg>
-
   </div>
 </div>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="app">
 
-  <!-- TOP BAR -->
+<header class="topbar">
+  <button class="back" id="backTop">
+    ← My Islamic Journey
+  </button>
 
-  <header class="topbar">
+  <div class="crumb">
+    MY ISLAMIC JOURNEY / DAILY ISLAMIC GOALS
+  </div>
+</header>
 
-    <button
-      class="back"
-      id="backTop"
-      aria-label="Return to My Islamic Journey"
+<!-- HERO -->
+<header class="hero">
+
+  <div class="arch-wrap" aria-hidden="true">
+    <div class="arch"></div>
+    <div class="moon"></div>
+  </div>
+
+  <div class="eyebrow">
+    DAILY ISLAMIC GOALS
+  </div>
+
+  <h1>
+    Build Meaningful<br>
+    Daily Habits
+  </h1>
+
+  <p class="subtitle">
+    Small consistent actions can become beautiful habits.
+  </p>
+
+</header>
+
+<!-- DASHBOARD -->
+<section class="dashboard">
+
+  <div class="glass dash-card" style="--delay:1.45s">
+    <div class="meta-label">Today</div>
+    <div class="meta-value" id="date"></div>
+    <div class="small-stat" id="todayStatus">Your journey continues.</div>
+  </div>
+
+  <div class="glass dash-card" style="--delay:1.58s">
+
+    <div class="meta-label">
+      Today's Progress
+    </div>
+
+    <div class="progress-count" id="progressCount">
+      0 / 9 Goals Completed
+    </div>
+
+    <div class="bar">
+      <div class="bar-fill" id="barFill"></div>
+    </div>
+
+    <div class="message" id="message">
+      Keep going — every small step matters.
+    </div>
+
+  </div>
+
+  <div class="glass dash-card" style="--delay:1.71s">
+
+    <div class="meta-label">
+      Daily Streak
+    </div>
+
+    <div class="streak-display">
+      <span class="fire">✦</span>
+      <span class="streak-number" id="streak">0</span>
+    </div>
+
+    <div class="small-stat">
+      <span id="bestStreak">Best: 0 days</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MOTIVATION -->
+<section class="glass motivation">
+  <div class="motivation-text" id="motivationText"></div>
+  <div class="motivation-source" id="motivationSource"></div>
+</section>
+
+<!-- GOALS -->
+<section class="goals" id="goals"></section>
+
+<!-- CUSTOM GOALS -->
+<section class="glass custom-area">
+
+  <div class="meta-label">
+    Personal Goal
+  </div>
+
+  <div class="custom-form">
+
+    <input
+      id="customInput"
+      type="text"
+      maxlength="70"
+      placeholder="Add your own meaningful goal..."
     >
-      ← My Islamic Journey
+
+    <button class="add-btn" id="addCustom">
+      + Add Goal
     </button>
 
-    <div class="crumb">
-      MY ISLAMIC JOURNEY / DAILY ISLAMIC GOALS
+  </div>
+
+  <div class="custom-list" id="customList"></div>
+
+</section>
+
+<!-- HISTORY -->
+<section class="history">
+
+  <div class="glass history-card">
+
+    <div class="meta-label">
+      Weekly Journey
     </div>
 
-  </header>
+    <div class="week" id="weekHistory"></div>
 
-
-  <!-- HERO -->
-
-  <header class="hero">
-
-    <div
-      class="arch-wrap"
-      aria-hidden="true"
-    >
-
-      <div class="arch"></div>
-      <div class="moon"></div>
-
+    <div class="small-stat" id="weeklySummary">
+      Your last 7 days
     </div>
 
-    <div class="eyebrow">
-      DAILY ISLAMIC GOALS
+  </div>
+
+  <div class="glass history-card">
+
+    <div class="meta-label">
+      Monthly Journey
     </div>
 
-    <h1>
-      Build Meaningful<br>
-      Daily Habits
-    </h1>
+    <div class="meta-value" id="monthTitle"></div>
 
-    <p class="subtitle">
-      Small consistent actions can become beautiful habits.
-    </p>
+    <div class="month-grid" id="monthHistory"></div>
 
-  </header>
+  </div>
 
+</section>
 
-  <!-- OVERVIEW -->
+<!-- BADGES -->
+<section class="glass badges">
 
-  <section
-    class="meta-grid"
-    aria-label="Today's overview"
-  >
+  <div class="meta-label">
+    Achievements
+  </div>
 
-    <div
-      class="glass meta-card"
-      style="--delay:1.45s"
-    >
+  <div class="badge-grid" id="badgeGrid"></div>
 
-      <div class="meta-label">
-        Today
-      </div>
+</section>
 
-      <div
-        class="meta-value"
-        id="date"
-      ></div>
+<!-- REFLECTION -->
+<section class="glass reflection">
 
-    </div>
+  <div class="meta-label">
+    A Thought for Today
+  </div>
 
+  <textarea
+    id="reflectionText"
+    placeholder="Write something you want to remember from today..."
+  ></textarea>
 
-    <div
-      class="glass meta-card"
-      style="--delay:1.58s"
-    >
+</section>
 
-      <div class="meta-label">
-        Today's Progress
-      </div>
+<!-- BOTTOM -->
+<section class="bottom">
 
-      <div
-        class="progress-count"
-        id="progressCount"
-      >
-        0 / 6 Goals Completed
-      </div>
+  <div class="motto">
+    Small steps.<br>
+    Consistent hearts.<br>
+    A meaningful journey.
+  </div>
 
-      <div
-        class="bar"
-        aria-label="Daily goal progress"
-      >
+  <div class="divider"></div>
 
-        <div
-          class="bar-fill"
-          id="barFill"
-        ></div>
+  <a href="index.html" class="return">
+    ← Return to My Islamic Journey
+  </a>
 
-      </div>
-
-      <div
-        class="message"
-        id="message"
-      >
-        Keep going — every small step matters.
-      </div>
-
-    </div>
-
-
-    <div
-      class="glass meta-card"
-      style="--delay:1.71s"
-    >
-
-      <div class="meta-label">
-        Daily Streak
-      </div>
-
-      <div class="meta-value">
-        <span id="streak">0</span>
-        Days
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- GOALS -->
-
-  <section
-    class="goals"
-    aria-label="Daily Islamic goals"
-  >
-
-    <!-- QURAN -->
-
-    <article
-      class="glass goal"
-      data-id="quran"
-      style="--delay:1.85s"
-    >
-
-      <div class="goal-num">
-        01
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <path
-            d="M8 10c5-2 10-1 16 3v27c-6-4-11-5-16-3V10Z"
-          />
-
-          <path
-            d="M40 10c-5-2-10-1-16 3v27c6-4 11-5 16-3V10Z"
-          />
-
-          <path d="M24 13v27"/>
-          <path d="M12 16c3-.5 6 .2 9 2"/>
-          <path d="M36 16c-3-.5-6 .2-9 2"/>
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          Read Quran
-        </div>
-
-        <div class="goal-desc">
-          Spend a few peaceful moments with the Quran.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark Read Quran complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-
-    <!-- DHIKR -->
-
-    <article
-      class="glass goal"
-      data-id="dhikr"
-      style="--delay:1.98s"
-    >
-
-      <div class="goal-num">
-        02
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <circle
-            cx="24"
-            cy="24"
-            r="13"
-          />
-
-          <circle
-            cx="24"
-            cy="24"
-            r="4"
-          />
-
-          <path d="M24 11V7"/>
-          <path d="M24 41v-4"/>
-          <path d="M11 24H7"/>
-          <path d="M41 24h-4"/>
-          <path d="M14.8 14.8l-2.8-2.8"/>
-          <path d="M36 36l-2.8-2.8"/>
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          Daily Dhikr
-        </div>
-
-        <div class="goal-desc">
-          Remember Allah throughout your day.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark Daily Dhikr complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-
-    <!-- DUA -->
-
-    <article
-      class="glass goal"
-      data-id="dua"
-      style="--delay:2.11s"
-    >
-
-      <div class="goal-num">
-        03
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <path
-            d="M15 29c-4-3-6-7-5-12 1-5 5-8 9-8 3 0 5 2 5 5v10"
-          />
-
-          <path
-            d="M33 29c4-3 6-7 5-12-1-5-5-8-9-8-3 0-5 2-5 5v10"
-          />
-
-          <path
-            d="M18 31c2 3 4 5 6 7 2-2 4-4 6-7"
-          />
-
-          <path d="M19 24h10"/>
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          Make Dua
-        </div>
-
-        <div class="goal-desc">
-          Take a moment to speak sincerely with Allah.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark Make Dua complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-
-    <!-- SALAH -->
-
-    <article
-      class="glass goal"
-      data-id="salah"
-      style="--delay:2.24s"
-    >
-
-      <div class="goal-num">
-        04
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <path d="M7 39h34"/>
-          <path d="M10 39V25l14-12 14 12v14"/>
-          <path d="M18 39V27h12v12"/>
-          <path d="M24 13V8"/>
-          <path d="M21 8h6"/>
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          Pray on Time
-        </div>
-
-        <div class="goal-desc">
-          Stay consistent with your daily prayers.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark Pray on Time complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-
-    <!-- GOOD DEED -->
-
-    <article
-      class="glass goal"
-      data-id="deed"
-      style="--delay:2.37s"
-    >
-
-      <div class="goal-num">
-        05
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <path
-            d="M24 40S8 30.2 8 18.7C8 13.5 11.5 10 16.2 10c3.3 0 6.2 1.9 7.8 4.7C25.6 11.9 28.5 10 31.8 10 36.5 10 40 13.5 40 18.7 40 30.2 24 40 24 40Z"
-          />
-
-          <path
-            d="M13 25h5l2.5-5 4 9 3-6 2 3h5"
-          />
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          One Good Deed
-        </div>
-
-        <div class="goal-desc">
-          Turn a good intention into a meaningful action.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark One Good Deed complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-
-    <!-- REFLECTION -->
-
-    <article
-      class="glass goal"
-      data-id="reflection"
-      style="--delay:2.50s"
-    >
-
-      <div class="goal-num">
-        06
-      </div>
-
-      <div
-        class="icon"
-        aria-hidden="true"
-      >
-
-        <svg viewBox="0 0 48 48">
-
-          <path
-            d="M10 10h28v21H20l-8 7v-7h-2V10Z"
-          />
-
-          <path d="M17 18h14"/>
-          <path d="M17 24h10"/>
-
-        </svg>
-
-      </div>
-
-      <div>
-
-        <div class="goal-title">
-          Daily Reflection
-        </div>
-
-        <div class="goal-desc">
-          Take a quiet moment to reflect on your day.
-        </div>
-
-      </div>
-
-      <div class="action">
-
-        <span class="completed-tag">
-          Complete
-        </span>
-
-        <button
-          class="goal-button"
-          aria-label="Mark Daily Reflection complete"
-        ></button>
-
-      </div>
-
-    </article>
-
-  </section>
-
-
-  <!-- LOWER -->
-
-  <section class="lower">
-
-    <div class="glass streak">
-
-      <div class="streak-top">
-
-        <div>
-
-          <div class="meta-label">
-            Consistency
-          </div>
-
-          <div class="streak-number">
-            <span id="streakLarge">0</span>
-          </div>
-
-          <div class="streak-unit">
-            day streak
-          </div>
-
-        </div>
-
-        <div
-          class="streak-icon"
-          aria-hidden="true"
-        >
-          ✦
-        </div>
-
-      </div>
-
-      <div class="streak-copy">
-        Consistency builds meaningful change.
-      </div>
-
-    </div>
-
-
-    <div class="glass reflection">
-
-      <div class="meta-label">
-        A Thought for Today
-      </div>
-
-      <textarea
-        id="reflectionText"
-        aria-label="A thought for today"
-        placeholder="Write something you want to remember from today..."
-      ></textarea>
-
-    </div>
-
-  </section>
-
-
-  <!-- BOTTOM -->
-
-  <section class="bottom">
-
-    <div class="motto">
-      Small steps.<br>
-      Consistent hearts.<br>
-      A meaningful journey.
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- DIRECT LINK TO INDEX.HTML -->
-
-    <a
-      href="index.html"
-      class="return"
-      aria-label="Return to My Islamic Journey"
-    >
-      ← Return to My Islamic Journey
-    </a>
-
-  </section>
+</section>
 
 </main>
 
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
 
-<div
-  class="transition"
-  id="transition"
-  aria-hidden="true"
-></div>
+  <div class="celebration-box">
 
+    <div class="celebration-moon">
+      ☾
+    </div>
+
+    <h2>
+      Alhamdulillah
+    </h2>
+
+    <p>
+      You completed every goal for today.
+      May these small consistent actions become
+      a beautiful part of your journey.
+    </p>
+
+    <button class="close-celebration" id="closeCelebration">
+      Continue Journey
+    </button>
+
+  </div>
+
+</div>
+
+<div class="transition" id="transition"></div>
 
 <script>
 (() => {
 
-  const GOALS = [
-    "quran",
-    "dhikr",
-    "dua",
-    "salah",
-    "deed",
-    "reflection"
+  /* =========================
+     DATA
+  ========================= */
+
+  const DEFAULT_GOALS = [
+    {
+      id:"quran",
+      title:"Read Quran",
+      desc:"Spend a few peaceful moments with the Quran.",
+      icon:"📖"
+    },
+    {
+      id:"dhikr",
+      title:"Daily Dhikr",
+      desc:"Remember Allah throughout your day.",
+      icon:"✦"
+    },
+    {
+      id:"dua",
+      title:"Make Dua",
+      desc:"Take a moment to speak sincerely with Allah.",
+      icon:"🤲"
+    },
+    {
+      id:"salah",
+      title:"Pray on Time",
+      desc:"Stay consistent with your daily prayers.",
+      icon:"☾"
+    },
+    {
+      id:"deed",
+      title:"One Good Deed",
+      desc:"Turn a good intention into a meaningful action.",
+      icon:"♡"
+    },
+    {
+      id:"reflection",
+      title:"Daily Reflection",
+      desc:"Take a quiet moment to reflect on your day.",
+      icon:"◌"
+    },
+    {
+      id:"istighfar",
+      title:"Make Istighfar",
+      desc:"Take a moment to seek Allah's forgiveness.",
+      icon:"✧"
+    },
+    {
+      id:"salawat",
+      title:"Send Salawat",
+      desc:"Send blessings upon Prophet Muhammad ﷺ.",
+      icon:"❋"
+    },
+    {
+      id:"gratitude",
+      title:"Practice Gratitude",
+      desc:"Remember three blessings Allah has given you.",
+      icon:"♡"
+    }
   ];
 
-  const STORAGE =
-    "myIslamicJourneyDailyGoalsV1";
+  const MOTIVATIONS = [
+    {
+      text:"Indeed, Allah is with those who are patient.",
+      source:"Quran 8:46"
+    },
+    {
+      text:"Remember Me; I will remember you.",
+      source:"Quran 2:152"
+    },
+    {
+      text:"And whoever puts their trust in Allah, He is sufficient for them.",
+      source:"Quran 65:3"
+    },
+    {
+      text:"The deeds most beloved to Allah are those done consistently.",
+      source:"Sahih Bukhari & Sahih Muslim"
+    },
+    {
+      text:"So remember Me; I will remember you. And be grateful to Me.",
+      source:"Quran 2:152"
+    }
+  ];
 
+  const BADGES = [
+    {
+      id:"first",
+      icon:"✦",
+      name:"First Step",
+      condition:s => s.totalCompleted >= 1
+    },
+    {
+      id:"three",
+      icon:"✧",
+      name:"Three Days",
+      condition:s => s.bestStreak >= 3
+    },
+    {
+      id:"seven",
+      icon:"🔥",
+      name:"One Week",
+      condition:s => s.bestStreak >= 7
+    },
+    {
+      id:"thirty",
+      icon:"☾",
+      name:"One Month",
+      condition:s => s.bestStreak >= 30
+    },
+    {
+      id:"perfect",
+      icon:"✦",
+      name:"Perfect Day",
+      condition:s => s.perfectDays >= 1
+    },
+    {
+      id:"ten",
+      icon:"◇",
+      name:"Ten Days",
+      condition:s => s.perfectDays >= 10
+    },
+    {
+      id:"twentyfive",
+      icon:"✧",
+      name:"25 Perfect Days",
+      condition:s => s.perfectDays >= 25
+    },
+    {
+      id:"hundred",
+      icon:"★",
+      name:"100 Goals",
+      condition:s => s.totalCompleted >= 100
+    }
+  ];
+
+  const STORAGE = "myIslamicJourneyDailyGoalsV2";
 
   /* =========================
-     DATE
+     DATE HELPERS
   ========================= */
 
-  const today = new Date();
+  const now = new Date();
 
-  const key =
-    today.toLocaleDateString("en-CA");
+  const dateKey = d =>
+    d.toLocaleDateString("en-CA");
 
-  const dateText =
-    today.toLocaleDateString(
-      "en-US",
-      {
-        weekday:"long",
-        month:"long",
-        day:"numeric"
-      }
-    );
+  const todayKey = dateKey(now);
 
-  document.getElementById("date")
-    .textContent = dateText;
+  const formatDate = d =>
+    d.toLocaleDateString("en-US",{
+      weekday:"long",
+      month:"long",
+      day:"numeric"
+    });
 
+  document.getElementById("date").textContent =
+    formatDate(now);
 
   /* =========================
-     DEFAULT STATE
+     STATE
   ========================= */
 
-  const defaults = {
-    day:key,
+  const defaultState = {
+    version:2,
+    currentDay:todayKey,
     completed:{},
+    customGoals:[],
+    history:{},
     reflection:"",
     streak:0,
-    lastSuccess:null
+    bestStreak:0,
+    totalCompleted:0,
+    perfectDays:0,
+    lastPerfect:null
   };
-
 
   let state;
 
   try{
-
-    state =
-      JSON.parse(
-        localStorage.getItem(STORAGE)
-      ) || defaults;
-
-  }catch{
-
-    state = defaults;
-
-  }
-
-
-  /* =========================
-     NEW DAY LOGIC
-  ========================= */
-
-  if(state.day !== key){
-
-    const yesterday =
-      new Date(today);
-
-    yesterday.setDate(
-      today.getDate() - 1
+    state = JSON.parse(
+      localStorage.getItem(STORAGE)
     );
 
-    const yesterdayKey =
-      yesterday.toLocaleDateString("en-CA");
-
-    if(
-      state.day !== yesterdayKey &&
-      state.lastSuccess !== yesterdayKey
-    ){
-
-      state.streak = 0;
-
+    if(!state || state.version !== 2){
+      state = defaultState;
     }
 
-    state.day = key;
-
-    state.completed = {};
-
-    state.reflection = "";
-
-    save();
+  }catch{
+    state = defaultState;
   }
-
 
   /* =========================
      SAVE
   ========================= */
 
-  const save = () => {
-
-    localStorage.setItem(
-      STORAGE,
-      JSON.stringify(state)
-    );
-
-  };
-
+  function save(){
+    try{
+      localStorage.setItem(
+        STORAGE,
+        JSON.stringify(state)
+      );
+    }catch(err){
+      console.warn("Could not save progress.",err);
+    }
+  }
 
   /* =========================
-     UPDATE UI
+     DAILY HISTORY
   ========================= */
 
-  const update = () => {
+  function archiveCurrentDay(){
 
-    const done =
-      GOALS.filter(
-        id => state.completed[id]
-      ).length;
+    if(
+      state.currentDay &&
+      state.currentDay !== todayKey
+    ){
 
-    const pct =
-      (done / GOALS.length) * 100;
+      const count =
+        Object.values(state.completed)
+          .filter(Boolean).length;
 
+      state.history[state.currentDay] = {
+        completed:count,
+        total:getAllGoals().length,
+        perfect:
+          count >= getAllGoals().length
+      };
+    }
+  }
 
-    document.getElementById(
-      "progressCount"
-    ).textContent =
-      `${done} / 6 Goals Completed`;
+  archiveCurrentDay();
 
+  if(state.currentDay !== todayKey){
 
-    document.getElementById(
-      "barFill"
-    ).style.width =
-      pct + "%";
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate()-1);
 
+    const yesterdayKey = dateKey(yesterday);
 
-    document.getElementById(
-      "message"
-    ).textContent =
-      done === 6
-        ? "Alhamdulillah — today's goals are complete."
-        : "Keep going — every small step matters.";
+    if(
+      state.lastPerfect !== yesterdayKey &&
+      state.lastPerfect !== todayKey
+    ){
+      state.streak = 0;
+    }
 
+    state.currentDay = todayKey;
+    state.completed = {};
+    state.reflection = "";
 
-    document.getElementById(
-      "streak"
-    ).textContent =
-      state.streak;
+    save();
+  }
 
+  /* =========================
+     GOALS
+  ========================= */
 
-    document.getElementById(
-      "streakLarge"
-    ).textContent =
-      state.streak;
+  function getAllGoals(){
 
+    return [
+      ...DEFAULT_GOALS,
+      ...state.customGoals.map(g => ({
+        ...g,
+        custom:true
+      }))
+    ];
+  }
 
-    document
-      .querySelectorAll(".goal")
-      .forEach(card => {
+  function renderGoals(){
 
-        const done =
-          !!state.completed[
-            card.dataset.id
-          ];
+    const container =
+      document.getElementById("goals");
 
+    container.innerHTML = "";
 
-        card.classList.toggle(
-          "completed",
-          done
-        );
+    getAllGoals().forEach((goal,index)=>{
 
+      const article =
+        document.createElement("article");
 
-        const btn =
-          card.querySelector(
-            ".goal-button"
-          );
+      article.className =
+        "glass goal";
 
+      article.dataset.id =
+        goal.id;
 
-        btn.setAttribute(
-          "aria-pressed",
-          String(done)
-        );
+      article.style.setProperty(
+        "--delay",
+        `${1.85 + index*.09}s`
+      );
 
+      article.innerHTML = `
 
-        btn.setAttribute(
-          "aria-label",
+        <div class="goal-num">
+          ${String(index+1).padStart(2,"0")}
+        </div>
 
-          done
-            ? "Mark " +
-              card.querySelector(
-                ".goal-title"
-              ).textContent +
-              " incomplete"
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="15"/>
+            <path d="M16 24l5 5 11-12"/>
+          </svg>
+        </div>
 
-            : "Mark " +
-              card.querySelector(
-                ".goal-title"
-              ).textContent +
-              " complete"
-        );
+        <div>
+          <div class="goal-title">
+            ${escapeHTML(goal.title)}
+          </div>
 
-      });
+          <div class="goal-desc">
+            ${escapeHTML(goal.desc)}
+          </div>
+        </div>
 
-  };
+        <div class="action">
 
+          <span class="completed-tag">
+            Complete
+          </span>
+
+          <button
+            class="goal-button"
+            aria-label="Mark ${escapeHTML(goal.title)} complete"
+          ></button>
+
+        </div>
+      `;
+
+      article
+        .querySelector(".goal-button")
+        .addEventListener("click",()=>{
+          markGoal(goal.id);
+        });
+
+      container.appendChild(article);
+    });
+
+    update();
+  }
+
+  function escapeHTML(value){
+
+    return String(value)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
 
   /* =========================
      MARK GOAL
@@ -2324,77 +1780,248 @@ h1{
 
   function markGoal(id){
 
-    state.completed[id] =
-      !state.completed[id];
+    const wasComplete =
+      !!state.completed[id];
 
+    state.completed[id] =
+      !wasComplete;
 
     const done =
-      GOALS.filter(
-        g => state.completed[g]
-      ).length;
+      Object.values(state.completed)
+        .filter(Boolean).length;
 
+    const total =
+      getAllGoals().length;
 
-    if(done === GOALS.length){
-
-      if(state.lastSuccess !== key){
-
-        const previous =
-          state.lastSuccess;
-
-
-        const yesterday =
-          new Date(today);
-
-        yesterday.setDate(
-          today.getDate() - 1
-        );
-
-
-        const yesterdayKey =
-          yesterday.toLocaleDateString(
-            "en-CA"
-          );
-
-
-        state.streak =
-          previous === yesterdayKey
-            ? (state.streak || 0) + 1
-            : 1;
-
-
-        state.lastSuccess = key;
-
-      }
-
+    if(!wasComplete){
+      state.totalCompleted++;
+    }else{
+      state.totalCompleted =
+        Math.max(0,state.totalCompleted-1);
     }
 
+    if(done === total){
+
+      if(state.lastPerfect !== todayKey){
+
+        const yesterday =
+          new Date(now);
+
+        yesterday.setDate(
+          now.getDate()-1
+        );
+
+        const yesterdayKey =
+          dateKey(yesterday);
+
+        if(
+          state.lastPerfect === yesterdayKey
+        ){
+          state.streak++;
+        }else{
+          state.streak = 1;
+        }
+
+        state.bestStreak =
+          Math.max(
+            state.bestStreak,
+            state.streak
+          );
+
+        state.perfectDays++;
+
+        state.lastPerfect =
+          todayKey;
+
+        celebrate();
+      }
+    }
 
     save();
     update();
-
+    renderHistory();
+    renderBadges();
   }
 
-
   /* =========================
-     GOAL BUTTONS
+     UPDATE
   ========================= */
 
-  document
-    .querySelectorAll(".goal")
-    .forEach(card => {
+  function update(){
 
-      card
-        .querySelector(".goal-button")
-        .addEventListener(
-          "click",
-          () =>
-            markGoal(
-              card.dataset.id
-            )
+    const total =
+      getAllGoals().length;
+
+    const done =
+      Object.values(state.completed)
+        .filter(Boolean).length;
+
+    const percentage =
+      total
+        ? (done/total)*100
+        : 0;
+
+    document.getElementById(
+      "progressCount"
+    ).textContent =
+      `${done} / ${total} Goals Completed`;
+
+    document.getElementById(
+      "barFill"
+    ).style.width =
+      `${percentage}%`;
+
+    let message =
+      "Keep going — every small step matters.";
+
+    if(done === 0){
+      message =
+        "Begin with one small step.";
+    }else if(done < total/2){
+      message =
+        "Beautiful beginning — keep going.";
+    }else if(done < total){
+      message =
+        "You're more than halfway there.";
+    }else{
+      message =
+        "Alhamdulillah — today's goals are complete.";
+    }
+
+    document.getElementById(
+      "message"
+    ).textContent = message;
+
+    document.getElementById(
+      "streak"
+    ).textContent =
+      state.streak;
+
+    document.getElementById(
+      "bestStreak"
+    ).textContent =
+      `Best: ${state.bestStreak} days`;
+
+    document.getElementById(
+      "todayStatus"
+    ).textContent =
+      done === total
+        ? "Today's journey is complete."
+        : `${total-done} goals remaining.`;
+
+    document
+      .querySelectorAll(".goal")
+      .forEach(card=>{
+
+        const id =
+          card.dataset.id;
+
+        const complete =
+          !!state.completed[id];
+
+        card.classList.toggle(
+          "completed",
+          complete
         );
 
+        const button =
+          card.querySelector(
+            ".goal-button"
+          );
+
+        button.setAttribute(
+          "aria-pressed",
+          String(complete)
+        );
+      });
+  }
+
+  /* =========================
+     CUSTOM GOALS
+  ========================= */
+
+  const customInput =
+    document.getElementById("customInput");
+
+  document
+    .getElementById("addCustom")
+    .addEventListener("click",addCustomGoal);
+
+  customInput.addEventListener(
+    "keydown",
+    e=>{
+      if(e.key==="Enter"){
+        addCustomGoal();
+      }
+    }
+  );
+
+  function addCustomGoal(){
+
+    const title =
+      customInput.value.trim();
+
+    if(!title) return;
+
+    state.customGoals.push({
+      id:
+        "custom-" +
+        Date.now(),
+
+      title,
+
+      desc:
+        "A personal goal for your journey."
     });
 
+    customInput.value = "";
+
+    save();
+    renderGoals();
+    renderCustomGoals();
+  }
+
+  function renderCustomGoals(){
+
+    const list =
+      document.getElementById("customList");
+
+    list.innerHTML = "";
+
+    state.customGoals.forEach(goal=>{
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "custom-item";
+
+      item.innerHTML = `
+        <span>${escapeHTML(goal.title)}</span>
+        <button class="delete-custom">Remove</button>
+      `;
+
+      item
+        .querySelector(".delete-custom")
+        .addEventListener(
+          "click",
+          ()=>{
+            delete state.completed[goal.id];
+
+            state.customGoals =
+              state.customGoals.filter(
+                g=>g.id!==goal.id
+              );
+
+            save();
+            renderGoals();
+            renderCustomGoals();
+          }
+        );
+
+      list.appendChild(item);
+    });
+  }
 
   /* =========================
      REFLECTION
@@ -2405,33 +2032,318 @@ h1{
       "reflectionText"
     );
 
-
   reflection.value =
     state.reflection || "";
 
-
   reflection.addEventListener(
     "input",
-    () => {
-
+    ()=>{
       state.reflection =
         reflection.value;
 
       save();
-
     }
   );
 
+  /* =========================
+     MOTIVATION
+  ========================= */
+
+  const motivation =
+    MOTIVATIONS[
+      now.getDate() %
+      MOTIVATIONS.length
+    ];
+
+  document.getElementById(
+    "motivationText"
+  ).textContent =
+    `"${motivation.text}"`;
+
+  document.getElementById(
+    "motivationSource"
+  ).textContent =
+    motivation.source;
 
   /* =========================
-     TOP BACK BUTTON
+     WEEKLY HISTORY
+  ========================= */
+
+  function renderHistory(){
+
+    const week =
+      document.getElementById(
+        "weekHistory"
+      );
+
+    week.innerHTML = "";
+
+    let weeklyComplete = 0;
+
+    for(let i=6;i>=0;i--){
+
+      const d =
+        new Date(now);
+
+      d.setDate(
+        now.getDate()-i
+      );
+
+      const key =
+        dateKey(d);
+
+      let info;
+
+      if(key === todayKey){
+
+        const done =
+          Object.values(
+            state.completed
+          ).filter(Boolean).length;
+
+        const total =
+          getAllGoals().length;
+
+        info = {
+          completed:done,
+          total,
+          perfect:done===total
+        };
+
+      }else{
+
+        info =
+          state.history[key] || {
+            completed:0,
+            total:getAllGoals().length,
+            perfect:false
+          };
+      }
+
+      if(info.perfect){
+        weeklyComplete++;
+      }
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "day " +
+        (info.perfect ? "complete":"");
+
+      item.innerHTML = `
+        <div>
+          ${d.toLocaleDateString(
+            "en-US",
+            {weekday:"short"}
+          ).slice(0,2)}
+        </div>
+
+        <div class="day-circle">
+          ${info.perfect ? "✓" : d.getDate()}
+        </div>
+      `;
+
+      week.appendChild(item);
+    }
+
+    document.getElementById(
+      "weeklySummary"
+    ).textContent =
+      `${weeklyComplete} complete day${
+        weeklyComplete===1 ? "" : "s"
+      } in the last 7 days`;
+
+    renderMonth();
+  }
+
+  /* =========================
+     MONTH
+  ========================= */
+
+  function renderMonth(){
+
+    const grid =
+      document.getElementById(
+        "monthHistory"
+      );
+
+    grid.innerHTML = "";
+
+    document.getElementById(
+      "monthTitle"
+    ).textContent =
+      now.toLocaleDateString(
+        "en-US",
+        {
+          month:"long",
+          year:"numeric"
+        }
+      );
+
+    const year =
+      now.getFullYear();
+
+    const month =
+      now.getMonth();
+
+    const first =
+      new Date(year,month,1)
+        .getDay();
+
+    const days =
+      new Date(year,month+1,0)
+        .getDate();
+
+    for(let i=0;i<first;i++){
+
+      const blank =
+        document.createElement("div");
+
+      blank.className =
+        "month-cell";
+
+      blank.style.opacity = "0";
+
+      grid.appendChild(blank);
+    }
+
+    for(let day=1;day<=days;day++){
+
+      const d =
+        new Date(year,month,day);
+
+      const key =
+        dateKey(d);
+
+      let perfect = false;
+
+      if(key === todayKey){
+
+        const done =
+          Object.values(
+            state.completed
+          ).filter(Boolean).length;
+
+        perfect =
+          done === getAllGoals().length;
+
+      }else{
+
+        perfect =
+          !!state.history[key]?.perfect;
+      }
+
+      const cell =
+        document.createElement("div");
+
+      cell.className =
+        "month-cell " +
+        (perfect ? "complete":"");
+
+      cell.title =
+        `${d.toLocaleDateString()} ${
+          perfect
+            ? "— Complete"
+            : "— In progress"
+        }`;
+
+      grid.appendChild(cell);
+    }
+  }
+
+  /* =========================
+     BADGES
+  ========================= */
+
+  function renderBadges(){
+
+    const grid =
+      document.getElementById(
+        "badgeGrid"
+      );
+
+    grid.innerHTML = "";
+
+    BADGES.forEach(badge=>{
+
+      const unlocked =
+        badge.condition(state);
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "badge " +
+        (unlocked ? "unlocked":"");
+
+      item.innerHTML = `
+        <div class="badge-icon">
+          ${badge.icon}
+        </div>
+
+        <div class="badge-name">
+          ${badge.name}
+        </div>
+      `;
+
+      grid.appendChild(item);
+    });
+  }
+
+  /* =========================
+     CELEBRATION
+  ========================= */
+
+  function celebrate(){
+
+    const celebration =
+      document.getElementById(
+        "celebration"
+      );
+
+    celebration.classList.add("show");
+
+    document.body.style.overflow =
+      "hidden";
+  }
+
+  function closeCelebration(){
+
+    document.getElementById(
+      "celebration"
+    ).classList.remove("show");
+
+    document.body.style.overflow =
+      "";
+  }
+
+  document.getElementById(
+    "closeCelebration"
+  ).addEventListener(
+    "click",
+    closeCelebration
+  );
+
+  document.getElementById(
+    "celebration"
+  ).addEventListener(
+    "click",
+    e=>{
+      if(e.target.id==="celebration"){
+        closeCelebration();
+      }
+    }
+  );
+
+  /* =========================
+     HOME
   ========================= */
 
   const transition =
     document.getElementById(
       "transition"
     );
-
 
   function goHome(){
 
@@ -2440,50 +2352,30 @@ h1{
         "(prefers-reduced-motion: reduce)"
       ).matches
     ){
-
-      location.href =
-        "index.html";
-
+      location.href="index.html";
       return;
-
     }
 
+    transition.classList.add("active");
 
-    transition.classList.add(
-      "active"
-    );
-
-
-    setTimeout(
-      () => {
-
-        location.href =
-          "index.html";
-
-      },
-      330
-    );
-
+    setTimeout(()=>{
+      location.href="index.html";
+    },330);
   }
 
-
-  document
-    .getElementById("backTop")
-    .addEventListener(
-      "click",
-      goHome
-    );
-
+  document.getElementById(
+    "backTop"
+  ).addEventListener(
+    "click",
+    goHome
+  );
 
   /* =========================
      STARS
   ========================= */
 
   const stars =
-    document.getElementById(
-      "stars"
-    );
-
+    document.getElementById("stars");
 
   const count =
     Math.min(
@@ -2498,95 +2390,69 @@ h1{
       )
     );
 
-
   const frag =
     document.createDocumentFragment();
 
-
-  for(
-    let i = 0;
-    i < count;
-    i++
-  ){
+  for(let i=0;i<count;i++){
 
     const s =
       document.createElement("i");
 
-
     s.className =
       "star" +
-      (
-        Math.random() < .08
-          ? " glow"
-          : ""
-      );
-
+      (Math.random()<.08 ? " glow":"");
 
     const size =
       (
-        Math.random() * 1.7 +
-        .55
+        Math.random()*1.7+.55
       ).toFixed(2);
 
-
     s.style.left =
-      (
-        Math.random() * 100
-      ).toFixed(2) + "%";
-
+      (Math.random()*100).toFixed(2)+"%";
 
     s.style.top =
-      (
-        Math.random() * 100
-      ).toFixed(2) + "%";
-
+      (Math.random()*100).toFixed(2)+"%";
 
     s.style.width =
-      size + "px";
-
+      size+"px";
 
     s.style.height =
-      size + "px";
-
+      size+"px";
 
     s.style.setProperty(
       "--op",
       (
-        Math.random() * .34 +
-        .12
+        Math.random()*.34+.12
       ).toFixed(2)
     );
-
 
     s.style.setProperty(
       "--dur",
       (
-        Math.random() * 4 +
-        3.5
-      ).toFixed(2) + "s"
+        Math.random()*4+3.5
+      ).toFixed(2)+"s"
     );
-
 
     s.style.setProperty(
       "--delay",
       (
-        Math.random() * 5
-      ).toFixed(2) + "s"
+        Math.random()*5
+      ).toFixed(2)+"s"
     );
 
-
     frag.appendChild(s);
-
   }
-
 
   stars.appendChild(frag);
 
-
   /* =========================
-     INITIAL UPDATE
+     INITIALIZE
   ========================= */
 
+  renderGoals();
+  renderCustomGoals();
+  renderHistory();
+  renderBadges();
   update();
 
 })();
