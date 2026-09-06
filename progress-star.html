@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Progress Star — My Islamic Journey</title>
+
+<style>
+:root{
+  --navy:#27374D;
+  --slate:#526D82;
+  --blue-gray:#9DB2BF;
+  --mist:#DDE6ED;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:Georgia,"Times New Roman",serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--navy);
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--mist);
+  font-family:var(--sans);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(82,109,130,.30),transparent 38%),
+    radial-gradient(circle at 8% 55%,rgba(157,178,191,.10),transparent 28%),
+    radial-gradient(circle at 92% 78%,rgba(82,109,130,.16),transparent 30%),
+    var(--navy);
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.sky::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  opacity:.17;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 45%,
+      transparent 0 62px,
+      rgba(157,178,191,.10) 63px 64px,
+      transparent 65px 126px
+    ),
+    repeating-conic-gradient(
+      from 22.5deg at 50% 45%,
+      transparent 0 44deg,
+      rgba(157,178,191,.065) 45deg 46deg,
+      transparent 47deg 90deg
+    );
+  mask-image:radial-gradient(circle,black 0 40%,transparent 74%);
+  animation:patternDrift 32s linear infinite;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  opacity:.17;
+}
+
+.orb.one{
+  width:48vw;
+  height:48vw;
+  left:25%;
+  top:-14%;
+  background:var(--slate);
+  animation:drift 24s ease-in-out infinite;
+}
+
+.orb.two{
+  width:34vw;
+  height:34vw;
+  left:-12%;
+  top:42%;
+  background:var(--blue-gray);
+  animation:drift 30s ease-in-out infinite reverse;
+}
+
+.orb.three{
+  width:38vw;
+  height:38vw;
+  right:-13%;
+  bottom:-10%;
+  background:var(--slate);
+  animation:drift 27s ease-in-out infinite;
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+}
+
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:var(--mist);
+  box-shadow:0 0 5px rgba(221,230,237,.22);
+  animation:twinkle var(--dur) ease-in-out var(--delay) infinite;
+}
+
+.star.glow{
+  box-shadow:
+    0 0 10px rgba(221,230,237,.45),
+    0 0 22px rgba(157,178,191,.18);
+}
+
+.constellations{
+  position:absolute;
+  inset:0;
+  opacity:.16;
+}
+
+.constellations svg{
+  width:100%;
+  height:100%;
+}
+
+.constellations line{
+  stroke:var(--blue-gray);
+  stroke-width:.7;
+  stroke-dasharray:2 10;
+}
+
+.constellations circle{
+  fill:var(--mist);
+  opacity:.7;
+}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:var(--op);
+    transform:scale(1);
+  }
+  50%{
+    opacity:calc(var(--op) + .28);
+    transform:scale(1.25);
+  }
+}
+
+@keyframes drift{
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+  50%{
+    transform:translate3d(3vw,-2vw,0);
+  }
+}
+
+@keyframes patternDrift{
+  from{
+    transform:translate3d(0,0,0) scale(1.15);
+  }
+  to{
+    transform:translate3d(1.5%,1%,0) scale(1.15);
+  }
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+  position:relative;
+  z-index:2;
+  width:min(1120px,calc(100% - 36px));
+  margin:auto;
+  padding:28px 0 70px;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:65px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+  border:1px solid rgba(221,230,237,.28);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(221,230,237,.05);
+  box-shadow:0 0 25px rgba(157,178,191,.08);
+}
+
+.brand-mark::before{
+  content:"✦";
+  color:var(--mist);
+  font-size:15px;
+}
+
+.brand-text{
+  font-family:var(--display);
+  font-size:18px;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:11px 17px;
+  border:1px solid rgba(157,178,191,.20);
+  border-radius:999px;
+  color:var(--mist);
+  text-decoration:none;
+  background:rgba(39,55,77,.40);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  font-size:13px;
+  transition:.3s ease;
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(221,230,237,.38);
+  background:rgba(82,109,130,.28);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  max-width:800px;
+  margin:0 auto 52px;
+  text-align:center;
+  animation:heroIn 1s ease both;
+}
+
+.eyebrow{
+  color:var(--blue-gray);
+  text-transform:uppercase;
+  letter-spacing:.24em;
+  font-size:11px;
+  margin-bottom:17px;
+}
+
+.hero h1{
+  margin:0;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(46px,7vw,78px);
+  line-height:.95;
+  letter-spacing:-.04em;
+}
+
+.hero p{
+  max-width:570px;
+  margin:23px auto 0;
+  color:var(--blue-gray);
+  line-height:1.8;
+  font-size:14px;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass{
+  border:1px solid rgba(157,178,191,.20);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(82,109,130,.18),
+      rgba(39,55,77,.48)
+    );
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(221,230,237,.06);
+}
+
+/* =========================================================
+   MAIN STAR
+========================================================= */
+
+.star-card{
+  border-radius:32px;
+  padding:40px;
+  margin-bottom:20px;
+  text-align:center;
+  animation:cardIn .8s .12s ease both;
+}
+
+.star-display{
+  width:245px;
+  height:245px;
+  margin:0 auto 28px;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+
+.star-display::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      var(--blue-gray) var(--progress,0%),
+      rgba(157,178,191,.07) var(--progress,0%)
+    );
+  mask:
+    radial-gradient(
+      farthest-side,
+      transparent calc(100% - 7px),
+      #000 calc(100% - 6px)
+    );
+  -webkit-mask:
+    radial-gradient(
+      farthest-side,
+      transparent calc(100% - 7px),
+      #000 calc(100% - 6px)
+    );
+  filter:drop-shadow(0 0 15px rgba(157,178,191,.16));
+}
+
+.star-core{
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  background:
+    radial-gradient(
+      circle,
+      rgba(157,178,191,.16),
+      rgba(39,55,77,.72) 68%
+    );
+  border:1px solid rgba(221,230,237,.15);
+  box-shadow:
+    inset 0 0 45px rgba(157,178,191,.06),
+    0 0 60px rgba(82,109,130,.10);
+}
+
+.big-star{
+  font-size:72px;
+  line-height:1;
+  color:var(--mist);
+  text-shadow:
+    0 0 18px rgba(221,230,237,.30),
+    0 0 45px rgba(157,178,191,.18);
+  animation:starPulse 3s ease-in-out infinite;
+}
+
+.star-level{
+  position:absolute;
+  bottom:38px;
+  font-size:10px;
+  color:var(--blue-gray);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+@keyframes starPulse{
+  0%,100%{
+    transform:scale(1);
+    opacity:.85;
+  }
+  50%{
+    transform:scale(1.08);
+    opacity:1;
+  }
+}
+
+.star-title{
+  font-family:var(--display);
+  font-size:32px;
+  font-weight:400;
+  margin-bottom:8px;
+}
+
+.star-description{
+  color:var(--blue-gray);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.progress-track{
+  width:min(500px,100%);
+  height:6px;
+  margin:25px auto 0;
+  border-radius:99px;
+  background:rgba(221,230,237,.07);
+  overflow:hidden;
+}
+
+.progress-track-fill{
+  height:100%;
+  width:0%;
+  background:var(--blue-gray);
+  box-shadow:0 0 15px rgba(157,178,191,.25);
+  transition:width .7s ease;
+}
+
+.next-level{
+  margin-top:10px;
+  color:var(--blue-gray);
+  font-size:10px;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
+  border-radius:21px;
+  padding:22px;
+  animation:cardIn .8s .2s ease both;
+  transition:.3s ease;
+}
+
+.stat:hover{
+  transform:translateY(-4px);
+  border-color:rgba(157,178,191,.30);
+}
+
+.stat-icon{
+  color:var(--blue-gray);
+  font-size:17px;
+  margin-bottom:14px;
+}
+
+.stat-value{
+  font-family:var(--display);
+  font-size:29px;
+}
+
+.stat-label{
+  color:var(--blue-gray);
+  font-size:10px;
+  margin-top:5px;
+}
+
+/* =========================================================
+   MILESTONES
+========================================================= */
+
+.milestones{
+  border-radius:28px;
+  padding:30px;
+  margin-bottom:20px;
+  animation:cardIn .8s .3s ease both;
+}
+
+.section-title{
+  margin:0;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:29px;
+}
+
+.section-subtitle{
+  color:var(--blue-gray);
+  font-size:12px;
+  margin-top:7px;
+}
+
+.milestone-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+  margin-top:25px;
+}
+
+.milestone{
+  padding:21px;
+  border:1px solid rgba(157,178,191,.12);
+  border-radius:18px;
+  background:rgba(39,55,77,.28);
+  transition:.3s ease;
+}
+
+.milestone:hover{
+  transform:translateY(-4px);
+  background:rgba(82,109,130,.16);
+}
+
+.milestone-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.milestone-star{
+  font-size:22px;
+  color:var(--blue-gray);
+}
+
+.milestone-status{
+  color:var(--blue-gray);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+.milestone h3{
+  font-family:var(--display);
+  font-size:19px;
+  font-weight:400;
+  margin:14px 0 5px;
+}
+
+.milestone p{
+  color:var(--blue-gray);
+  font-size:10px;
+  line-height:1.6;
+  margin:0;
+}
+
+.mini-progress{
+  height:4px;
+  margin-top:16px;
+  border-radius:99px;
+  background:rgba(221,230,237,.07);
+  overflow:hidden;
+}
+
+.mini-fill{
+  height:100%;
+  background:var(--blue-gray);
+  width:0%;
+  transition:width .6s ease;
+}
+
+/* =========================================================
+   JOURNEY SCORE
+========================================================= */
+
+.score-card{
+  border-radius:28px;
+  padding:30px;
+  animation:cardIn .8s .38s ease both;
+}
+
+.score-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.score-box{
+  padding:22px;
+  border:1px solid rgba(157,178,191,.10);
+  border-radius:18px;
+  background:rgba(39,55,77,.24);
+}
+
+.score-label{
+  color:var(--blue-gray);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:9px;
+}
+
+.score-number{
+  font-family:var(--display);
+  font-size:48px;
+  margin-top:8px;
+}
+
+.score-text{
+  color:var(--blue-gray);
+  font-size:11px;
+  line-height:1.6;
+}
+
+.score-bar{
+  height:5px;
+  background:rgba(221,230,237,.07);
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:16px;
+}
+
+.score-bar-fill{
+  width:0%;
+  height:100%;
+  background:var(--blue-gray);
+  transition:width .7s ease;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  text-align:center;
+  padding:50px 0 10px;
+  color:rgba(157,178,191,.60);
+  font-size:11px;
+}
+
+footer span{
+  color:var(--mist);
+  font-family:var(--display);
+  font-size:14px;
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .milestone-list{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  .page{
+    width:min(100% - 24px,620px);
+    padding-top:18px;
+  }
+
+  .topbar{
+    margin-bottom:48px;
+  }
+
+  .brand-text{
+    font-size:16px;
+  }
+
+  .back-btn{
+    padding:9px 12px;
+    font-size:11px;
+  }
+
+  .hero{
+    margin-bottom:38px;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .star-card,
+  .milestones,
+  .score-card{
+    padding:22px;
+    border-radius:22px;
+  }
+
+  .star-display{
+    width:210px;
+    height:210px;
+  }
+
+  .star-core{
+    width:162px;
+    height:162px;
+  }
+
+  .big-star{
+    font-size:60px;
+  }
+
+  .score-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .milestone-list{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .topbar{
+    align-items:flex-start;
+  }
+
+  .brand-mark{
+    width:34px;
+    height:34px;
+  }
+
+  .brand-text{
+    font-size:14px;
+  }
+
+  .back-btn{
+    font-size:10px;
+    padding:8px 10px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .star-display{
+    width:190px;
+    height:190px;
+  }
+
+  .star-core{
+    width:145px;
+    height:145px;
+  }
+
+  .big-star{
+    font-size:52px;
+  }
+
+  .star-title{
+    font-size:27px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div class="sky" aria-hidden="true">
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="constellations">
+
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+
+      <line x1="90" y1="130" x2="210" y2="185"/>
+      <line x1="210" y1="185" x2="270" y2="110"/>
+
+      <line x1="940" y1="125" x2="1035" y2="205"/>
+      <line x1="1035" y1="205" x2="1110" y2="145"/>
+
+      <line x1="120" y1="650" x2="205" y2="570"/>
+      <line x1="1025" y1="615" x2="1105" y2="680"/>
+
+      <circle cx="90" cy="130" r="2"/>
+      <circle cx="210" cy="185" r="2"/>
+      <circle cx="270" cy="110" r="2"/>
+
+      <circle cx="940" cy="125" r="2"/>
+      <circle cx="1035" cy="205" r="2"/>
+      <circle cx="1110" cy="145" r="2"/>
+
+      <circle cx="120" cy="650" r="2"/>
+      <circle cx="205" cy="570" r="2"/>
+
+      <circle cx="1025" cy="615" r="2"/>
+      <circle cx="1105" cy="680" r="2"/>
+
+    </svg>
+
+  </div>
+
+</div>
+
+
+<main class="page">
+
+  <!-- =====================================================
+       NAV
+  ====================================================== -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <div class="brand-mark"></div>
+
+      <div class="brand-text">
+        My Islamic Journey
+      </div>
+
+    </div>
+
+    <a
+      href="index.html"
+      class="back-btn"
+    >
+      ← Back to Journey
+    </a>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      Progress Star
+    </div>
+
+    <h1>
+      Your Journey
+      <br>
+      In Stars
+    </h1>
+
+    <p>
+      Every prayer, every page, every good deed
+      becomes another step in your journey.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       MAIN STAR
+  ====================================================== -->
+
+  <section class="glass star-card">
+
+    <div
+      class="star-display"
+      id="starDisplay"
+      style="--progress:0%"
+    >
+
+      <div class="star-core">
+
+        <div class="big-star">
+          ★
+        </div>
+
+        <div
+          class="star-level"
+          id="starLevel"
+        >
+          Beginning
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="star-title"
+      id="starTitle"
+    >
+      Your journey is beginning
+    </div>
+
+    <div
+      class="star-description"
+      id="starDescription"
+    >
+      Keep showing up. Progress is built one meaningful
+      action at a time.
+    </div>
+
+
+    <div class="progress-track">
+
+      <div
+        class="progress-track-fill"
+        id="mainProgress"
+      ></div>
+
+    </div>
+
+    <div
+      class="next-level"
+      id="nextLevel"
+    >
+      Start your journey to earn your first star.
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STATS
+  ====================================================== -->
+
+  <section class="stats">
+
+    <div class="glass stat">
+
+      <div class="stat-icon">
+        ✦
+      </div>
+
+      <div
+        class="stat-value"
+        id="journeyDays"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Journey Days
+      </div>
+
+    </div>
+
+
+    <div class="glass stat">
+
+      <div class="stat-icon">
+        ◷
+      </div>
+
+      <div
+        class="stat-value"
+        id="activeDays"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Active Days
+      </div>
+
+    </div>
+
+
+    <div class="glass stat">
+
+      <div class="stat-icon">
+        ★
+      </div>
+
+      <div
+        class="stat-value"
+        id="starsEarned"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Stars Earned
+      </div>
+
+    </div>
+
+
+    <div class="glass stat">
+
+      <div class="stat-icon">
+        ↑
+      </div>
+
+      <div
+        class="stat-value"
+        id="journeyScore"
+      >
+        0%
+      </div>
+
+      <div class="stat-label">
+        Journey Progress
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MILESTONES
+  ====================================================== -->
+
+  <section class="glass milestones">
+
+    <h2 class="section-title">
+      Milestones
+    </h2>
+
+    <div class="section-subtitle">
+      Little achievements along your journey.
+    </div>
+
+
+    <div class="milestone-list">
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m1status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          First Step
+        </h3>
+
+        <p>
+          Begin your Islamic journey by completing
+          your first tracked activity.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m1fill"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m2status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          Seven Days
+        </h3>
+
+        <p>
+          Stay connected with your journey
+          for seven active days.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m2fill"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m3status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          Twenty-One Days
+        </h3>
+
+        <p>
+          Build a deeper rhythm by reaching
+          twenty-one active days.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m3fill"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m4status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          Forty Days
+        </h3>
+
+        <p>
+          Continue your consistency and reach
+          forty active days.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m4fill"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m5status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          Hundred Days
+        </h3>
+
+        <p>
+          A major milestone in your long-term
+          journey of consistency.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m5fill"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="milestone">
+
+        <div class="milestone-top">
+
+          <div class="milestone-star">
+            ☆
+          </div>
+
+          <div
+            class="milestone-status"
+            id="m6status"
+          >
+            Locked
+          </div>
+
+        </div>
+
+        <h3>
+          One Thousand
+        </h3>
+
+        <p>
+          A long-term celebration of dedication
+          and continuous effort.
+        </p>
+
+        <div class="mini-progress">
+          <div
+            class="mini-fill"
+            id="m6fill"
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       JOURNEY SCORE
+  ====================================================== -->
+
+  <section class="glass score-card">
+
+    <h2 class="section-title">
+      Journey Score
+    </h2>
+
+    <div class="section-subtitle">
+      Your overall progress across the journey.
+    </div>
+
+
+    <div class="score-layout">
+
+      <div class="score-box">
+
+        <div class="score-label">
+          Overall Progress
+        </div>
+
+        <div
+          class="score-number"
+          id="overallScore"
+        >
+          0%
+        </div>
+
+        <div class="score-text">
+          Your score grows as you build consistency
+          across your Islamic Journey pages.
+        </div>
+
+        <div class="score-bar">
+
+          <div
+            class="score-bar-fill"
+            id="scoreBar"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="score-box">
+
+        <div class="score-label">
+          Current Level
+        </div>
+
+        <div
+          class="score-number"
+          id="levelNumber"
+        >
+          0
+        </div>
+
+        <div class="score-text">
+          Keep moving forward. There is always
+          another beautiful step ahead.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    A journey worth taking ·
+    <span>My Islamic Journey</span>
+  </footer>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   STAR FIELD
+========================================================= */
+
+const stars =
+  document.getElementById("stars");
+
+const count =
+  Math.min(
+    160,
+    Math.max(
+      100,
+      Math.round(
+        innerWidth *
+        innerHeight /
+        7000
+      )
+    )
+  );
+
+const frag =
+  document.createDocumentFragment();
+
+for(let i=0;i<count;i++){
+
+  const s =
+    document.createElement("i");
+
+  s.className =
+    "star" +
+    (
+      Math.random() < .08
+      ? " glow"
+      : ""
+    );
+
+  const size =
+    (
+      Math.random()*1.7+.55
+    ).toFixed(2);
+
+  s.style.left =
+    (
+      Math.random()*100
+    ).toFixed(2)+"%";
+
+  s.style.top =
+    (
+      Math.random()*100
+    ).toFixed(2)+"%";
+
+  s.style.width =
+    size+"px";
+
+  s.style.height =
+    size+"px";
+
+  s.style.setProperty(
+    "--op",
+    (
+      Math.random()*.34+.12
+    ).toFixed(2)
+  );
+
+  s.style.setProperty(
+    "--dur",
+    (
+      Math.random()*4+3.5
+    ).toFixed(2)+"s"
+  );
+
+  s.style.setProperty(
+    "--delay",
+    (
+      Math.random()*5
+    ).toFixed(2)+"s"
+  );
+
+  frag.appendChild(s);
+
+}
+
+stars.appendChild(frag);
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const STORAGE_KEY =
+  "myIslamicJourneyProgressStarV1";
+
+
+function loadData(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEY
+      )
+    ) || {};
+
+  }catch(error){
+
+    return {};
+
+  }
+
+}
+
+
+let data =
+  loadData();
+
+
+/* =========================================================
+   DATE HELPERS
+========================================================= */
+
+function dateKey(date){
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
+  const d =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+/* =========================================================
+   CALCULATE REAL ACTIVITY
+========================================================= */
+
+/*
+   This page can automatically read the progress
+   stored by the other My Islamic Journey pages.
+
+   Daily Goals:
+   myIslamicJourneyDailyGoalsV2
+
+   Salah:
+   myIslamicJourneySalahTrackerV1
+
+   Quran:
+   myIslamicJourneyQuranTrackerV1
+
+   Good Deeds:
+   myIslamicJourneyGoodDeedsV1
+*/
+
+
+function getStored(key){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(key)
+    );
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+/* =========================================================
+   DAILY GOALS
+========================================================= */
+
+function getGoalsDays(){
+
+  const saved =
+    getStored(
+      "myIslamicJourneyDailyGoalsV2"
+    );
+
+  if(!saved){
+    return 0;
+  }
+
+  if(saved.days){
+
+    return Object.keys(
+      saved.days
+    ).filter(
+      key =>
+        Number(saved.days[key]) > 0
+    ).length;
+
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   SALAH DAYS
+========================================================= */
+
+function getSalahDays(){
+
+  const saved =
+    getStored(
+      "myIslamicJourneySalahTrackerV1"
+    );
+
+  if(!saved){
+    return 0;
+  }
+
+  if(saved.history){
+
+    return Object.keys(
+      saved.history
+    ).length;
+
+  }
+
+  if(saved.days){
+
+    return Object.keys(
+      saved.days
+    ).length;
+
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   QURAN DAYS
+========================================================= */
+
+function getQuranDays(){
+
+  const saved =
+    getStored(
+      "myIslamicJourneyQuranTrackerV1"
+    );
+
+  if(!saved){
+    return 0;
+  }
+
+  if(saved.history){
+
+    return Object.values(
+      saved.history
+    ).filter(
+      record =>
+        Number(record.pages) > 0
+    ).length;
+
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   GOOD DEEDS DAYS
+========================================================= */
+
+function getGoodDeedDays(){
+
+  const saved =
+    getStored(
+      "myIslamicJourneyGoodDeedsV1"
+    );
+
+  if(!saved){
+    return 0;
+  }
+
+  if(saved.days){
+
+    return Object.values(
+      saved.days
+    ).filter(
+      record => {
+
+        return Object
+          .values(record)
+          .some(
+            value =>
+              Number(value) > 0
+          );
+
+      }
+    ).length;
+
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   JOURNEY DATA
+========================================================= */
+
+function calculateJourney(){
+
+  const goals =
+    getGoalsDays();
+
+  const salah =
+    getSalahDays();
+
+  const quran =
+    getQuranDays();
+
+  const deeds =
+    getGoodDeedDays();
+
+
+  const allDays =
+    Math.max(
+      goals,
+      salah,
+      quran,
+      deeds
+    );
+
+
+  /*
+     We give every tracker equal weight.
+     Maximum journey score is 100%.
+  */
+
+  const trackerScores = [
+
+    Math.min(
+      100,
+      goals * 3
+    ),
+
+    Math.min(
+      100,
+      salah * 3
+    ),
+
+    Math.min(
+      100,
+      quran * 3
+    ),
+
+    Math.min(
+      100,
+      deeds * 3
+    )
+
+  ];
+
+
+  const average =
+    trackerScores.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    ) / 4;
+
+
+  return {
+
+    goals,
+    salah,
+    quran,
+    deeds,
+
+    activeDays:
+      allDays,
+
+    score:
+      Math.round(average)
+
+  };
+
+}
+
+
+/* =========================================================
+   STAR LEVEL
+========================================================= */
+
+function getLevel(score){
+
+  if(score < 10){
+
+    return {
+      level:0,
+      name:"Beginning",
+      title:"Your journey is beginning",
+      description:
+        "Take your first small step. Every meaningful action matters."
+    };
+
+  }
+
+  if(score < 25){
+
+    return {
+      level:1,
+      name:"First Light",
+      title:"A light has begun",
+      description:
+        "You have started creating a rhythm. Keep going."
+    };
+
+  }
+
+  if(score < 40){
+
+    return {
+      level:2,
+      name:"Growing",
+      title:"Your journey is growing",
+      description:
+        "Consistency is beginning to shape your days."
+    };
+
+  }
+
+  if(score < 60){
+
+    return {
+      level:3,
+      name:"Steady",
+      title:"You are becoming steady",
+      description:
+        "Your small actions are becoming meaningful habits."
+    };
+
+  }
+
+  if(score < 80){
+
+    return {
+      level:4,
+      name:"Radiant",
+      title:"Your journey is shining",
+      description:
+        "Beautiful consistency. Keep protecting the habits you've built."
+    };
+
+  }
+
+  if(score < 100){
+
+    return {
+      level:5,
+      name:"Guided",
+      title:"You are deep into your journey",
+      description:
+        "Your dedication is becoming a beautiful pattern."
+    };
+
+  }
+
+  return {
+    level:6,
+    name:"Complete",
+    title:"A beautiful milestone",
+    description:
+      "You have reached the highest tracked journey level."
+  };
+
+}
+
+
+/* =========================================================
+   RENDER MAIN STAR
+========================================================= */
+
+function renderMain(){
+
+  const journey =
+    calculateJourney();
+
+  const level =
+    getLevel(
+      journey.score
+    );
+
+
+  document
+    .getElementById("starDisplay")
+    .style.setProperty(
+      "--progress",
+      journey.score + "%"
+    );
+
+
+  document
+    .getElementById("mainProgress")
+    .style.width =
+      journey.score + "%";
+
+
+  document
+    .getElementById("starLevel")
+    .textContent =
+      level.name;
+
+
+  document
+    .getElementById("starTitle")
+    .textContent =
+      level.title;
+
+
+  document
+    .getElementById("starDescription")
+    .textContent =
+      level.description;
+
+
+  const next =
+    document.getElementById(
+      "nextLevel"
+    );
+
+
+  if(level.level >= 6){
+
+    next.textContent =
+      "All journey levels completed.";
+
+  }else{
+
+    const thresholds =
+      [
+        10,
+        25,
+        40,
+        60,
+        80,
+        100
+      ];
+
+    const target =
+      thresholds[level.level];
+
+    next.textContent =
+      `${target - journey.score}% until the next star level.`;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER STATS
+========================================================= */
+
+function renderStats(){
+
+  const journey =
+    calculateJourney();
+
+
+  document.getElementById(
+    "journeyDays"
+  ).textContent =
+    journey.activeDays;
+
+
+  document.getElementById(
+    "activeDays"
+  ).textContent =
+    journey.activeDays;
+
+
+  document.getElementById(
+    "journeyScore"
+  ).textContent =
+    journey.score + "%";
+
+
+  document.getElementById(
+    "overallScore"
+  ).textContent =
+    journey.score + "%";
+
+
+  document.getElementById(
+    "scoreBar"
+  ).style.width =
+    journey.score + "%";
+
+
+  const level =
+    getLevel(
+      journey.score
+    );
+
+
+  document.getElementById(
+    "levelNumber"
+  ).textContent =
+    level.level;
+
+
+  document.getElementById(
+    "starsEarned"
+  ).textContent =
+    level.level;
+
+}
+
+
+/* =========================================================
+   MILESTONES
+========================================================= */
+
+function milestone(
+  days,
+  fillId,
+  statusId
+){
+
+  const journey =
+    calculateJourney();
+
+  const current =
+    journey.activeDays;
+
+
+  const percent =
+    Math.min(
+      100,
+      Math.round(
+        current / days * 100
+      )
+    );
+
+
+  document.getElementById(
+    fillId
+  ).style.width =
+    percent + "%";
+
+
+  document.getElementById(
+    statusId
+  ).textContent =
+    current >= days
+      ? "Completed"
+      : `${current}/${days}`;
+
+}
+
+
+function renderMilestones(){
+
+  milestone(
+    1,
+    "m1fill",
+    "m1status"
+  );
+
+  milestone(
+    7,
+    "m2fill",
+    "m2status"
+  );
+
+  milestone(
+    21,
+    "m3fill",
+    "m3status"
+  );
+
+  milestone(
+    40,
+    "m4fill",
+    "m4status"
+  );
+
+  milestone(
+    100,
+    "m5fill",
+    "m5status"
+  );
+
+  milestone(
+    1000,
+    "m6fill",
+    "m6status"
+  );
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderAll(){
+
+  renderMain();
+
+  renderStats();
+
+  renderMilestones();
+
+}
+
+
+renderAll();
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+setInterval(
+  renderAll,
+  2000
+);
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+if(
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+){
+
+  document
+    .querySelectorAll("*")
+    .forEach(
+      el => {
+
+        el.style.animationDuration =
+          "0.01ms";
+
+        el.style.transitionDuration =
+          "0.01ms";
+
+      }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
